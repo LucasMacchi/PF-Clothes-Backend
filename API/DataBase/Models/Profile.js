@@ -1,15 +1,11 @@
 const { DataTypes } = require("sequelize");
-const { product_id_generator } = require("../utils/productID_Generator");
 module.exports = (sequelize) => {
   sequelize.define("profile", {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      unique: true,
-      set(value) {
-        this.setDataValue("id", product_id_generator("u"));
-      },
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -24,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
 
@@ -33,6 +29,10 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     banner: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    profilePicture:{
       type: DataTypes.TEXT,
       allowNull: true,
     },

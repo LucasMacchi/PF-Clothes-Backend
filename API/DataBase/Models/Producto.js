@@ -1,18 +1,14 @@
 const { DataTypes } = require("sequelize");
-const { product_id_generator } = require("../utils/productID_Generator");
 const { sizes } = require("../utils/sizes.js");
 const { demographic } = require("../utils/demographic");
 
 module.exports = (sequelize) => {
   sequelize.define("product", {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       primaryKey: true,
       allowNull: false,
-      defaultValue: "",
-      set(value) {
-        this.setDataValue("id", product_id_generator("p"));
-      },
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -30,11 +26,11 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     price: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     temporal_price: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.FLOAT,
     },
     materials: {
       type: DataTypes.STRING,
@@ -50,7 +46,7 @@ module.exports = (sequelize) => {
       },
     },
     stock: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     image: {
