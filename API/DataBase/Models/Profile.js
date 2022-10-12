@@ -2,10 +2,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("profile", {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      unique: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING,
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
 
@@ -28,11 +28,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    storeImage: {
+    banner: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    banner: {
+    profilePicture:{
       type: DataTypes.TEXT,
       allowNull: true,
     },
