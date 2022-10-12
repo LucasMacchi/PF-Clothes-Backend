@@ -63,6 +63,15 @@ const profilesCreator = async() => {
         location: "Corrientes",
         profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
     })
+    await profile.create({
+        name: "Roberto Hernando",
+        mail: "golo@hotmail.com",
+        password: "8521",
+        phone: "111111111111",
+        banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+        location: "torrejas",
+        profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
+    })
 }
 
 
