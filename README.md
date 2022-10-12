@@ -1,1 +1,1 @@
-Este es el backend del proyecto grupal, dev test
+Este es el backend del proyecto grupal, dev
