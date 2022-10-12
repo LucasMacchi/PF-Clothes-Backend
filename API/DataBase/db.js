@@ -1,11 +1,11 @@
 require('dotenv').config();
 const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
-const { Sequelize } = require("sequelize");
+const { Sequelize,Op } = require("sequelize");
 const modelProduct = require("./Models/Producto")
 const modelCalification = require("./Models/Calification")
 const modelMarketedProduct = require("./Models/MarketedProduct")
 const modelProfile = require("./Models/Profile")
-console.log(DB_PASSWORD);
+
 const conn = new Sequelize("pf_cloth", DB_USER, DB_PASSWORD, {
     host:DB_HOST,
     dialect:"postgres",
@@ -25,7 +25,7 @@ modelProduct(conn)
 modelCalification(conn)
 modelMarketedProduct(conn)
 modelProfile(conn)
-console.log(conn.models)
+//console.log(conn.models)
 //Asociaciones
 const {product, qualification, marketedProduct, profile} = conn.models
 
@@ -68,5 +68,7 @@ const profilesCreator = async() => {
 
 module.exports = {
     conn,
-    profilesCreator
+    profilesCreator,
+    ...conn.models,
+    Op,
 }
