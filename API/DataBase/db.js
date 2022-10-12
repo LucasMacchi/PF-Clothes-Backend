@@ -65,9 +65,48 @@ const profilesCreator = async() => {
     })
 }
 
+const createProducts = async() => {
+    await product.create({
+        name: "jeans",
+        size: "XL",
+        color: "rojo",
+        price: 25,
+        demographic: "adult male",
+        stock: 10,
+        image: "no image"
+    })
+    await product.create({
+        name: "remera",
+        size: "XL",
+        color: "rojo",
+        price: 25,
+        demographic: "adult male",
+        stock: 10,
+        image: "no image"
+    })
+    await product.create({
+        name: "zapatos",
+        size: "XL",
+        color: "rojo",
+        price: 25,
+        demographic: "adult male",
+        stock: 10,
+        image: "no image"
+    })
+    await product.create({
+        name: "shorts",
+        size: "XL",
+        color: "rojo",
+        price: 25,
+        demographic: "adult male",
+        stock: 10,
+        image: "no image"
+    })
+}
 
 module.exports = {
     ...conn.models,
     conn,
-    profilesCreator
+    profilesCreator,
+    createProducts
 }
