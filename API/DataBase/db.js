@@ -67,6 +67,7 @@ const profilesCreator = async() => {
 
 
 module.exports = {
+    ...conn.models,
     conn,
     profilesCreator
 }
