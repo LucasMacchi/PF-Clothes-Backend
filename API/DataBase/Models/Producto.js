@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: "",
       set(value) {
-        this.setDataValue("id", product_id_generator());
+        this.setDataValue("id", product_id_generator("p"));
       },
     },
     name: {
