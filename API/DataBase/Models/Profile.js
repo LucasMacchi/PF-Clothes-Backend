@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize");
+const { product_id_generator } = require("../utils/productID_Generator");
 module.exports = (sequelize) => {
   sequelize.define("profile", {
     id: {
@@ -6,6 +7,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
       unique: true,
+      set(value) {
+        this.setDataValue("id", product_id_generator("u"));
+      },
     },
     name: {
       type: DataTypes.STRING,
@@ -26,10 +30,6 @@ module.exports = (sequelize) => {
 
     storeName: {
       type: DataTypes.STRING,
-      allowNull: true,
-    },
-    storeImage: {
-      type: DataTypes.TEXT,
       allowNull: true,
     },
     banner: {
