@@ -58,6 +58,9 @@ router.get("/get/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const object = req.body;
+
+  if (object.password) object.password = await bcrypt.hash(object.password, 8);
+
   try {
     let modifyUser = await profile.update(object, {
       where: {
