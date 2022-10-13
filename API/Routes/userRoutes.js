@@ -1,10 +1,46 @@
 const { Router } = require("express");
-//Aca van los archivos de los controladores
-
-//
+var bcrypt = require("bcryptjs");
+const { profile } = require("../DataBase/db");
 const router = Router();
 
-//Aca abajo van las rutas separadas
+router.post("/", async (req, res) => {
+  let {
+    name,
+    mail,
+    password,
+    phone,
+    storeName,
+    banner,
+    profilePicture,
+    location,
+    favorites,
+    shoppingCart,
+  } = req.body;
 
-//exportamos el router
+  let passwordHash = await bcrypt.hash(password, 8);
+
+  if (!favorites) favorites = [];
+  if (!shoppingCart) shoppingCart = [];
+
+  try {
+    let [user, created] = await profile.findOrCreate({
+      where: {
+        name,
+        mail,
+        password: passwordHash,
+        phone,
+        storeName,
+        banner,
+        profilePicture,
+        location,
+        favorites,
+        shoppingCart,
+      },
+    });
+    return res.send(user);
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 module.exports = router;
