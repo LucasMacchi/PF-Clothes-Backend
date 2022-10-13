@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { Profile } = require("../DataBase/db");
 const router = Router();
 
+//Crear un usuario
 router.post("/", async (req, res) => {
   const {
     name,
@@ -32,6 +33,22 @@ router.post("/", async (req, res) => {
       },
     });
     return res.send(user);
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
+//Modificar datos de un usuario
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const object = req.body;
+  try {
+    let modifyUser = await Profile.update(object, {
+      where: {
+        id: id,
+      },
+    });
+    return res.send({ changed: true });
   } catch (err) {
     res.send(err.message);
   }
