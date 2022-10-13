@@ -42,10 +42,12 @@ module.exports = (sequelize) => {
     },
     favorites: {
       type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
       allowNull: true,
     },
     shoppingCart: {
       type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
       allowNull: true,
     },
   });
