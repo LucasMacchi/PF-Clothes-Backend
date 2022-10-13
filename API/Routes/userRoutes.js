@@ -38,6 +38,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Traer datos de un usuario
+router.get("/get/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    let user = await Profile.findByPk(id);
+    return res.send(user);
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 //Modificar datos de un usuario
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
