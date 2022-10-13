@@ -13,6 +13,8 @@ router.use("/product", productRoutes);
 router.use("/user", userRoutes);
 //
 router.use("/stores",storeRoutes);
+// login
+//router.use("/login");
 //Test
 router.get("/test", (req, res) => {
   res.send("Hello World!!!!, im working");
