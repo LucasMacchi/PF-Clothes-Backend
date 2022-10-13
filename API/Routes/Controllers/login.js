@@ -22,7 +22,7 @@ const signIn = async (req,res) => {
                 username:user.username
             }
         
-            const token = jwt.sign(userDataforToken,'123');
+            const token = jwt.sign(userDataforToken,process.env.SECRET);
 
             res.send({
                 username:user.name,
