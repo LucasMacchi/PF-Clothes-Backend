@@ -4,7 +4,7 @@ const { profile } = require("../DataBase/db");
 const router = Router();
 
 router.post("/", async (req, res) => {
-  const {
+  let {
     name,
     mail,
     password,
@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
 
   let passwordHash = await bcrypt.hash(password, 8);
 
-  if (!favorites) favorites === [];
-  if (!shoppingCart) shoppingCart === [];
+  if (!favorites) favorites = [];
+  if (!shoppingCart) shoppingCart = [];
 
   try {
     let [user, created] = await profile.findOrCreate({
