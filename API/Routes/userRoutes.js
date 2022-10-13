@@ -2,6 +2,8 @@ const { Router } = require("express");
 var bcrypt = require("bcryptjs");
 const { profile } = require("../DataBase/db");
 const router = Router();
+//Controladores
+const addProductsToLists = require("./Controllers/addProductsToLists")
 
 router.post("/", async (req, res) => {
   let {
@@ -42,6 +44,27 @@ router.post("/", async (req, res) => {
     res.send(err.message);
   }
 });
+//add elements to favorites
+router.put("/favorites", async (req, res) => {
+  const {productID, profileID} = req.query
+  try {
+      const response = await addProductsToLists(productID, profileID, "fav")
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(404).send(error.message)
+  }
+})
+
+//add elements to shoppingcart
+router.put("/shoppingcart", async (req, res) => {
+  const {productID, profileID} = req.query
+  try {
+      const response = await addProductsToLists(productID, profileID, "shop")
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(404).send(error.message)
+  }
+})
 
 //Traer datos de un usuario
 router.get("/get/:id", async (req, res) => {
@@ -58,6 +81,9 @@ router.get("/get/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const object = req.body;
+
+  if (object.password) object.password = await bcrypt.hash(object.password, 8);
+
   try {
     let modifyUser = await profile.update(object, {
       where: {
