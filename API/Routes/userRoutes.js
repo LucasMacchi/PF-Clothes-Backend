@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Profile } = require("../DataBase/db");
+const { profile } = require("../DataBase/db");
 const router = Router();
 
 //Crear un usuario
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
   } = req.body;
 
   try {
-    let [user, created] = await Profile.findOrCreate({
+    let [user, created] = await profile.findOrCreate({
       where: {
         name,
         mail,
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 router.get("/get/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    let user = await Profile.findByPk(id);
+    let user = await profile.findByPk(id);
     return res.send(user);
   } catch (err) {
     res.send(err.message);
@@ -54,7 +54,7 @@ router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const object = req.body;
   try {
-    let modifyUser = await Profile.update(object, {
+    let modifyUser = await profile.update(object, {
       where: {
         id: id,
       },
