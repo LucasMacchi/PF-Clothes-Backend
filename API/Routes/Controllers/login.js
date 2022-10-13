@@ -3,9 +3,19 @@ const bcrypt = require('bcryptjs');
 
 const signIn = async (req,res) => {
     const {username, password } = req.body;
-    const createdUser = await profile.findOne({name:username});
+    let hashedPassword = await bcrypt.hash(password, 8);
+    const user = await profile.findOne({
+        where:{ name:username }
+    });
+
+    const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
+    
     try{
-        res.send(createdUser);
+        if(passwordCorrect){
+            res.send("Welcome")
+        }else{
+            res.send("user or password incorrect");
+        }
     }catch(err){
         res.send(err.message);
     }
