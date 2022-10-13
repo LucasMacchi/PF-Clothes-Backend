@@ -1,6 +1,6 @@
 require('dotenv').config();
-const {DB_USER, DB_PASSWORD, DB_HOST} = process.env
-const { Sequelize } = require("sequelize");
+const {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
+const { Sequelize,Op } = require("sequelize");
 const modelProduct = require("./Models/Producto")
 const modelCalification = require("./Models/Calification")
 const modelMarketedProduct = require("./Models/MarketedProduct")
@@ -25,7 +25,7 @@ modelProduct(conn)
 modelCalification(conn)
 modelMarketedProduct(conn)
 modelProfile(conn)
-console.log(conn.models)
+//console.log(conn.models)
 //Asociaciones
 const {product, qualification, marketedProduct, profile} = conn.models
 
@@ -63,10 +63,21 @@ const profilesCreator = async() => {
         location: "Corrientes",
         profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
     })
+    await profile.create({
+        name: "Roberto Hernando",
+        mail: "golo@hotmail.com",
+        password: "8521",
+        phone: "111111111111",
+        banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+        location: "torrejas",
+        profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
+    })
 }
 
 
 module.exports = {
     conn,
-    profilesCreator
+    profilesCreator,
+    ...conn.models,
+    Op,
 }
