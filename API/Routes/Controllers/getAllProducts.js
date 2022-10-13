@@ -1,4 +1,5 @@
 const {product} = require("../../DataBase/db")
+const paginated = require("./paginado")
 
 const getAllProducts = async (cant) => {
 
@@ -8,11 +9,7 @@ const getAllProducts = async (cant) => {
     if(!data.length) throw Error("No existe ningun producto")
     
     if(cant){
-        let finalArray = []
-        while(data.length){
-            finalArray.push(data.splice(0, cant))
-        }
-        return finalArray
+        return paginated(data, cant)
     }
     else return data
     
