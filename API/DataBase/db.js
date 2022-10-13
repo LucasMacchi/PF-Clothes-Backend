@@ -1,6 +1,6 @@
 require('dotenv').config();
 const {DB_USER, DB_PASSWORD, DB_HOST} = process.env
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const modelProduct = require("./Models/Producto")
 const modelCalification = require("./Models/Calification")
 const modelMarketedProduct = require("./Models/MarketedProduct")
@@ -105,8 +105,10 @@ const createProducts = async() => {
 }
 
 module.exports = {
-    ...conn.models,
     conn,
     profilesCreator,
-    createProducts
+    ...conn.models,
+    Op,
+    createProducts,
+
 }
