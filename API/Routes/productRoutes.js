@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 //Aca van los archivos de los controladores
 const getAllProducts = require("./Controllers/getAllProducts")
-
+const getProductName = require("./Controllers/getAllProductsByName")
 //
 const router = Router();
 
@@ -25,6 +25,25 @@ router.get("/all", async (req, res) => {
     } catch (error) {
         res.status(404).send(error.message)
     }
+})
+//
+//Traer todos los productos por nombre / Trae por query la variable search (string de busqueda) y cant (cantidad de elementos en paginado)
+router.get("/", async (req, res) => {
+    const search = req.query.search
+    const cant = req.query.cant
+    try {
+        if(cant){
+            const productsByName = await getProductName(search, cant)
+            res.status(200).send(productsByName)
+        }
+        else{
+            const productsByName = await getProductName(search, 0)
+            res.status(200).send(productsByName)
+        }
+    } catch (error) {
+        res.status(404).send(error)
+    }
+    
 })
 //
 //exportamos el router
