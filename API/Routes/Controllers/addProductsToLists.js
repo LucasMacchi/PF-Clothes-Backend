@@ -1,10 +1,10 @@
 const {profile,Op} = require('../../DataBase/db');
 
 
-const addProductsToLists = async(productID, proid, order) => {
+const addProductsToLists = async(productID, userID, order) => {
     if(order === "fav"){
         try {
-            await profile.update({favorites: favorites.concat(productID)}, {where:{id:proid}})
+            await profile.update({favorites: favorites.concat(productID)}, {where:{id:userID}})
             return "El producto se agrego a favoritos"
         } catch (error) {
             throw Error(error)
@@ -12,7 +12,7 @@ const addProductsToLists = async(productID, proid, order) => {
     }
     else if(order === "shop"){
         try {
-            await profile.update({shoppingCart: shoppingCart.concat(productID)}, {where:{id:proid}})
+            await profile.update({shoppingCart: shoppingCart.concat(productID)}, {where:{id:userID}})
             return "El producto se agrego al carrito"
         } catch (error) {
             throw Error(error)
