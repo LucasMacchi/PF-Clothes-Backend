@@ -1,21 +1,10 @@
 const { Router } = require("express");
 const router = Router();
-const {profile,Op} = require('../DataBase/db');
+const {
+    getAllStores,
+} = require('./Controllers/getAllStores');
 
-router.get("/all", async (req,res) => {
-    console.log(profile);
-    const allStores = await profile.findAll({
-        where:{
-            storeName:{
-                [Op.ne]:null,
-            }
-        }
-    });
-    try{
-        res.send(allStores);
-    }catch(err){
-        res.send(err.message);
-    }
-});
+// rutas vendedores
+router.get("/all",getAllStores);
 
 module.exports = router;
