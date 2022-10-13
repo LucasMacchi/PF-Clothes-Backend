@@ -110,5 +110,4 @@ module.exports = {
     ...conn.models,
     Op,
     createProducts,
-
 }
