@@ -1,6 +1,6 @@
 const { Router } = require("express");
 var bcrypt = require("bcryptjs");
-const { Profile } = require("../DataBase/db");
+const { profile } = require("../DataBase/db");
 const router = Router();
 
 router.post("/", async (req, res) => {
@@ -19,8 +19,11 @@ router.post("/", async (req, res) => {
 
   let passwordHash = await bcrypt.hash(password, 8);
 
+  if (!favorites) favorites === [];
+  if (!shoppingCart) shoppingCart === [];
+
   try {
-    let [user, created] = await Profile.findOrCreate({
+    let [user, created] = await profile.findOrCreate({
       where: {
         name,
         mail,
