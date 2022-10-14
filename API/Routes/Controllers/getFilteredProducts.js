@@ -62,8 +62,7 @@ const getFilteredProducts = async (
     if (cant) {
       return paginated(data, cant);
     } else return data;
-  }
-  if (size || price || demographic) {
+  } else if (size || price || demographic) {
     let filteredProducts = await product.findAll({
       where: {
         size,
