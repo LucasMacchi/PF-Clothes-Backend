@@ -1,10 +1,10 @@
 const { Router } = require("express");
+const { product } = require("../DataBase/db");
 
 //Aca van los archivos de los controladores
 const getAllProducts = require("./Controllers/getAllProducts");
 const getProductName = require("./Controllers/getAllProductsByName");
 const getFilteredProducts = require("./Controllers/getFilteredProducts");
-
 //
 const router = Router();
 
@@ -46,6 +46,7 @@ router.get("/", async (req, res) => {
   }
 });
 //
+
 //Filtrados
 router.get("/filter", async (req, res) => {
   const { size, price, demographic, cant, sortBy, orderBy } = req.query;
@@ -73,6 +74,41 @@ router.get("/filter", async (req, res) => {
     }
   } catch (error) {
     res.status(404).send(error.message);
+   }
+});
+//Agregar un producto
+router.post("/", async (req, res) => {
+  let {
+    name,
+    size,
+    color,
+    price,
+    temporal_price,
+    materials,
+    brand,
+    demographic,
+    stock,
+    image,
+  } = req.body;
+
+  try {
+    let [postProduct, created] = await product.findOrCreate({
+      where: {
+        name,
+        size,
+        color,
+        price,
+        temporal_price,
+        materials,
+        brand,
+        demographic,
+        stock,
+        image,
+      },
+    });
+    res.status(200).send(postProduct);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
