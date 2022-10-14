@@ -1,4 +1,4 @@
-const { product } = require("../../DataBase/db");
+const { product, Op } = require("../../DataBase/db");
 const paginated = require("./paginado");
 
 const getFilteredProducts = async (
@@ -62,12 +62,34 @@ const getFilteredProducts = async (
     if (cant) {
       return paginated(data, cant);
     } else return data;
-  } else if (size || price || demographic) {
+  } else if (size) {
     let filteredProducts = await product.findAll({
       where: {
-        size,
-        price,
-        demographic,
+        size: size,
+      },
+      order: [[sortBy, orderBy]],
+    });
+    let data = await filteredProducts;
+    if (!data.length) throw Error("No existe ningun producto");
+    if (cant) {
+      return paginated(data, cant);
+    } else return data;
+  } else if (demographic) {
+    let filteredProducts = await product.findAll({
+      where: {
+        demographic: demographic,
+      },
+      order: [[sortBy, orderBy]],
+    });
+    let data = await filteredProducts;
+    if (!data.length) throw Error("No existe ningun producto");
+    if (cant) {
+      return paginated(data, cant);
+    } else return data;
+  } else if (price) {
+    let filteredProducts = await product.findAll({
+      where: {
+        price: price,
       },
       order: [[sortBy, orderBy]],
     });

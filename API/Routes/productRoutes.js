@@ -48,17 +48,29 @@ router.get("/", async (req, res) => {
 //
 //Filtrados
 router.get("/filter", async (req, res) => {
-  const { size, price, demographic, cant = 0, sortBy, orderBy } = req.query;
+  const { size, price, demographic, cant, sortBy, orderBy } = req.query;
   try {
-    const products = await getFilteredProducts(
-      size,
-      price,
-      demographic,
-      cant,
-      sortBy,
-      orderBy
-    );
-    res.status(200).send(products);
+    if (cant) {
+      const products = await getFilteredProducts(
+        size,
+        price,
+        demographic,
+        cant,
+        sortBy,
+        orderBy
+      );
+      res.status(200).send(products);
+    } else {
+      const products = await getFilteredProducts(
+        size,
+        price,
+        demographic,
+        0,
+        sortBy,
+        orderBy
+      );
+      res.status(200).send(products);
+    }
   } catch (error) {
     res.status(404).send(error.message);
   }
