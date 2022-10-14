@@ -43,80 +43,423 @@ marketedProduct.hasOne(product)
 
 const profilesCreator = async() => {
 
-    await profile.create({
-        name: "Lucas Macchi",
-        mail: "lucasmacchi25@gmail.com",
-        password: "123456",
-        phone: "111111111111",
-        storeName: "Altas zapatillas",
-        banner: "https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?cs=srgb&dl=pexels-william-matt-3768005.jpg&fm=jpg",
-        location: "Corrientes",
-        profilePicture: "https://t1.pb.ltmcdn.com/es/posts/2/4/2/que_piensa_una_persona_cuando_dejas_de_buscarla_5242_orig.jpg"
+    await qualification.create({
+        score: 3,
+        reviews: "Un capo",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Lucas Macchi",
+                mail: "lucasmacchi25@gmail.com",
+                password: "123456",
+                phone: "111111111111",
+                storeName: "Altas zapatillas",
+                banner: "https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?cs=srgb&dl=pexels-william-matt-3768005.jpg&fm=jpg",
+                location: "Corrientes",
+                profilePicture: "https://t1.pb.ltmcdn.com/es/posts/2/4/2/que_piensa_una_persona_cuando_dejas_de_buscarla_5242_orig.jpg",
+                products:[
+                    {
+                        size: "L",
+                        color: "gris",
+                        price: 10,
+                        demographic: "teen male",
+                        stock: 156,
+                        image: "no image",
+                        name: "Gorra",
+                    },
+                    {
+                        name: "remera",
+                        size: "M",
+                        color: "negro",
+                        price: 48,
+                        demographic: "teen female",
+                        stock: 47,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 4,
+        reviews: "Muy buenos productos, confiable",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Marcelo Rodriguez",
+                mail: "marcelito@hotmail.com",
+                password: "8524",
+                phone: "111111111111",
+                        storeName: "Buzos baratos",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "Corrientes",
+                profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
+                products:[
+                    {
+                        size: "XL",
+                        color: "gris",
+                        price: 75,
+                        demographic: "teen female",
+                        stock: 156,
+                        image: "no image",
+                        name: "Pantalon",
+                    },
+                    {
+                        name: "Chaleco",
+                        size: "S",
+                        color: "negro",
+                        price: 47,
+                        demographic: "adult male",
+                        stock: 47,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+             })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 1,
+        reviews: "ESTAFADOOOOR!!!!",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Roberto Hernando",
+                mail: "golo@hotmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "torrejas",
+                profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"     ,
+                products:[
+                    {
+                        size: "S",
+                        color: "Amarillo",
+                        price: 24,
+                        demographic: "teen male",
+                        stock: 156,
+                        image: "no image",
+                        name: "short",
+                    },
+                    {
+                        name: "Campera",
+                        size: "XXL",
+                        color: "Azul",
+                        price: 47,
+                        demographic: "adult male",
+                        stock: 47,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 1,
+        reviews: "Me amenazo!!",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Franco Milazzo",
+                mail: "francoMil@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "Cordoba",
+                profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/3/3f/Franco_Milazzo.png/revision/latest/scale-to-width-down/250?cb=20150623183355&path-prefix=es",
+                products:[
+                    {
+                        size: "M",
+                        color: "Azul",
+                        price: 68,
+                        demographic: "teen male",
+                        stock: 78,
+                        image: "no image",
+                        name: "Jean",
+                    },
+                    {
+                        name: "Buzo",
+                        size: "XXS",
+                        color: "Rojo",
+                        price: 47,
+                        demographic: "little boy",
+                        stock: 20,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+        
+    await qualification.create({
+        score: 4,
+        reviews: "Buena tienda",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Martina Gonzales",
+                mail: "martina_43@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "Cordoba",
+                profilePicture: "https://lamenteesmaravillosa.com/wp-content/uploads/2022/03/mujer-ojos-cerrados-mano-corazon-768x512.jpg",
+                products:[
+                    {
+                        size: "M",
+                        color: "Azul",
+                        price: 68,
+                        demographic: "teen male",
+                        stock: 78,
+                        image: "no image",
+                        name: "Jean",
+                    },
+                    {
+                        name: "Buzo",
+                        size: "XXS",
+                        color: "Rojo",
+                        price: 47,
+                        demographic: "little boy",
+                        stock: 20,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 5,
+        reviews: "De las mejores tiendas, buen servicio",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Lucia Buchetti",
+                mail: "luci_arg@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "Mendoza",
+                profilePicture: "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg",
+                products:[
+                    {
+                        size: "M",
+                        color: "Azul",
+                        price: 78,
+                        demographic: "adult female",
+                        stock: 78,
+                        image: "no image",
+                        name: "Campera",
+                    },
+                    {
+                        name: "Saco",
+                        size: "L",
+                        color: "Rojo",
+                        price: 98,
+                        demographic: "adult male",
+                        stock: 20,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 3,
+        reviews: "No tan bueno, falta soporte",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Mario Davis",
+                mail: "mario_el10@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "Entre Rios",
+                profilePicture: "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2022/06/billy-kametz-2728819.jpg?itok=dLNsBLtJ",
+                products:[
+                    {
+                        size: "XXL",
+                        color: "Azul",
+                        price: 25,
+                        demographic: "adult male",
+                        stock: 78,
+                        image: "no image",
+                        name: "Remera",
+                    },
+                    {
+                        name: "Boxers",
+                        size: "L",
+                        color: "Rojo",
+                        price: 98,
+                        demographic: "teen male",
+                        stock: 20,
+                        image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+        })
+
+    await qualification.create({
+        score: 5,
+        reviews: "Un Disculpe, fuego tiene?",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Maximo Cosseti",
+                mail: "maximo_coset@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "CABA",
+                profilePicture: "https://cloudfront-us-east-1.images.arcpublishing.com/radiomitre/Y2B2DJZVBFAFRB4NDORUCUXDUM.jpg",
+                products:[
+                    {
+                        size: "M",
+                        color: "Negro",
+                        price: 78,
+                        demographic: "adult male",
+                        stock: 78,
+                        image: "no image",
+                        name: "Saco",
+                    },
+                    {
+                        name: "Camisa",
+                        size: "L",
+                        color: "Negro",
+                        price: 98,
+                        demographic: "adult male",
+                        stock: 20,
+                       image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+       })
+
+    await qualification.create({
+        score: 5,
+        reviews: "Un capo",
+     }).then(async (qual) => {
+         const user = await profile.create({
+             name: "Mario Santos",
+             mail: "marioSantito@gmail.com",
+             password: "8521",
+             phone: "111111111111",
+             banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+             location: "CABA",
+             profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/3/3d/Mario_Santos.png/revision/latest/scale-to-width-down/250?cb=20150614023808&path-prefix=es",
+             products:[
+                 {
+                     size: "M",
+                     color: "Marron",
+                     price: 78,
+                     demographic: "adult male",
+                     stock: 78,
+                     image: "no image",
+                     name: "Campera alcolchada",
+                 },
+                 {
+                     name: "Camisa",
+                     size: "M",
+                     color: "Negro",
+                     price: 98,
+                     demographic: "adult male",
+                     stock: 20,
+                    image: "no image",
+                 }
+             ]
+         }, {
+             include: [product]
+         })
+         qual.setProfile(user)
     })
-    await profile.create({
-        name: "Marcelo Rodriguez",
-        mail: "marcelito@hotmail.com",
-        password: "8524",
-        phone: "111111111111",
-        storeName: "Buzos baratos",
-        banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
-        location: "Corrientes",
-        profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
-    })
-    await profile.create({
-        name: "Roberto Hernando",
-        mail: "golo@hotmail.com",
-        password: "8521",
-        phone: "111111111111",
-        banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
-        location: "torrejas",
-        profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg"
-    })
+
+    await qualification.create({
+        score: 5,
+        reviews: "Me envio todo el mismo dia, un capoo!!",
+        }).then(async (qual) => {
+            const user = await profile.create({
+                name: "Pablo Lamponne",
+                mail: "LamponeATiempo@gmail.com",
+                password: "8521",
+                phone: "111111111111",
+                banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+                location: "CABA",
+                profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/b/b8/54216_fiobe-pobtada.jpg/revision/latest/scale-to-width-down/250?cb=20170709032448&path-prefix=es",
+                products:[
+                    {
+                        size: "M",
+                        color: "Negro",
+                        price: 78,
+                        demographic: "adult male",
+                        stock: 78,
+                        image: "no image",
+                        name: "Chaqueta",
+                    },
+                    {
+                        name: "Camisa",
+                        size: "L",
+                        color: "Blanco",
+                        price: 98,
+                        demographic: "adult male",
+                        stock: 20,
+                       image: "no image",
+                    }
+                ]
+            }, {
+                include: [product]
+            })
+            qual.setProfile(user)
+       })
+
+    await qualification.create({
+        score: 5,
+        reviews: "Me envio todo el mismo dia, un capoo!!",
+    }).then(async (qual) => {
+        const user = await profile.create({
+            name: "Gabriel David Medina",
+            mail: "GabrielMedi@gmail.com",
+            password: "8521",
+            phone: "111111111111",
+            banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+            location: "CABA",
+            profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/c/ce/Tarjeta_de_Navidad_26.png/revision/latest/scale-to-width-down/180?cb=20160318014107&path-prefix=es",
+            products:[
+                {
+                    name: "Camisa",
+                    size: "XL",
+                    color: "Blanco",
+                    price: 45,
+                    demographic: "adult male",
+                    stock: 20,
+                   image: "no image",
+                }
+            ]
+        }, {
+            include: [product]
+        })
+        qual.setProfile(user)
+        })
 }
 
-const createProducts = async() => {
-    await product.create({
-        name: "jeans",
-        size: "XL",
-        color: "rojo",
-        price: 25,
-        demographic: "adult male",
-        stock: 10,
-        image: "no image"
-    })
-    await product.create({
-        name: "remera",
-        size: "XL",
-        color: "rojo",
-        price: 25,
-        demographic: "adult male",
-        stock: 10,
-        image: "no image"
-    })
-    await product.create({
-        name: "zapatos",
-        size: "XL",
-        color: "rojo",
-        price: 25,
-        demographic: "adult male",
-        stock: 10,
-        image: "no image"
-    })
-    await product.create({
-        name: "shorts",
-        size: "XL",
-        color: "rojo",
-        price: 25,
-        demographic: "adult male",
-        stock: 10,
-        image: "no image"
-    })
-}
 
 module.exports = {
     conn,
     profilesCreator,
     ...conn.models,
     Op,
-    createProducts,
+    
 }
