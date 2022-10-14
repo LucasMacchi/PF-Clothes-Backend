@@ -4,6 +4,7 @@ const { profile } = require("../DataBase/db");
 const router = Router();
 //Controladores
 const addProductsToLists = require("./Controllers/addProductsToLists")
+const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
 
 router.post("/", async (req, res) => {
   let {
@@ -60,6 +61,26 @@ router.put("/shoppingcart", async (req, res) => {
   const {productID, profileID} = req.query
   try {
       const response = await addProductsToLists(productID, profileID, "shop")
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(404).send(error.message)
+  }
+})
+//remove elements of favorites
+router.delete("/favorites", async (req, res) => {
+  const {productID, profileID} = req.query
+  try {
+      const response = await deleteProductsOfList(productID, profileID, "fav")
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(404).send(error.message)
+  }
+})
+//remove elements of the shopping card
+router.delete("/shoppingcart", async (req, res) => {
+  const {productID, profileID} = req.query
+  try {
+      const response = await deleteProductsOfList(productID, profileID, "shop")
       res.status(200).send(response)
   } catch (error) {
       res.status(404).send(error.message)
