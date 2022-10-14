@@ -3,13 +3,15 @@ Guide of routes:
 Product Routes:
 
     - GET /product/all/:cant
-        -This will bring all the products, the cant variable will determine how many products will include each subarray
+        -This will bring all the products, the cant variable will determine 
+        how many products will include each subarray
 
     -GET /product/all
         -This will bring all the products
 
     -GET /?search=&cant=
-        -The search variable will be the product you want to search and the cant variable, is an optional variable that let you specify the amout of product that each subarray will include
+        -The search variable will be the product you want to search and the cant variable, 
+        is an optional variable that let you specify the amout of product that each subarray will include
 
 
 Profile Routes:
