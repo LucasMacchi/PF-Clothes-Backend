@@ -12,24 +12,25 @@ const signIn = async (req,res) => {
     const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
 
     try{
+        
+        const userDataforToken = {
+            id:user.id,
+            username:user.name
+        }
+        
+        const token = jwt.sign(userDataforToken,process.env.SECRET);
+
+        res.send({
+            username:user.name,
+            token,
+        });
+        
+    }catch(err){
         if(!(user && passwordCorrect)){
             res.status(401).json({
                 error:"invalid user or password",
             })
-        }else{
-            const userDataforToken = {
-                id:user.id,
-                username:user.name
-            }
-        
-            const token = jwt.sign(userDataforToken,process.env.SECRET);
-
-            res.send({
-                username:user.name,
-                token,
-            });
         }
-    }catch(err){
         res.send(err.message);
     }
 

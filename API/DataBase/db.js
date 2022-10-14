@@ -50,7 +50,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Lucas Macchi",
                 mail: "lucasmacchi25@gmail.com",
-                password: "123456",
+                password: "$2a$08$j8/eAoOFOyPatGDWm6P/b.kYgAKXC8UaXAqK0G84myeHXm4Pm13Ti",// password:"123456"
                 phone: "111111111111",
                 storeName: "Altas zapatillas",
                 banner: "https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?cs=srgb&dl=pexels-william-matt-3768005.jpg&fm=jpg",
@@ -89,7 +89,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Marcelo Rodriguez",
                 mail: "marcelito@hotmail.com",
-                password: "8524",
+                password: "$2a$08$qucaVmg1AfwdUSKMVt/s9eMY7/Oi.LJnU6VUaZQe.YSKyZDmA3zW.",//password:"8524"
                 phone: "111111111111",
                         storeName: "Buzos baratos",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
@@ -128,7 +128,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Roberto Hernando",
                 mail: "golo@hotmail.com",
-                password: "8521",
+                password: "$2a$08$GIOAnXCnDhsjTaITR05u/e.IuHL99GEnPTy1lqpLkkgz.bhtjZjFm",// password:"8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "torrejas",
@@ -166,7 +166,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Franco Milazzo",
                 mail: "francoMil@gmail.com",
-                password: "8521",
+                password: "$2a$08$w3lWaaat2TyQSgbvoAuBye4zR.rnn78y2FlO1tnRnZgo4fOqLbczm", // password : "8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "Cordoba",
@@ -204,7 +204,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Martina Gonzales",
                 mail: "martina_43@gmail.com",
-                password: "8521",
+                password: "$2a$08$.9NTiO04sBHHvUcS0nirYuJJqWnB2W9YnNn5s2rqYOXg9F2tB05Y.",// password:"8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "Cordoba",
@@ -242,7 +242,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Lucia Buchetti",
                 mail: "luci_arg@gmail.com",
-                password: "8521",
+                password: "$2a$08$Ozd0Md/aTtl4zVBs/V/8yu0wRtBYcVu2Se6jVSGAgeoACWEfZJ0Ke", // password : 8521
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "Mendoza",
@@ -280,7 +280,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Mario Davis",
                 mail: "mario_el10@gmail.com",
-                password: "8521",
+                password: "$2a$08$buAjncij/WavoYrnV5.kbekHYlEm9iIsal9m4G7ZogMTig3kdRQfu",// password:"8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "Entre Rios",
@@ -318,7 +318,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Maximo Cosseti",
                 mail: "maximo_coset@gmail.com",
-                password: "8521",
+                password: "$2a$08$L1ybjTFoKfG3eOF9v2b3.Oyn8bHMs8Ob97YW3ox3Ct84ODxJXBDpu",//password:"8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "CABA",
@@ -356,7 +356,7 @@ const profilesCreator = async() => {
          const user = await profile.create({
              name: "Mario Santos",
              mail: "marioSantito@gmail.com",
-             password: "8521",
+             password: "$2a$08$yq1jgaokXrPLdgWR.jWlHuFOM4DRsGMyw2ncntUqU3RwHn95KgeOq", // password:"8521"
              phone: "111111111111",
              banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
              location: "CABA",
@@ -394,7 +394,7 @@ const profilesCreator = async() => {
             const user = await profile.create({
                 name: "Pablo Lamponne",
                 mail: "LamponeATiempo@gmail.com",
-                password: "8521",
+                password: "$2a$08$BX8OhJDnizlV/RX4gDHDfef4Od4TzgI4SijgYEuIWcW4.JcfFPQLK",//password:"8521"
                 phone: "111111111111",
                 banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
                 location: "CABA",
@@ -432,7 +432,7 @@ const profilesCreator = async() => {
         const user = await profile.create({
             name: "Gabriel David Medina",
             mail: "GabrielMedi@gmail.com",
-            password: "8521",
+            password: "$2a$08$f/3k5KtoxTT4.Cz712tRf.s6i.8Ycn.tg5lTZEfT/GB.mHiWvJAZO",// password:"8521"
             phone: "111111111111",
             banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
             location: "CABA",
