@@ -78,6 +78,7 @@ router.post("/", async (req, res) => {
     });
     let user = await profile.findByPk(id);
     await postProduct.addProfiles(user);
+
     res.status(200).send(postProduct);
   } catch (error) {
     res.status(404).send(error);
