@@ -13,13 +13,13 @@ const signIn = async (req,res) => {
 
     try{
         if(!(user && passwordCorrect)){
-            res.status(403).json({
+            res.status(401).json({
                 error:"invalid user or password",
             })
         }else{
             const userDataforToken = {
                 id:user.id,
-                username:user.username
+                username:user.name
             }
         
             const token = jwt.sign(userDataforToken,process.env.SECRET);
