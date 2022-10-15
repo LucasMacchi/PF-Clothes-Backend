@@ -52,3 +52,8 @@ Stores Routes:
 
     - GET /stores/:name
         - This route will fetch a store by the name in the url
+
+Sizes Routes:
+
+    - GET /sizes
+        - This route will fetch all the sizes for the cloth of the e-commerce
