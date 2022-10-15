@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { product } = require("../DataBase/db");
+const { product, profile } = require("../DataBase/db");
 
 //Aca van los archivos de los controladores
 const getAllProducts = require("./Controllers/getAllProducts");
@@ -70,6 +70,7 @@ router.get("/filter", async (req, res) => {
 //Agregar un producto
 router.post("/", async (req, res) => {
   let {
+    id,
     name,
     size,
     color,
@@ -83,8 +84,8 @@ router.post("/", async (req, res) => {
   } = req.body;
 
   try {
-    let [postProduct, created] = await product.findOrCreate({
-      where: {
+    await product
+      .create({
         name,
         size,
         color,
@@ -95,11 +96,14 @@ router.post("/", async (req, res) => {
         demographic,
         stock,
         image,
-      },
-    });
-    res.status(200).send(postProduct);
+      })
+      .then(async (product) => {
+        let user = await profile.findByPk(id);
+        await user.addProduct(product);
+        res.status(200).send(product);
+      });
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 });
 
