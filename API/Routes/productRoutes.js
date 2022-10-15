@@ -49,32 +49,23 @@ router.get("/", async (req, res) => {
 
 //Filtrados
 router.get("/filter", async (req, res) => {
-  const { size, price, demographic, cant, sortBy, orderBy } = req.query;
+  const { size, price, demographic, cant } = req.query;
   try {
     if (cant) {
       const products = await getFilteredProducts(
         size,
         price,
         demographic,
-        cant,
-        sortBy,
-        orderBy
+        cant
       );
       res.status(200).send(products);
     } else {
-      const products = await getFilteredProducts(
-        size,
-        price,
-        demographic,
-        0,
-        sortBy,
-        orderBy
-      );
+      const products = await getFilteredProducts(size, price, demographic, 0);
       res.status(200).send(products);
     }
   } catch (error) {
     res.status(404).send(error.message);
-   }
+  }
 });
 //Agregar un producto
 router.post("/", async (req, res) => {
