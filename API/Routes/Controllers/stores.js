@@ -6,10 +6,10 @@ const getAllStores = async (req,res,next) => {
 
     
    try{
-
-        const token = getToken(req);
-        const decodedToken = jwt.verify(token,process.env.SECRET);
-        console.log(decodedToken.id);
+        // test using jwt token auth
+        //const token = getToken(req);
+        //const decodedToken = jwt.verify(token,process.env.SECRET);
+        //console.log(decodedToken.id);
 
         const allStores = await profile.findAll({
             where:{
