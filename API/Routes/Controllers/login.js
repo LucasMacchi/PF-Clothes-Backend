@@ -12,13 +12,16 @@ const signIn = async (req,res) => {
     const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
 
     try{
-        
+
         const userDataforToken = {
             id:user.id,
             username:user.name
         }
         
-        const token = jwt.sign(userDataforToken,process.env.SECRET);
+        const token = jwt.sign(
+            userDataforToken,
+            process.env.SECRET,
+            {expiresIn:60*60});
 
         res.send({
             username:user.name,

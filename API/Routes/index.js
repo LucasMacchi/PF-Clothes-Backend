@@ -16,9 +16,14 @@ router.use("/stores",storeRoutes);
 // login
 router.use("/login",loginRoutes);
 //Test
-router.get("/test", (req, res) => {
+router.get("/test", (req, res,next) => {
   res.send("Hello World!!!!, im working");
+  next();
 });
 //
+
+router.use((req,res)=>{
+  console.log("he entrado aqui");
+});
 
 module.exports = router;
