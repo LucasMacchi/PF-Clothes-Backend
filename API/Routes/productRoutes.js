@@ -62,8 +62,8 @@ router.post("/", async (req, res) => {
   } = req.body;
 
   try {
-    let [postProduct, created] = await product.findOrCreate({
-      where: {
+    await product
+      .create({
         name,
         size,
         color,
@@ -74,14 +74,14 @@ router.post("/", async (req, res) => {
         demographic,
         stock,
         image,
-      },
-    });
-    let user = await profile.findByPk(id);
-    await postProduct.addProfiles(user);
-
-    res.status(200).send(postProduct);
+      })
+      .then(async (product) => {
+        let user = await profile.findByPk(id);
+        await user.addProduct(product);
+        res.status(200).send(product);
+      });
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 });
 
