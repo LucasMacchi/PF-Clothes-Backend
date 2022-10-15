@@ -21,7 +21,7 @@ const signIn = async (req,res) => {
         const token = jwt.sign(
             userDataforToken,
             process.env.SECRET,
-            {expiresIn:60*60});
+            {expiresIn:60*60*24*7});
 
         res.send({
             username:user.name,
