@@ -1,14 +1,7 @@
 const { product, Op } = require("../../DataBase/db");
 const paginated = require("./paginado");
 
-const getFilteredProducts = async (
-  size,
-  price,
-  demographic,
-  cant,
-  sortBy,
-  orderBy
-) => {
+const getFilteredProducts = async (size, price, demographic, cant) => {
   if (size && price && demographic) {
     let filteredProducts = await product.findAll({
       where: {
@@ -16,7 +9,6 @@ const getFilteredProducts = async (
         price,
         demographic,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -29,7 +21,6 @@ const getFilteredProducts = async (
         size,
         price,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -42,7 +33,6 @@ const getFilteredProducts = async (
         size,
         demographic,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -55,7 +45,6 @@ const getFilteredProducts = async (
         price,
         demographic,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -67,7 +56,6 @@ const getFilteredProducts = async (
       where: {
         size: size,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -79,7 +67,6 @@ const getFilteredProducts = async (
       where: {
         demographic: demographic,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
@@ -91,7 +78,6 @@ const getFilteredProducts = async (
       where: {
         price: price,
       },
-      order: [[sortBy, orderBy]],
     });
     let data = await filteredProducts;
     if (!data.length) throw Error("No existe ningun producto");
