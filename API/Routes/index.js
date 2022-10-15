@@ -20,10 +20,5 @@ router.get("/test", (req, res,next) => {
   res.send("Hello World!!!!, im working");
   next();
 });
-//
-
-router.use((req,res)=>{
-  console.log("he entrado aqui");
-});
 
 module.exports = router;
