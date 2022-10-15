@@ -11,6 +11,10 @@ const getAllStores = async (req,res) => {
         const token = getToken(req);
         const decodedToken = jwt.verify(token,process.env.SECRET);
 
+        if(!decodedToken || !decodedToken.id){
+            res.status(401).json({error:'token missing or invalid'});
+        }
+
         const allStores = await profile.findAll({
             where:{
                 storeName:{
@@ -20,7 +24,11 @@ const getAllStores = async (req,res) => {
         });
         res.send(allStores);
     }catch(err){
-        res.status(401).json({error:'token missing or invalid'});
+        if(err.message.includes('token') || err.message.includes('signature')){
+            res.status(401).json({error:'token missing or invalid'});
+        }else{
+            res.json({error:err.message});
+        }
     }
 }
 
