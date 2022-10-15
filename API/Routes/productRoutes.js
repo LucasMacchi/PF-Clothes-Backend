@@ -5,6 +5,7 @@ const { product, profile } = require("../DataBase/db");
 const getAllProducts = require("./Controllers/getAllProducts");
 const getProductName = require("./Controllers/getAllProductsByName");
 const getFilteredProducts = require("./Controllers/getFilteredProducts");
+const getProductDetail = require("./Controllers/getProductDetail");
 //
 const router = Router();
 
@@ -104,6 +105,19 @@ router.post("/", async (req, res) => {
       });
   } catch (error) {
     res.status(404).send(error.message);
+  }
+});
+
+// Detalles del producto
+router.get("/:id",async(req,res,next) => {
+  const {id} = req.params;
+  try{
+    const detail = await getProductDetail(id);
+    res.send(detail);
+  }catch(err){
+
+    next(err);
+    
   }
 });
 
