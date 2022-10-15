@@ -3,6 +3,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 //const cookieParser = require('cookie-parser');
 const routes = require("./Routes/index");
+const {logger} = require("./Routes/Utils/logger");
+const {errorHandler} = require("./Routes/Utils/errorHandler");
 
 const server = express();
 
@@ -24,15 +26,11 @@ server.use((req, res, next) => {
   next();
 });
 
+
+server.use(logger);
 server.use("/", routes);
 
 // Error catching endware.
-server.use((err, req, res, next) => {
-  // eslint-disable-line no-unused-vars
-  const status = err.status || 500;
-  const message = err.message || err;
-  console.error(err);
-  res.status(status).send(message);
-});
+server.use(errorHandler);
 
 module.exports = server;

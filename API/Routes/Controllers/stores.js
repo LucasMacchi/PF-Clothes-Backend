@@ -1,19 +1,30 @@
 const {profile,Op} = require('../../DataBase/db');
+const {getToken} = require('../Utils/getToken');
+const jwt = require('jsonwebtoken');
 
-const getAllStores = async (req,res) => {
+const getAllStores = async (req,res,next) => {
 
-    const allStores = await profile.findAll({
-        where:{
-            storeName:{
-                [Op.ne]:null,
+    
+   try{
+        //test using jwt token auth
+        //const token = getToken(req);
+        //const decodedToken = jwt.verify(token,process.env.SECRET);
+        //console.log(decodedToken.id);
+
+        const allStores = await profile.findAll({
+            where:{
+                storeName:{
+                        [Op.ne]:null,
+                }
             }
-        }
-    });
+        });
 
-    try{
         res.send(allStores);
+
     }catch(err){
-        res.send(err.message);
+
+        next(err);
+
     }
 }
 
