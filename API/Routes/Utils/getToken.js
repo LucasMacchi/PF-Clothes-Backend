@@ -1,15 +1,12 @@
 const jwt = require('jsonwebtoken');
 
 const getToken = (req,res,next) => {
-    console.log("this is token");
     const authorization = req.get('authorization');
-    console.log(authorization);
     
     if(authorization && authorization.toLowerCase().startsWith('bearer ')){
-        
+        // verifica token
         const decodedToken = jwt.verify(authorization.substring(7),process.env.SECRET);
-        console.log(decodedToken.id);
-
+        // pasa id del usuario en el token al request
         const { id } = decodedToken;
         req.id = id;
 

@@ -7,7 +7,7 @@ const {
 const {getToken} = require('./Utils/getToken');
 
 // rutas vendedores
-router.get("/all",getToken,getAllStores);
+router.get("/all",getAllStores);
 router.get("/:name",getStoreByName);
 
 module.exports = router;
