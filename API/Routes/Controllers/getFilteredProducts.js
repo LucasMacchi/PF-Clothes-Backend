@@ -11,7 +11,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -23,7 +23,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -35,7 +35,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -47,7 +47,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -58,7 +58,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -69,7 +69,7 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
@@ -80,14 +80,14 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       },
     });
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
   } else {
     let filteredProducts = await product.findAll();
     let data = await filteredProducts;
-    if (!data.length) throw Error("No existe ningun producto");
+    //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
     } else return data;
