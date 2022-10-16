@@ -49,6 +49,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Lucas Macchi",
+                username:"lmacchi",
                 mail: "lucasmacchi25@gmail.com",
                 password: "$2a$08$j8/eAoOFOyPatGDWm6P/b.kYgAKXC8UaXAqK0G84myeHXm4Pm13Ti",// password:"123456"
                 phone: "111111111111",
@@ -88,6 +89,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Marcelo Rodriguez",
+                username:"mrodriguez",
                 mail: "marcelito@hotmail.com",
                 password: "$2a$08$qucaVmg1AfwdUSKMVt/s9eMY7/Oi.LJnU6VUaZQe.YSKyZDmA3zW.",//password:"8524"
                 phone: "111111111111",
@@ -127,6 +129,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Roberto Hernando",
+                username:"rhernando",
                 mail: "golo@hotmail.com",
                 password: "$2a$08$GIOAnXCnDhsjTaITR05u/e.IuHL99GEnPTy1lqpLkkgz.bhtjZjFm",// password:"8521"
                 phone: "111111111111",
@@ -165,6 +168,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Franco Milazzo",
+                username:"fmilazzo",
                 mail: "francoMil@gmail.com",
                 password: "$2a$08$w3lWaaat2TyQSgbvoAuBye4zR.rnn78y2FlO1tnRnZgo4fOqLbczm", // password : "8521"
                 phone: "111111111111",
@@ -203,6 +207,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Martina Gonzales",
+                username:"mgonzales",
                 mail: "martina_43@gmail.com",
                 password: "$2a$08$.9NTiO04sBHHvUcS0nirYuJJqWnB2W9YnNn5s2rqYOXg9F2tB05Y.",// password:"8521"
                 phone: "111111111111",
@@ -241,6 +246,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Lucia Buchetti",
+                username:"lbuchetti",
                 mail: "luci_arg@gmail.com",
                 password: "$2a$08$Ozd0Md/aTtl4zVBs/V/8yu0wRtBYcVu2Se6jVSGAgeoACWEfZJ0Ke", // password : 8521
                 phone: "111111111111",
@@ -279,6 +285,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Mario Davis",
+                username:"mdavis",
                 mail: "mario_el10@gmail.com",
                 password: "$2a$08$buAjncij/WavoYrnV5.kbekHYlEm9iIsal9m4G7ZogMTig3kdRQfu",// password:"8521"
                 phone: "111111111111",
@@ -317,6 +324,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Maximo Cosseti",
+                username:"mcosseti",
                 mail: "maximo_coset@gmail.com",
                 password: "$2a$08$L1ybjTFoKfG3eOF9v2b3.Oyn8bHMs8Ob97YW3ox3Ct84ODxJXBDpu",//password:"8521"
                 phone: "111111111111",
@@ -355,6 +363,7 @@ const profilesCreator = async() => {
      }).then(async (qual) => {
          const user = await profile.create({
              name: "Mario Santos",
+             username:"msantos",
              mail: "marioSantito@gmail.com",
              password: "$2a$08$yq1jgaokXrPLdgWR.jWlHuFOM4DRsGMyw2ncntUqU3RwHn95KgeOq", // password:"8521"
              phone: "111111111111",
@@ -393,6 +402,7 @@ const profilesCreator = async() => {
         }).then(async (qual) => {
             const user = await profile.create({
                 name: "Pablo Lamponne",
+                username:"plampone",
                 mail: "LamponeATiempo@gmail.com",
                 password: "$2a$08$BX8OhJDnizlV/RX4gDHDfef4Od4TzgI4SijgYEuIWcW4.JcfFPQLK",//password:"8521"
                 phone: "111111111111",
@@ -431,6 +441,7 @@ const profilesCreator = async() => {
     }).then(async (qual) => {
         const user = await profile.create({
             name: "Gabriel David Medina",
+            username:"gmedina",
             mail: "GabrielMedi@gmail.com",
             password: "$2a$08$f/3k5KtoxTT4.Cz712tRf.s6i.8Ycn.tg5lTZEfT/GB.mHiWvJAZO",// password:"8521"
             phone: "111111111111",

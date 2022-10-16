@@ -6,7 +6,7 @@ const signIn = async (req,res) => {
     const {username, password } = req.body;
 
     const user = await profile.findOne({
-        where:{ name:username }
+        where:{ username:username }
     });
 
     const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
@@ -15,16 +15,16 @@ const signIn = async (req,res) => {
 
         const userDataforToken = {
             id:user.id,
-            username:user.name
+            username:user.username
         }
         
         const token = jwt.sign(
             userDataforToken,
             process.env.SECRET,
-            {expiresIn:60*60});
+            {expiresIn:60*60*24*7});
 
         res.send({
-            username:user.name,
+            username:user.username,
             token,
         });
         

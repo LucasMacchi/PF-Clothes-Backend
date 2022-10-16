@@ -4,6 +4,7 @@ const {
     getAllStores,
     getStoreByName,
 } = require('./Controllers/stores');
+const {getToken} = require('./Utils/getToken');
 
 // rutas vendedores
 router.get("/all",getAllStores);

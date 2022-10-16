@@ -7,6 +7,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
+    username:{
+      type:DataTypes.STRING,
+      allowNull:false,
+      unique:true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -23,7 +28,6 @@ module.exports = (sequelize) => {
       type: DataTypes.BIGINT,
       allowNull: false,
     },
-
     storeName: {
       type: DataTypes.STRING,
       allowNull: true,
