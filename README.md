@@ -19,6 +19,9 @@ Product Routes:
     -GET /product/filter?price=&size=&demographic=&cant=
         - This route filters the products that match with any of the filters, and the cant variable,is an optional variable that let you specify the amout of product that each subarray will include
 
+    -GET /product/:id
+        - This route bring a product info using the id in the url
+
 Profile Routes:
 
     - POST /user
