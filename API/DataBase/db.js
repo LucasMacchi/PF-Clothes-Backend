@@ -143,8 +143,8 @@ const profilesCreator = async() => {
                         price: 24,
                         demographic: "teen female",
                         stock: 156,
-                        image: "no image",
-                        name: "https://images.pexels.com/photos/7208718/pexels-photo-7208718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                        image: "https://images.pexels.com/photos/7208718/pexels-photo-7208718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                        name: "Shorts",
                     },
                     {
                         name: "Campera",
