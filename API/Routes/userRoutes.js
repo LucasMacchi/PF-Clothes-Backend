@@ -5,6 +5,8 @@ const router = Router();
 //Controladores
 const addProductsToLists = require("./Controllers/addProductsToLists")
 const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
+const addReview = require("./Controllers/addReview")
+
 
 router.post("/", async (req, res) => {
   let {
@@ -97,6 +99,16 @@ router.get("/get/:id", async (req, res) => {
     res.send(err.message);
   }
 });
+//Agrega una review al usuario
+router.post("/review/:id", async (req, res) => {
+  const id = req.params.id
+  try {
+    const response = await addReview(id, req.body, "profile");
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+})
 
 //Modificar datos de un usuario
 router.put("/:id", async (req, res) => {
