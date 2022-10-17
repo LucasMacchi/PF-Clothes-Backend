@@ -6,8 +6,9 @@ const router = Router();
 const addProductsToLists = require("./Controllers/addProductsToLists")
 const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
 const addReview = require("./Controllers/addReview")
+const getToken = require("./Utils/getToken");
 
-
+// crear usuario
 router.post("/", async (req, res) => {
   let {
     name,
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
   }
 });
 //add elements to favorites
-router.put("/favorites", async (req, res) => {
+router.put("/favorites",getToken, async (req, res) => {
   const {productID, profileID} = req.query
   try {
       const response = await addProductsToLists(productID, profileID, "fav")
@@ -59,7 +60,7 @@ router.put("/favorites", async (req, res) => {
 })
 
 //add elements to shoppingcart
-router.put("/shoppingcart", async (req, res) => {
+router.put("/shoppingcart",getToken, async (req, res) => {
   const {productID, profileID} = req.query
   try {
       const response = await addProductsToLists(productID, profileID, "shop")
@@ -69,7 +70,7 @@ router.put("/shoppingcart", async (req, res) => {
   }
 })
 //remove elements of favorites
-router.delete("/favorites", async (req, res) => {
+router.delete("/favorites",getToken, async (req, res) => {
   const {productID, profileID} = req.query
   try {
       const response = await deleteProductsOfList(productID, profileID, "fav")
@@ -79,7 +80,7 @@ router.delete("/favorites", async (req, res) => {
   }
 })
 //remove elements of the shopping card
-router.delete("/shoppingcart", async (req, res) => {
+router.delete("/shoppingcart",getToken, async (req, res) => {
   const {productID, profileID} = req.query
   try {
       const response = await deleteProductsOfList(productID, profileID, "shop")
@@ -100,7 +101,7 @@ router.get("/get/:id", async (req, res) => {
   }
 });
 //Agrega una review al usuario
-router.post("/review/:id", async (req, res) => {
+router.post("/review/:id",getToken, async (req, res) => {
   const id = req.params.id
   try {
     const response = await addReview(id, req.body, "profile");
@@ -111,7 +112,7 @@ router.post("/review/:id", async (req, res) => {
 })
 
 //Modificar datos de un usuario
-router.put("/:id", async (req, res) => {
+router.put("/:id",getToken, async (req, res) => {
   const { id } = req.params;
   const object = req.body;
 

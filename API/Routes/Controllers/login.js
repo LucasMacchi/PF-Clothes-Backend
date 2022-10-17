@@ -33,8 +33,9 @@ const signIn = async (req,res) => {
             res.status(401).json({
                 error:"invalid user or password",
             })
+        }else{
+            res.send(err.message);
         }
-        res.send(err.message);
     }
 
 };
