@@ -35,9 +35,6 @@ profile.hasMany(marketedProduct)
 profile.hasMany(qualification) //nuevo
 //producto
 product.hasMany(qualification) //nuevo
-//calification
-qualification.hasOne(profile)
-qualification.hasOne(product)
 //marketedProduct
 marketedProduct.hasOne(product)
 
