@@ -16,7 +16,7 @@ Product Routes:
     -POST /product
         - This route will create a product in the Product table
 
-    -GET /product/filter?price=&size=&demographic=&cant=
+    -GET /product/filter?price=&size=&demographic=&color=&name=&cant=
         - This route filters the products that match with any of the filters, and the cant variable,is an optional variable that let you specify the amout of product that each subarray will include
 
     -GET /product/:id
