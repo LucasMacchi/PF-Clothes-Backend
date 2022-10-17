@@ -6,7 +6,7 @@ const router = Router();
 const addProductsToLists = require("./Controllers/addProductsToLists")
 const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
 const addReview = require("./Controllers/addReview")
-const getToken = require("./Utils/getToken");
+const {getToken} = require("./Utils/getToken");
 
 // crear usuario
 router.post("/", async (req, res) => {

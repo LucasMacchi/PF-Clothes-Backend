@@ -2,16 +2,16 @@ const {profile,Op} = require('../../DataBase/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const signIn = async (req,res) => {
+const signIn = async (req,res,next) => {
     const {username, password } = req.body;
 
-    const user = await profile.findOne({
-        where:{ username:username }
-    });
-
-    const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
-
     try{
+
+        const user = await profile.findOne({
+            where:{ username:username }
+        });
+
+        const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
 
         const userDataforToken = {
             id:user.id,
@@ -21,7 +21,8 @@ const signIn = async (req,res) => {
         const token = jwt.sign(
             userDataforToken,
             process.env.SECRET,
-            {expiresIn:60*60*24*7});
+            {expiresIn:60*60*24*7}
+        );
 
         res.send({
             username:user.username,
@@ -36,6 +37,7 @@ const signIn = async (req,res) => {
         }else{
             res.send(err.message);
         }
+
     }
 
 };

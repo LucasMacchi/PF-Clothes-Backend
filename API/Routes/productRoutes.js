@@ -7,7 +7,7 @@ const getProductName = require("./Controllers/getAllProductsByName");
 const getFilteredProducts = require("./Controllers/getFilteredProducts");
 const getProductDetail = require("./Controllers/getProductDetail");
 const addReview = require("./Controllers/addReview")
-const getToken = require("./Utils/getToken");
+const {getToken} = require("./Utils/getToken");
 //
 const router = Router();
 
