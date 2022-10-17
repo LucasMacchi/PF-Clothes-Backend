@@ -7,6 +7,7 @@ const addProductsToLists = require("./Controllers/addProductsToLists")
 const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
 const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
+const getAvrg = require("./Controllers/avrgScore");
 const {getToken} = require("./Utils/getToken");
 
 // crear usuario
@@ -107,6 +108,16 @@ router.get("/review/:id", async (req, res) => {
   const id = req.params.id
   try {
     const response = await getReview(id, "profile");
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+})
+//Trae el promedio de puntaje del usuario
+router.get("/review/avrg/:id", async (req, res) => {
+  const id = req.params.id
+  try {
+    const response = await getAvrg(id, "profile");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
