@@ -25,8 +25,12 @@ Product Routes:
     -POST /product/review/:id
         - This route add a review with a body with score and reviews as properties, the id will be the product to review
 
-    -GET /user/review/:id
+    -GET /product/review/:id
         -This route returns all the reviews from an specific product
+
+    -GET /product/review/avrg/:id
+        -This route returns the average score of a profile
+
         
 Profile Routes:
 
@@ -56,6 +60,9 @@ Profile Routes:
 
     -GET /user/review/:id
         -This route returns all the reviews from an specific user
+    
+    -GET /user/review/avrg/:id
+        -This route returns the average score of a profile
 
 Stores Routes:
 
