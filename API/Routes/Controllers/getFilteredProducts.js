@@ -6,11 +6,10 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
     let filteredProducts = await product.findAll({
       where: {
         size,
-        price,
         demographic,
       },
     });
-    let data = await filteredProducts;
+    let data = await filteredProducts.filter((el) => el.price <= price);
     //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
@@ -19,10 +18,9 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
     let filteredProducts = await product.findAll({
       where: {
         size,
-        price,
       },
     });
-    let data = await filteredProducts;
+    let data = await filteredProducts.filter((el) => el.price <= price);
     //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
@@ -42,11 +40,10 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
   } else if (price && demographic) {
     let filteredProducts = await product.findAll({
       where: {
-        price,
         demographic,
       },
     });
-    let data = await filteredProducts;
+    let data = await filteredProducts.filter((el) => el.price <= price);
     //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
@@ -74,12 +71,8 @@ const getFilteredProducts = async (size, price, demographic, cant) => {
       return paginated(data, cant);
     } else return data;
   } else if (price) {
-    let filteredProducts = await product.findAll({
-      where: {
-        price: price,
-      },
-    });
-    let data = await filteredProducts;
+    let filteredProducts = await product.findAll();
+    let data = await filteredProducts.filter((el) => el.price <= price);
     //if (!data.length) throw Error("No existe ningun producto");
     if (cant) {
       return paginated(data, cant);
