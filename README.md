@@ -24,6 +24,9 @@ Product Routes:
     
     -POST /product/review/:id
         - This route add a review with a body with score and reviews as properties, the id will be the product to review
+
+    -GET /user/review/:id
+        -This route returns all the reviews from an specific product
         
 Profile Routes:
 
@@ -51,6 +54,9 @@ Profile Routes:
     -POST /user/review/:id
         - This route add a review with a body with score and reviews as properties, the id will be the profile to review
 
+    -GET /user/review/:id
+        -This route returns all the reviews from an specific user
+
 Stores Routes:
 
     - GET /stores/all
@@ -68,3 +74,8 @@ Demographics Routes:
 
     - GET /demographics
         - This route will fetch all the demographics for the cloth of the e-commerce
+
+Review:
+    
+    -GET /review/:id
+        -Get an specific review by id
