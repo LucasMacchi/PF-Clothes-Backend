@@ -21,7 +21,7 @@ const addReview = async (id, review, order) => {
         article.addQualification(qual)
         return "Review agregada al "+order
     }
-    else return "Wrong order"
+    else throw Error("Orden incorrecta")
 }
 
 module.exports = addReview
