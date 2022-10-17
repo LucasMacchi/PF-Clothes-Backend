@@ -6,6 +6,7 @@ const storeRoutes = require("../Routes/storeRoutes");
 const loginRoutes = require("../Routes/loginRoutes");
 const sizesRoutes = require("../Routes/sizesRoutes");
 const demographicRoutes = require("../Routes/demographicRoutes");
+const reviewRoutes = require("./reviewRoutes")
 //
 const router = Router();
 
@@ -21,6 +22,8 @@ router.use("/login",loginRoutes);
 router.use("/sizes",sizesRoutes);
 // demographics
 router.use("/demographics",demographicRoutes);
+//review
+router.use("/review", reviewRoutes)
 //Test
 router.get("/test", (req, res,next) => {
   res.send("Hello World!!!!, im working");
