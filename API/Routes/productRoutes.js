@@ -6,6 +6,7 @@ const getAllProducts = require("./Controllers/getAllProducts");
 const getProductName = require("./Controllers/getAllProductsByName");
 const getFilteredProducts = require("./Controllers/getFilteredProducts");
 const getProductDetail = require("./Controllers/getProductDetail");
+const addReview = require("./Controllers/addReview")
 //
 const router = Router();
 
@@ -107,6 +108,16 @@ router.post("/", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+//Agrega una review
+router.post("/review/:id", async (req, res) => {
+  const id = req.params.id
+  try {
+    const response = await addReview(id, req.body, "product");
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+})
 
 // Detalles del producto
 router.get("/:id",async(req,res,next) => {

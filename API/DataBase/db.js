@@ -32,23 +32,18 @@ const {product, qualification, marketedProduct, profile} = conn.models
 //Perfil
 profile.hasMany(product)
 profile.hasMany(marketedProduct)
-//calification
-qualification.hasOne(profile)
-qualification.hasOne(product)
+profile.hasMany(qualification) //nuevo
+//producto
+product.hasMany(qualification) //nuevo
 //marketedProduct
 marketedProduct.hasOne(product)
-
 
 ///Seeder
 
 const profilesCreator = async() => {
-
-    await qualification.create({
-        score: 3,
-        reviews: "Un capo",
-        }).then(async (qual) => {
-            const user = await profile.create({
-                name: "Lucas Macchi",
+    //1
+    await profile.create({
+        name: "Lucas Macchi",
                 username:"lmacchi",
                 mail: "lucasmacchi25@gmail.com",
                 password: "$2a$08$j8/eAoOFOyPatGDWm6P/b.kYgAKXC8UaXAqK0G84myeHXm4Pm13Ti",// password:"123456"
@@ -79,15 +74,15 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
+            }).then(async (user) => {
+                const qual = await qualification.create({
+                    score: 3,
+                    reviews: "Un capo",
+                })
+                user.addQualification(qual)
             })
-            qual.setProfile(user)
-        })
-
-    await qualification.create({
-        score: 4,
-        reviews: "Muy buenos productos, confiable",
-        }).then(async (qual) => {
-            const user = await profile.create({
+    //2
+    await profile.create({
                 name: "Marcelo Rodriguez",
                 username:"mrodriguez",
                 mail: "marcelito@hotmail.com",
@@ -119,15 +114,14 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-             })
-            qual.setProfile(user)
-        })
-
-    await qualification.create({
-        score: 1,
-        reviews: "ESTAFADOOOOR!!!!",
-        }).then(async (qual) => {
-            const user = await profile.create({
+            }).then(async (user) => {
+                const qual = await qualification.create({
+                    score: 4,
+                    reviews: "Muy buenos productos, confiable",
+                })
+                user.addQualification(qual)
+            })
+    await profile.create({
                 name: "Roberto Hernando",
                 username:"rhernando",
                 mail: "golo@hotmail.com",
@@ -158,16 +152,16 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 3,
+            reviews: "Bueno",
         })
-
-    await qualification.create({
-        score: 1,
-        reviews: "Me amenazo!!",
-        }).then(async (qual) => {
-            const user = await profile.create({
-                name: "Franco Milazzo",
+        user.addQualification(qual)
+    })
+    
+    await profile.create({
+        name: "Franco Milazzo",
                 username:"fmilazzo",
                 mail: "francoMil@gmail.com",
                 password: "$2a$08$w3lWaaat2TyQSgbvoAuBye4zR.rnn78y2FlO1tnRnZgo4fOqLbczm", // password : "8521"
@@ -197,15 +191,15 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
+    }).then(async (user) => {
+                const qual = await qualification.create({
+                    score: 1,
+                    reviews: "Me amenazo!!",
+                })
+                user.addQualification(qual)
             })
-            qual.setProfile(user)
-        })
-        
-    await qualification.create({
-        score: 4,
-        reviews: "Buena tienda",
-        }).then(async (qual) => {
-            const user = await profile.create({
+
+    await profile.create({
                 name: "Martina Gonzales",
                 username:"mgonzales",
                 mail: "martina_43@gmail.com",
@@ -236,16 +230,16 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 4,
+            reviews: "Buena tienda",
         })
+        user.addQualification(qual)
+    })
 
-    await qualification.create({
-        score: 5,
-        reviews: "De las mejores tiendas, buen servicio",
-        }).then(async (qual) => {
-            const user = await profile.create({
-                name: "Lucia Buchetti",
+    await profile.create({
+                 name: "Lucia Buchetti",
                 username:"lbuchetti",
                 mail: "luci_arg@gmail.com",
                 password: "$2a$08$Ozd0Md/aTtl4zVBs/V/8yu0wRtBYcVu2Se6jVSGAgeoACWEfZJ0Ke", // password : 8521
@@ -275,15 +269,15 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 5,
+            reviews: "De las mejores tiendas, buen servicio",
         })
+        user.addQualification(qual)
+    })
 
-    await qualification.create({
-        score: 3,
-        reviews: "No tan bueno, falta soporte",
-        }).then(async (qual) => {
-            const user = await profile.create({
+    await profile.create({
                 name: "Mario Davis",
                 username:"mdavis",
                 mail: "mario_el10@gmail.com",
@@ -314,15 +308,15 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 3,
+            reviews: "No tan bueno, falta soporte",
         })
+        user.addQualification(qual)
+    })
 
-    await qualification.create({
-        score: 5,
-        reviews: "Un Disculpe, fuego tiene?",
-        }).then(async (qual) => {
-            const user = await profile.create({
+    await profile.create({
                 name: "Maximo Cosseti",
                 username:"mcosseti",
                 mail: "maximo_coset@gmail.com",
@@ -353,16 +347,16 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
-       })
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 5,
+            reviews: "Un Disculpe, fuego tiene?",
+        })
+        user.addQualification(qual)
+    })
 
-    await qualification.create({
-        score: 5,
-        reviews: "Un capo",
-     }).then(async (qual) => {
-         const user = await profile.create({
-             name: "Mario Santos",
+    await profile.create({
+            name: "Mario Santos",
              username:"msantos",
              mail: "marioSantito@gmail.com",
              password: "$2a$08$yq1jgaokXrPLdgWR.jWlHuFOM4DRsGMyw2ncntUqU3RwHn95KgeOq", // password:"8521"
@@ -392,16 +386,17 @@ const profilesCreator = async() => {
              ]
          }, {
              include: [product]
-         })
-         qual.setProfile(user)
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 5,
+            reviews: "Un Disculpe, fuego tiene?",
+        })
+        user.addQualification(qual)
     })
 
-    await qualification.create({
-        score: 5,
-        reviews: "Me envio todo el mismo dia, un capoo!!",
-        }).then(async (qual) => {
-            const user = await profile.create({
-                name: "Pablo Lamponne",
+    await profile.create({
+
+        name: "Pablo Lamponne",
                 username:"plampone",
                 mail: "LamponeATiempo@gmail.com",
                 password: "$2a$08$BX8OhJDnizlV/RX4gDHDfef4Od4TzgI4SijgYEuIWcW4.JcfFPQLK",//password:"8521"
@@ -431,16 +426,17 @@ const profilesCreator = async() => {
                 ]
             }, {
                 include: [product]
-            })
-            qual.setProfile(user)
-       })
 
-    await qualification.create({
-        score: 5,
-        reviews: "Me envio todo el mismo dia, un capoo!!",
-    }).then(async (qual) => {
-        const user = await profile.create({
-            name: "Gabriel David Medina",
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 5,
+            reviews: "Me envio todo el mismo dia, un capoo!!",
+        })
+        user.addQualification(qual)
+    })
+
+    await profile.create({
+        name: "Gabriel David Medina",
             username:"gmedina",
             mail: "GabrielMedi@gmail.com",
             password: "$2a$08$f/3k5KtoxTT4.Cz712tRf.s6i.8Ycn.tg5lTZEfT/GB.mHiWvJAZO",// password:"8521"
@@ -461,9 +457,24 @@ const profilesCreator = async() => {
             ]
         }, {
             include: [product]
+    }).then(async (user) => {
+        const qual = await qualification.create({
+            score: 5,
+            reviews: "Un master",
         })
-        qual.setProfile(user)
-        })
+        user.addQualification(qual)
+    })
+
+    await profile.create({
+        name: "Facundo Ancarani",
+        username: "fanca",
+        mail: "facundoAnca@gmail.com",
+        password: "$2a$08$f/3k5KtoxTT4.Cz712tRf.s6i.8Ycn.tg5lTZEfT/GB.mHiWvJAZO",// password:"8521"
+        phone: "111111111111",
+        banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
+        location: "CABA",
+        profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/c/ce/Tarjeta_de_Navidad_26.png/revision/latest/scale-to-width-down/180?cb=20160318014107&path-prefix=es",
+    })
 }
 
 

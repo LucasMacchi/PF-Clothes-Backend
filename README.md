@@ -21,7 +21,10 @@ Product Routes:
 
     -GET /product/:id
         - This route bring a product info using the id in the url
-
+    
+    -POST /product/review/:id
+        - This route add a review with a body with score and reviews as properties, the id will be the product to review
+        
 Profile Routes:
 
     - POST /user
@@ -44,6 +47,9 @@ Profile Routes:
 
     - DELETE /user/shoppingcart?productID=&profileID=
         - This route will eliminate a product of the shoppingcart array in the Profile table
+
+    -POST /user/review/:id
+        - This route add a review with a body with score and reviews as properties, the id will be the profile to review
 
 Stores Routes:
 
