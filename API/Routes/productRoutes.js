@@ -50,18 +50,27 @@ router.get("/", async (req, res) => {
 
 //Filtrados
 router.get("/filter", async (req, res) => {
-  const { size, price, demographic, cant } = req.query;
+  const { name, size, price, demographic, color, cant } = req.query;
   try {
     if (cant) {
       const products = await getFilteredProducts(
+        name,
         size,
         price,
         demographic,
+        color,
         cant
       );
       res.status(200).send(products);
     } else {
-      const products = await getFilteredProducts(size, price, demographic, 0);
+      const products = await getFilteredProducts(
+        name,
+        size,
+        price,
+        demographic,
+        color,
+        0
+      );
       res.status(200).send(products);
     }
   } catch (error) {
@@ -109,15 +118,13 @@ router.post("/", async (req, res) => {
 });
 
 // Detalles del producto
-router.get("/:id",async(req,res,next) => {
-  const {id} = req.params;
-  try{
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
     const detail = await getProductDetail(id);
     res.send(detail);
-  }catch(err){
-
+  } catch (err) {
     next(err);
-    
   }
 });
 
