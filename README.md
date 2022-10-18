@@ -86,6 +86,9 @@ Review:
     
     -GET /review/:id
         -Get an specific review by id
+        
+    -PUT /review/:id
+        -This route require a body with "score" and "reviews" as properties, then, it will update the review with the new one and then returned
 
 login:
 
