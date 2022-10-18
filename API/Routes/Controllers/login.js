@@ -11,7 +11,15 @@ const signIn = async (req,res,next) => {
             where:{ username:username }
         });
 
+        console.log(user);
+
         const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
+
+        if(!(user && passwordCorrect)){
+            res.status(401).json({
+                error:"invalid user or password",
+            })
+        }
 
         const userDataforToken = {
             id:user.id,
@@ -30,14 +38,7 @@ const signIn = async (req,res,next) => {
         });
         
     }catch(err){
-        if(!(user && passwordCorrect)){
-            res.status(401).json({
-                error:"invalid user or password",
-            })
-        }else{
-            res.send(err.message);
-        }
-
+        next(err);
     }
 
 };
