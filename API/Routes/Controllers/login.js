@@ -29,7 +29,7 @@ const signIn = async (req,res,next) => {
         const token = jwt.sign(
             userDataforToken,
             process.env.SECRET,
-            {expiresIn:60*60*24*7}
+            {expiresIn:60*60*24}
         );
 
         res.send({
