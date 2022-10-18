@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
   let {
     name,
     mail,
+    username,
     password,
     phone,
     storeName,
@@ -37,6 +38,7 @@ router.post("/", async (req, res) => {
         mail,
         password: passwordHash,
         phone,
+        username,
         storeName,
         banner,
         profilePicture,
@@ -45,9 +47,9 @@ router.post("/", async (req, res) => {
         shoppingCart,
       },
     });
-    return res.send(user);
+    res.send(user);
   } catch (err) {
-    res.send(err.message);
+    res.send(err);
   }
 });
 //add elements to favorites
