@@ -9,7 +9,7 @@ const getProductDetail = require("./Controllers/getProductDetail");
 const addReview = require("./Controllers/addReview")
 const getReview = require("./Controllers/getReviews")
 const getAvrg = require("./Controllers/avrgScore")
-
+const {getToken} = require("./Utils/getToken");
 //
 const router = Router();
 
@@ -72,8 +72,8 @@ router.get("/filter", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
-//Agregar un producto
-router.post("/", async (req, res) => {
+//Agregar un producto ruta privada
+router.post("/",getToken, async (req, res) => {
   let {
     id,
     name,
@@ -132,7 +132,7 @@ router.get("/review/avrg/:id", async (req, res) => {
   }
 })
 //Agrega una review
-router.post("/review/:id", async (req, res) => {
+router.post("/review/:id",getToken, async (req, res) => {
   const id = req.params.id
   try {
     const response = await addReview(id, req.body, "product");

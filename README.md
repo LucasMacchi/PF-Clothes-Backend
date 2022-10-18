@@ -86,3 +86,35 @@ Review:
     
     -GET /review/:id
         -Get an specific review by id
+
+login:
+
+    -POST /login
+        -Accept username and password to generate token and send to the client
+
+test users:
+    
+    - those are the test users to make use of the login route
+    - user : lmacchi / password : 123456
+    - user : mrodriguez / password : 8524
+    - user : rhernando / password : 8521
+    - user : fmilazzo / password : 8521
+    - user : mgonzales / password : 8521
+    - user : lbuchetti / password : 8521
+    - user : mdavis / password : 8521
+    - user : mcosseti / password : 8521
+    - user : msantos / password : 8521
+    - user : plampone / password : 8521
+    - user : gmedina / password : 8521
+    - user : fanca / password : 8521
+
+protected routes:
+
+    - POST /product
+    - POST /product/review/:id
+    - PUT /user/:id
+    - PUT /user/favorites
+    - PUT /user/shoppingcart
+    - DELETE /user/favorites
+    - DELETE /user/shoppingcart
+    - POST /user/review/:id
