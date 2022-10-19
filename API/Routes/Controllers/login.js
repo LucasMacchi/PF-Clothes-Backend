@@ -21,21 +21,23 @@ const signIn = async (req,res,next) => {
             })
         }
 
-        const userDataforToken = {
-            id:user.id,
-            username:user.username
+        if(user && passwordCorrect){
+            const userDataforToken = {
+                id:user.id,
+                username:user.username
+            }
+            
+            const token = jwt.sign(
+                userDataforToken,
+                process.env.SECRET,
+                {expiresIn:60*60*24}
+            );
+    
+            res.send({
+                username:user.username,
+                token,
+            });
         }
-        
-        const token = jwt.sign(
-            userDataforToken,
-            process.env.SECRET,
-            {expiresIn:60*60*24}
-        );
-
-        res.send({
-            username:user.username,
-            token,
-        });
         
     }catch(err){
         next(err);
