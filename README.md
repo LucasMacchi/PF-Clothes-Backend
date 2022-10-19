@@ -91,6 +91,9 @@ Review:
     -PUT /review/:id
         -This route require a body with "score" and "reviews" as properties, then, it will update the review with the new one and then returned
 
+    -DELETE /review/:id
+        - This route will delete a review from the database
+
 login:
 
     -POST /login
