@@ -7,7 +7,9 @@ const getFilteredProducts = async (
   price,
   demographic,
   color,
-  page
+  page,
+  sortBy,
+  orderBy
 ) => {
   if (size && price && demographic && name && color) {
     let filteredProducts = await product.findAll({
@@ -21,6 +23,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
 
@@ -37,6 +40,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && demographic && color) {
@@ -48,6 +52,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && color && name) {
@@ -61,6 +66,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && color && demographic && name) {
@@ -75,6 +81,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (color && price && demographic && name) {
@@ -88,6 +95,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
 
@@ -101,6 +109,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && name) {
@@ -113,6 +122,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && color) {
@@ -123,6 +133,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && demographic && name) {
@@ -136,6 +147,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (size && demographic && color) {
@@ -147,6 +159,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (size && name && color) {
@@ -160,6 +173,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
@@ -172,6 +186,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && price && name) {
@@ -184,6 +199,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && demographic && name) {
@@ -197,6 +213,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
@@ -211,6 +228,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (demographic && price && color) {
@@ -221,6 +239,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (demographic && name && color) {
@@ -234,6 +253,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
@@ -248,6 +268,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && price && color) {
@@ -260,6 +281,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && demographic && color) {
@@ -273,6 +295,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
@@ -285,6 +308,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
 
@@ -299,6 +323,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && size) {
@@ -311,6 +336,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (name && demographic) {
@@ -323,6 +349,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (name && color) {
@@ -335,6 +362,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (size && demographic) {
@@ -345,6 +373,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (size && color) {
@@ -355,6 +384,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (size && price) {
@@ -364,6 +394,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (price && demographic) {
@@ -373,6 +404,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (price && color) {
@@ -382,6 +414,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && demographic) {
@@ -392,6 +425,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
@@ -404,6 +438,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (demographic) {
@@ -413,6 +448,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (price) {
@@ -427,6 +463,7 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
   } else if (color) {
@@ -436,13 +473,18 @@ const getFilteredProducts = async (
       },
       limit: 10,
       offset: page,
+      order: [[sortBy, orderBy]],
     });
     return (data = await filteredProducts);
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
   } else {
-    let filteredProducts = await product.findAll({ limit: 10, offset: page });
+    let filteredProducts = await product.findAll({
+      limit: 10,
+      offset: page,
+      order: [[sortBy, orderBy]],
+    });
     return (data = await filteredProducts);
   }
 };
