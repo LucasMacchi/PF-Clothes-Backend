@@ -16,12 +16,12 @@ Product Routes:
     -POST /product
         - This route will create a product in the Product table
 
-    -GET /product/filter?price=&size=&demographic=&cant=
+    -GET /product/filter?name=&price=&size=&demographic=&color=&cant=
         - This route filters the products that match with any of the filters, and the cant variable,is an optional variable that let you specify the amout of product that each subarray will include
 
     -GET /product/:id
         - This route bring a product info using the id in the url
-    
+
     -POST /product/review/:id
         - This route add a review with a body with score and reviews as properties, the id will be the product to review
 
@@ -31,7 +31,8 @@ Product Routes:
     -GET /product/review/avrg/:id
         -This route returns the average score of a profile
 
-        
+
+
 Profile Routes:
 
     - POST /user
@@ -60,7 +61,7 @@ Profile Routes:
 
     -GET /user/review/:id
         -This route returns all the reviews from an specific user
-    
+
     -GET /user/review/avrg/:id
         -This route returns the average score of a profile
 
@@ -83,10 +84,10 @@ Demographics Routes:
         - This route will fetch all the demographics for the cloth of the e-commerce
 
 Review:
-    
+
     -GET /review/:id
         -Get an specific review by id
-        
+
     -PUT /review/:id
         -This route require a body with "score" and "reviews" as properties, then, it will update the review with the new one and then returned
 
@@ -96,7 +97,7 @@ login:
         -Accept username and password to generate token and send to the client
 
 test users:
-    
+
     - those are the test users to make use of the login route
     - user : lmacchi / password : 123456
     - user : mrodriguez / password : 8524
