@@ -6,10 +6,10 @@ const db = conn
 
 
 db.sync({force: true}).then(()=> {
-  server.listen(PORT, () => {
+  server.listen(PORT, async() => {
     try {
+      await profilesCreator()
       db.authenticate().then(()=> console.log("database connected"))
-      profilesCreator()
       console.log("Server is up, at port ", PORT);
     } catch (error) {
       console.log("Ocurrio un error durante el inicio del servidor: "+error.message)
