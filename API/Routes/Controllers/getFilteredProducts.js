@@ -1,5 +1,5 @@
 const { product, Op } = require("../../DataBase/db");
-const paginated = require("./paginado");
+//const paginated = require("./paginado");
 
 const getFilteredProducts = async (
   name,
@@ -7,7 +7,7 @@ const getFilteredProducts = async (
   price,
   demographic,
   color,
-  cant
+  page
 ) => {
   if (size && price && demographic && name && color) {
     let filteredProducts = await product.findAll({
@@ -19,12 +19,11 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
+
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
   } else if (size && price && demographic && name) {
@@ -36,12 +35,10 @@ const getFilteredProducts = async (
         size,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && demographic && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -49,12 +46,10 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && color && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -64,12 +59,10 @@ const getFilteredProducts = async (
         size,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && color && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -80,12 +73,10 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (color && price && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -95,12 +86,11 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
+
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
   } else if (size && price && demographic) {
@@ -109,12 +99,10 @@ const getFilteredProducts = async (
         size,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -123,24 +111,20 @@ const getFilteredProducts = async (
         },
         size,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && color) {
     let filteredProducts = await product.findAll({
       where: {
         size,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -150,12 +134,10 @@ const getFilteredProducts = async (
         size,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (size && demographic && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -163,12 +145,10 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (size && name && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -178,12 +158,11 @@ const getFilteredProducts = async (
         size,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
+
     //////////////////////////////////////////////
   } else if (color && price && demographic) {
     let filteredProducts = await product.findAll({
@@ -191,12 +170,10 @@ const getFilteredProducts = async (
         color,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && price && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -205,12 +182,10 @@ const getFilteredProducts = async (
         },
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -220,12 +195,11 @@ const getFilteredProducts = async (
         color,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
+
     /////////////////////////////////////////
   } else if (demographic && price && name) {
     let filteredProducts = await product.findAll({
@@ -235,24 +209,20 @@ const getFilteredProducts = async (
         },
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (demographic && price && color) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (demographic && name && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -262,12 +232,11 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
+
     /////////////////////////////////////////
   } else if (name && price && demographic) {
     let filteredProducts = await product.findAll({
@@ -277,12 +246,10 @@ const getFilteredProducts = async (
         },
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && price && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -291,12 +258,10 @@ const getFilteredProducts = async (
         },
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && demographic && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -306,12 +271,10 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
 
     ////////////////////////////////////////
   } else if (price && demographic && color) {
@@ -320,12 +283,10 @@ const getFilteredProducts = async (
         demographic,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
@@ -336,12 +297,10 @@ const getFilteredProducts = async (
           [Op.like]: name.toLowerCase() + "%",
         },
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name && size) {
     let filteredProducts = await product.findAll({
       where: {
@@ -350,12 +309,10 @@ const getFilteredProducts = async (
         },
         size,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (name && demographic) {
     let filteredProducts = await product.findAll({
       where: {
@@ -364,12 +321,10 @@ const getFilteredProducts = async (
         },
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (name && color) {
     let filteredProducts = await product.findAll({
       where: {
@@ -378,81 +333,68 @@ const getFilteredProducts = async (
         },
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (size && demographic) {
     let filteredProducts = await product.findAll({
       where: {
         size,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (size && color) {
     let filteredProducts = await product.findAll({
       where: {
         size,
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (size && price) {
     let filteredProducts = await product.findAll({
       where: {
         size,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (price && demographic) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (price && color) {
     let filteredProducts = await product.findAll({
       where: {
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (color && demographic) {
     let filteredProducts = await product.findAll({
       where: {
         color,
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
+
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
   } else if (size) {
@@ -460,30 +402,22 @@ const getFilteredProducts = async (
       where: {
         size,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (demographic) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (price) {
-    let filteredProducts = await product.findAll();
-    let data = await filteredProducts.filter((el) => el.price <= price);
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    let filteredProducts = await product.findAll({ limit: 10, offset: page });
+    return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (name) {
     let filteredProducts = await product.findAll({
       where: {
@@ -491,32 +425,25 @@ const getFilteredProducts = async (
           [Op.like]: name.toLowerCase() + "%",
         },
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
   } else if (color) {
     let filteredProducts = await product.findAll({
       where: {
         color,
       },
+      limit: 10,
+      offset: page,
     });
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    return (data = await filteredProducts);
+
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
   } else {
-    let filteredProducts = await product.findAll();
-    let data = await filteredProducts;
-    //if (!data.length) throw Error("No existe ningun producto");
-    if (cant) {
-      return paginated(data, cant);
-    } else return data;
+    let filteredProducts = await product.findAll({ limit: 10, offset: page });
+    return (data = await filteredProducts);
   }
 };
 

@@ -54,29 +54,17 @@ router.get("/", async (req, res) => {
 
 //Filtrados
 router.get("/filter", async (req, res) => {
-  const { name, size, price, demographic, color, cant } = req.query;
+  const { name, size, price, demographic, color, page } = req.query;
   try {
-    if (cant) {
-      const products = await getFilteredProducts(
-        name,
-        size,
-        price,
-        demographic,
-        color,
-        cant
-      );
-      res.status(200).send(products);
-    } else {
-      const products = await getFilteredProducts(
-        name,
-        size,
-        price,
-        demographic,
-        color,
-        0
-      );
-      res.status(200).send(products);
-    }
+    const products = await getFilteredProducts(
+      name,
+      size,
+      price,
+      demographic,
+      color,
+      page
+    );
+    res.status(200).send(products);
   } catch (error) {
     res.status(404).send(error.message);
   }
