@@ -8,6 +8,7 @@ const successLoginUrl = "http://localhost:3000/login/success";
 const errorLoginUrl = "http://localhost:3000/login/error";
 
 router.post("/",signIn);
+
 router.get("/google",passport.authenticate("google",{ scope: ['profile','email']}));
 router.get("/auth/google/callback",passport.authenticate("google",{
     failureMessage: "Cannot login to google, please try again later!",
