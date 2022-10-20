@@ -38,8 +38,8 @@ Profile Routes:
     - POST /user
         - This route will create a user in the Profile table
 
-    - GET /user/get/:id
-        - This route will fetch a user by the id in the url
+    - POST /user/get
+        - This route will fetch a user by the id in the token
 
     - PUT /user/:id
         - This route will modify a user data by the id in the url
@@ -119,6 +119,7 @@ protected routes:
 
     - POST /product
     - POST /product/review/:id
+    - POST /user/get
     - PUT /user/:id
     - PUT /user/favorites
     - PUT /user/shoppingcart
