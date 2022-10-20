@@ -94,9 +94,9 @@ router.delete("/shoppingcart",getToken, async (req, res) => {
   }
 })
 
-//Traer datos de un usuario
-router.get("/get/:id", async (req, res) => {
-  const { id } = req.params;
+//Request data from user
+router.post("/get",getToken, async (req, res) => {
+  const { id } = req;
   try {
     let user = await profile.findByPk(id);
     return res.send(user);
