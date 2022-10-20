@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const routes = require("./Routes/index");
 const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
+require("./Auth/passport");
 
 const server = express();
 
