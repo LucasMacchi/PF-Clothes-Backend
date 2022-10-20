@@ -7,6 +7,7 @@ const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
 const passport = require('passport');
 const helmet = require('helmet');
+require('express-session');
 require("./Auth/passport");
 require("./Auth/GoogleSSO");
 
