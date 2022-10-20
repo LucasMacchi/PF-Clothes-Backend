@@ -7,7 +7,10 @@ const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
 const passport = require('passport');
 const helmet = require('helmet');
-require('express-session');
+require('dotenv').config();
+//const session = require('express-session');
+const cookieSession = require('cookie-session');
+
 require("./Auth/passport");
 require("./Auth/GoogleSSO");
 
@@ -21,8 +24,7 @@ server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 //server.use(cookieParser());
 server.use(helmet());
-server.use(passport.initialize());
-server.use(passport.session());
+
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
@@ -33,7 +35,15 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-
+/*server.use(session({
+  secret:"123",
+}));*/
+server.use(cookieSession({
+  maxAge:24 * 60 * 60 * 1000,
+  keys:[process.env.COOKIE_KEY],
+}));
+server.use(passport.initialize());
+server.use(passport.session());
 
 server.use(logger);
 server.use("/", routes);
