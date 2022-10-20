@@ -8,7 +8,6 @@ const {errorHandler} = require("./Routes/Utils/errorHandler");
 const passport = require('passport');
 const helmet = require('helmet');
 require('dotenv').config();
-//const session = require('express-session');
 const cookieSession = require('cookie-session');
 
 require("./Auth/passport");
@@ -35,9 +34,7 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-/*server.use(session({
-  secret:"123",
-}));*/
+
 server.use(cookieSession({
   maxAge:24 * 60 * 60 * 1000,
   keys:[process.env.COOKIE_KEY],
