@@ -2,6 +2,7 @@ const {profile,Op} = require('../../DataBase/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 const signIn = async (req,res,next) => {
     const {username, password } = req.body;
 
@@ -45,6 +46,11 @@ const signIn = async (req,res,next) => {
 
 };
 
+const signInGoogle = async (req,res) => {
+
+}
+
 module.exports = {
     signIn,
+    signInGoogle,
 }

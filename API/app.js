@@ -5,7 +5,10 @@ const bodyParser = require("body-parser");
 const routes = require("./Routes/index");
 const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
+const passport = require('passport');
+const helmet = require('helmet');
 require("./Auth/passport");
+require("./Auth/GoogleSSO");
 
 const server = express();
 
@@ -16,6 +19,9 @@ server.use(morgan("dev"));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 //server.use(cookieParser());
+server.use(helmet());
+server.use(passport.initialize());
+server.use(passport.session());
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
