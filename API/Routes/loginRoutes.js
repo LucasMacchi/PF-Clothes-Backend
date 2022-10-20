@@ -13,9 +13,9 @@ router.get("/auth/google/callback",passport.authenticate("google",{
     failureMessage: "Cannot login to google, please try again later!",
     failureRedirect: errorLoginUrl,
     successRedirect:successLoginUrl,
-},
+}),
 (req,res) => {
     console.log("User: ", req.user);
     res.send("Thank you for signing in!");
-}));
+});
 module.exports = router;

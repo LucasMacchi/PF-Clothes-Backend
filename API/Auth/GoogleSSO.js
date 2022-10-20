@@ -10,17 +10,21 @@ passport.use(new GoogleStrategy({
     callbackURL:GOOGLE_CALLBACK_URL,
     passReqToCallback:true,
 },
-async (req,accesToken,refreshToken,profile,cb) => {
+async (req,accesToken,refreshToken,gProfile,cb) => {
+    console.log(gProfile);
     const defaultUser = {
-        fullName: `${profile.name.givenName} ${profile.name.familyName}`,
-        email: profile.emails[0].value,
-        picture: profile.photos[0].value,
-        googleId:profile.id, 
+        name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
+        username: gProfile.emails[0].value,
+        password: gProfile.id,
+        mail: gProfile.emails[0].value,
+        profilePicture: gProfile.photos[0].value,
+        googleId: gProfile.id, 
+        phone:'111111111',
     }
 
     const user = await profile.findOrCreate({
         where:{
-            googleId:profile.id,
+            googleId:gProfile.id,
         },
         defaults: defaultUser,
     }).catch((err) => {
