@@ -5,7 +5,7 @@ const {conn, profilesCreator} = require("./DataBase/db")
 const db = conn
 
 
-db.sync({force: false}).then(()=> {
+db.sync({force: true}).then(()=> {
   server.listen(process.env.PORT, async() => {
     try {
       await profilesCreator()
