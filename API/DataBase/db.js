@@ -5,11 +5,13 @@ const modelProduct = require("./Models/Producto")
 const modelCalification = require("./Models/Calification")
 const modelMarketedProduct = require("./Models/MarketedProduct")
 const modelProfile = require("./Models/Profile")
+const modelVariant = require("./Models/Variant")
 
 //Seeders
 const users = require("./Seeders/users")
 const products = require("./Seeders/products")
 const reviews = require("./Seeders/reviews")
+const createVariant = require("./Seeders/variant")
 
 const conn = new Sequelize("pf_cloth", DB_USER, DB_PASSWORD, {
     host:DB_HOST,
@@ -30,9 +32,10 @@ modelProduct(conn)
 modelCalification(conn)
 modelMarketedProduct(conn)
 modelProfile(conn)
+modelVariant(conn)
 //console.log(conn.models)
 //Asociaciones
-const {product, qualification, marketedProduct, profile} = conn.models
+const {product, qualification, marketedProduct, profile, variant} = conn.models
 
 //Perfil
 profile.hasMany(product)
@@ -40,6 +43,7 @@ profile.hasMany(marketedProduct)
 profile.hasMany(qualification) 
 //producto
 product.hasMany(qualification) 
+product.hasMany(variant)
 //marketedProduct
 marketedProduct.hasOne(product)
 
@@ -47,17 +51,23 @@ marketedProduct.hasOne(product)
 
 const profilesCreator = async() => {
 
-
+    const modelsProduct = products.map(async (pro) => {
+        const model = await product.create(pro)
+        await model.createVariant(createVariant())
+        await model.createVariant(createVariant())
+        return model
+    })
     var e = 0
 
     for(i = 0; i < users.length; i++){
         const profileC = await profile.create(users[i])
-
-        if(e <= products.length){
-            await profileC.createProduct(products[e])
-            if(products[e+1]) await profileC.createProduct(products[e+1])
+        //console.log(profileC.__proto__)
+        if(e <= modelsProduct.length){
+            await profileC.addProduct(await modelsProduct[e])
+            if(modelsProduct[e+1]) await profileC.addProduct( await modelsProduct[e+1])
             e += 2
         }
+
         if(reviews[i]){
             await profileC.createQualification(reviews[i])
         }

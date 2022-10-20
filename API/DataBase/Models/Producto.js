@@ -17,17 +17,6 @@ module.exports = (sequelize) => {
         this.setDataValue("name", value.toLowerCase())
       }
     },
-    size: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validator: {
-        isIn: [sizes],
-      },
-    },
-    color: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false,
@@ -47,10 +36,6 @@ module.exports = (sequelize) => {
       validator: {
         isIn: [demographic],
       },
-    },
-    stock: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
     image: {
       type: DataTypes.TEXT,

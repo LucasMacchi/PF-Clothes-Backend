@@ -1,9 +1,9 @@
-const {product} = require("../../DataBase/db")
+const {product, variant} = require("../../DataBase/db")
 const paginated = require("./paginado")
 
 const getAllProducts = async (cant) => {
 
-    const allproducts = await product.findAll({raw: true})
+    const allproducts = await product.findAll({include: variant},{raw: true})
     let data = await allproducts
     console.log(data.length)
     if(!data.length) throw Error("No existe ningun producto")
