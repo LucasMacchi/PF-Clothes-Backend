@@ -1,26 +1,34 @@
-const {profile,Op} = require('../../DataBase/db');
+const { profile, product, Op } = require("../../DataBase/db");
 
+const addProductsToLists = async (productID, userID, order) => {
+  if (order === "fav") {
+    const user = await profile.findByPk(userID);
+    const data = await user;
+    if (!data) throw Error("Ese perfil no existe");
+    data.dataValues.favorites.push(productID);
+    await profile.update(
+      { favorites: data.dataValues.favorites },
+      { where: { id: userID } }
+    );
+    return "El producto se agrego a favoritos";
+  } else if (order === "shop") {
+    const user = await profile.findByPk(userID);
+    const detail = await product.findByPk(productID);
+    let { id, name, image } = detail;
+    const productDetail = {
+      id: id,
+      name: name,
+      image: image,
+    };
+    const data = await user;
+    if (!data) throw Error("Ese perfil no existe");
+    data.dataValues.shoppingCart.push(productDetail);
+    await profile.update(
+      { shoppingCart: data.dataValues.shoppingCart },
+      { where: { id: userID } }
+    );
+    return "El producto se agrego al carrito";
+  } else throw Error("Orden incorrecta");
+};
 
-const addProductsToLists = async(productID, userID, order) => {
-    if(order === "fav"){
-        
-        const user = await profile.findByPk(userID)
-        const data = await user
-        if(!data) throw Error("Ese perfil no existe")
-        data.dataValues.favorites.push(productID)
-        await profile.update({favorites: data.dataValues.favorites}, {where:{id:userID}})
-        return "El producto se agrego a favoritos"
-    }
-    else if(order === "shop"){
-        const user = await profile.findByPk(userID)
-        const data = await user
-        if(!data) throw Error("Ese perfil no existe")
-        data.dataValues.shoppingCart.push(productID)
-        await profile.update({shoppingCart: data.dataValues.shoppingCart}, {where:{id:userID}})
-        return "El producto se agrego al carrito"
-    }
-    else throw Error("Orden incorrecta")
-    
-}
-
-module.exports = addProductsToLists
+module.exports = addProductsToLists;

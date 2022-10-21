@@ -7,10 +7,10 @@ module.exports = (sequelize) => {
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
     },
-    username:{
-      type:DataTypes.STRING,
-      allowNull:false,
-      unique:true,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    profilePicture:{
+    profilePicture: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     shoppingCart: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.JSON),
       defaultValue: [],
       allowNull: true,
     },
