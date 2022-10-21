@@ -1,8 +1,8 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require('passport-google-oauth20');
 const {profile} = require('../DataBase/db');
 
-const GOOGLE_CALLBACK_URL = "http://localhost:3001/login/auth/google/callback";
+const GOOGLE_CALLBACK_URL = "http://localhost:3001/login/oauth2/redirect/google";
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,

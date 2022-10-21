@@ -1,7 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-//const cookieParser = require('cookie-parser');
 const routes = require("./Routes/index");
 const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
@@ -9,6 +8,7 @@ const passport = require('passport');
 const helmet = require('helmet');
 require('dotenv').config();
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 require("./Auth/passport");
@@ -22,7 +22,7 @@ server.use(morgan("dev"));
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-//server.use(cookieParser());
+server.use(cookieParser());
 server.use(helmet());
 server.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
