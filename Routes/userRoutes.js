@@ -9,6 +9,7 @@ const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const {getToken} = require("./Utils/getToken");
+const getShoppingcart = require("./Controllers/getShoppingcart")
 
 // crear usuario
 router.post("/", async (req, res) => {
@@ -93,6 +94,16 @@ router.delete("/shoppingcart",getToken, async (req, res) => {
       res.status(404).send(error.message)
   }
 })
+//get all elements of the shopping card
+router.get("/shoppingcart",getToken, async (req, res) => {
+  const {profileID} = req.query
+  try {
+      const response = await getShoppingcart(profileID)
+      res.status(200).send(response)
+  } catch (error) {
+      res.status(404).send(error.message)
+  }
+})
 
 //Request data from user
 router.post("/get",getToken, async (req, res) => {
@@ -125,6 +136,7 @@ router.get("/review/avrg/:id", async (req, res) => {
     res.status(404).send(error.message);
   }
 })
+
 //Traer reviews de un usuario
 router.post("/review/:id",getToken, async (req, res) => {
   const id = req.params.id
