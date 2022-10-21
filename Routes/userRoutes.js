@@ -10,6 +10,7 @@ const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
+const getFavoritesList = require("./Controllers/getFavoritesList");
 
 // crear usuario
 router.post("/", async (req, res) => {
