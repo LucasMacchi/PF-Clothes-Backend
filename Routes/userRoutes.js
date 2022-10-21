@@ -3,13 +3,13 @@ var bcrypt = require("bcryptjs");
 const { profile } = require("../DataBase/db");
 const router = Router();
 //Controladores
-const addProductsToLists = require("./Controllers/addProductsToLists")
-const deleteProductsOfList = require("./Controllers/deleteProductsOfList")
+const addProductsToLists = require("./Controllers/addProductsToLists");
+const deleteProductsOfList = require("./Controllers/deleteProductsOfList");
 const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
-const {getToken} = require("./Utils/getToken");
-const getShoppingcart = require("./Controllers/getShoppingcart")
+const { getToken } = require("./Utils/getToken");
+const getShoppingcart = require("./Controllers/getShoppingcart");
 
 // crear usuario
 router.post("/", async (req, res) => {
@@ -54,59 +54,70 @@ router.post("/", async (req, res) => {
   }
 });
 //add elements to favorites
-router.put("/favorites",getToken, async (req, res) => {
-  const {productID, profileID} = req.query
+router.put("/favorites", getToken, async (req, res) => {
+  const { productID, profileID } = req.query;
   try {
-      const response = await addProductsToLists(productID, profileID, "fav")
-      res.status(200).send(response)
+    const response = await addProductsToLists(productID, profileID, "fav");
+    res.status(200).send(response);
   } catch (error) {
-      res.status(404).send(error.message)
+    res.status(404).send(error.message);
   }
-})
+});
 
 //add elements to shoppingcart
-router.put("/shoppingcart",getToken, async (req, res) => {
-  const {productID, profileID} = req.query
+router.put("/shoppingcart", getToken, async (req, res) => {
+  const { productID, profileID } = req.query;
   try {
-      const response = await addProductsToLists(productID, profileID, "shop")
-      res.status(200).send(response)
+    const response = await addProductsToLists(productID, profileID, "shop");
+    res.status(200).send(response);
   } catch (error) {
-      res.status(404).send(error.message)
+    res.status(404).send(error.message);
   }
-})
+});
 //remove elements of favorites
-router.delete("/favorites",getToken, async (req, res) => {
-  const {productID, profileID} = req.query
+router.delete("/favorites", getToken, async (req, res) => {
+  const { productID, profileID } = req.query;
   try {
-      const response = await deleteProductsOfList(productID, profileID, "fav")
-      res.status(200).send(response)
+    const response = await deleteProductsOfList(productID, profileID, "fav");
+    res.status(200).send(response);
   } catch (error) {
-      res.status(404).send(error.message)
+    res.status(404).send(error.message);
   }
-})
+});
 //remove elements of the shopping card
-router.delete("/shoppingcart",getToken, async (req, res) => {
-  const {productID, profileID} = req.query
+router.delete("/shoppingcart", getToken, async (req, res) => {
+  const { productID, profileID } = req.query;
   try {
-      const response = await deleteProductsOfList(productID, profileID, "shop")
-      res.status(200).send(response)
+    const response = await deleteProductsOfList(productID, profileID, "shop");
+    res.status(200).send(response);
   } catch (error) {
-      res.status(404).send(error.message)
+    res.status(404).send(error.message);
   }
-})
+});
 //get all elements of the shopping card
-router.get("/shoppingcart",getToken, async (req, res) => {
-  const {profileID} = req.query
+router.get("/shoppingcart", getToken, async (req, res) => {
+  const { profileID } = req.query;
   try {
-      const response = await getShoppingcart(profileID)
-      res.status(200).send(response)
+    const response = await getShoppingcart(profileID);
+    res.status(200).send(response);
   } catch (error) {
-      res.status(404).send(error.message)
+    res.status(404).send(error.message);
   }
-})
+});
+
+//get all elements of the favorites list
+router.get("/favorites", getToken, async (req, res) => {
+  const { profileID } = req.query;
+  try {
+    const response = await getFavoritesList(profileID);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
 
 //Request data from user
-router.post("/get",getToken, async (req, res) => {
+router.post("/get", getToken, async (req, res) => {
   const { id } = req;
   try {
     let user = await profile.findByPk(id);
@@ -118,38 +129,38 @@ router.post("/get",getToken, async (req, res) => {
 
 //Trae las reviews al usuario
 router.get("/review/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const response = await getReview(id, "profile");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
   }
-})
+});
 //Trae el promedio de puntaje del usuario
 router.get("/review/avrg/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const response = await getAvrg(id, "profile");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
   }
-})
+});
 
 //Traer reviews de un usuario
-router.post("/review/:id",getToken, async (req, res) => {
-  const id = req.params.id
+router.post("/review/:id", getToken, async (req, res) => {
+  const id = req.params.id;
   try {
     const response = await addReview(id, req.body, "profile");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
   }
-})
+});
 
 //Modificar datos de un usuario
-router.put("/:id",getToken, async (req, res) => {
+router.put("/:id", getToken, async (req, res) => {
   const { id } = req.params;
   const object = req.body;
 
