@@ -8,6 +8,7 @@ const sizesRoutes = require("../Routes/sizesRoutes");
 const demographicRoutes = require("../Routes/demographicRoutes");
 const reviewRoutes = require("./reviewRoutes");
 const paymentRoutes = require("./paymentRoutes");
+const authRoutes = require("./authRoutes");
 //
 const router = Router();
 
@@ -27,6 +28,8 @@ router.use("/demographics",demographicRoutes);
 router.use("/review", reviewRoutes);
 // payment
 router.use("/payment",paymentRoutes);
+// auth
+router.use("/auth",authRoutes);
 
 //Test
 router.get("/test", (req, res,next) => {
