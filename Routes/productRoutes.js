@@ -10,6 +10,7 @@ const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const { getToken } = require("./Utils/getToken");
+const url = require("./Utils/imageUploader")
 //
 const router = Router();
 
@@ -73,7 +74,7 @@ router.get("/filter", async (req, res) => {
   }
 });
 //Agregar un producto ruta privada
-router.post("/", getToken, async (req, res) => {
+router.post("/", /*getToken*/ async (req, res) => {
   let {
     id,
     name,
@@ -87,7 +88,9 @@ router.post("/", getToken, async (req, res) => {
     stock,
     image,
   } = req.body;
-
+  //Image uploader
+  image = await url(req.file.path)
+  //
   try {
     await product
       .create({

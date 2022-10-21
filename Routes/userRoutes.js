@@ -10,6 +10,7 @@ const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const {getToken} = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart")
+const url = require("./Utils/imageUploader")
 
 // crear usuario
 router.post("/", async (req, res) => {
@@ -26,7 +27,10 @@ router.post("/", async (req, res) => {
     favorites,
     shoppingCart,
   } = req.body;
-
+  //Image uploaders
+  profilePicture = await url(req.files["profilePicture"][0].path)
+  banner = await url(req.files["banner"][0].path)
+  //
   let passwordHash = await bcrypt.hash(password, 8);
 
   if (!favorites) favorites = [];
