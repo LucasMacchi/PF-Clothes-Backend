@@ -107,6 +107,12 @@ Variant:
     -GET variant/:id
         -This route will return the variant with that id
 
+    -PUT variant/:id
+        -This route will modify the variant with that id
+
+    -DELETE variant/:id
+        -This route will delete the variant with that id
+
 test users:
 
     - those are the test users to make use of the login route
