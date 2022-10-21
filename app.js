@@ -10,6 +10,7 @@ require('dotenv').config();
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const session = require('express-session');
 
 require("./Auth/passport");
 require("./Auth/GoogleSSO");
@@ -23,7 +24,7 @@ server.use(morgan("dev"));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
-server.use(helmet());
+//server.use(helmet({ crossOriginOpenerPolicy: { policy: "unsafe-none" } }));
 server.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 /*server.use((req, res, next) => {
@@ -37,15 +38,51 @@ server.use(cors({ origin: "http://localhost:3000", credentials: true }));
   next();
 });*/
 
-server.use(cookieSession({
+server.use(session({
+  secret:"secretcode",
+  resave: true,
+  saveUninitialized:true,
+  name:'session',
+  cookie:{
+    //sameSite:"none",
+    //secure:true,
+    maxAge:1000 * 60 * 60 * 24,
+  }
+}));
+
+server.get('/',(req,res,next)=>{
+  console.log(req.session);
+  console.log(req.sessionID);
+  res.send('hello world');
+});
+
+/*server.use((req,res,next)=>{
+  res.header("Access-Control-Allow-Credentials",true);
+  res.header("Access-Control-Allow-Origin",req.headers.origin);
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+  );
+  next();
+});
+
+server.use(helmet());*/
+
+/*server.use(cookieSession({
+  name:'session',
   maxAge:24 * 60 * 60 * 1000,
   keys:[process.env.COOKIE_KEY],
-}));
+}));*/
 server.use(passport.initialize());
 server.use(passport.session());
 
-server.use(logger);
+
 server.use("/", routes);
+server.use(logger);
 
 // Error catching endware.
 server.use(errorHandler);

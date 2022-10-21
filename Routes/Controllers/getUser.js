@@ -1,4 +1,4 @@
-const getUser = async (req,rest) => {
+const getUser = async (req,res) => {
     res.json(req.user);
 }
 

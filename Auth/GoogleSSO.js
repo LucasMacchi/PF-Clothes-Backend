@@ -1,6 +1,8 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const {profile} = require('../DataBase/db');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const GOOGLE_CALLBACK_URL = "http://localhost:3001/login/oauth2/redirect/google";
 
@@ -11,7 +13,11 @@ passport.use(new GoogleStrategy({
     passReqToCallback:true,
 },
 async (req,accesToken,refreshToken,gProfile,cb) => {
-    console.log(gProfile);
+    console.log("gprofile: ",gProfile);
+    console.log("req ", req);
+    console.log("acces token",accesToken);
+    console.log("refresh token",refreshToken);
+    console.log("cb",cb);
     const defaultUser = {
         name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
         username: gProfile.emails[0].value,
@@ -31,6 +37,8 @@ async (req,accesToken,refreshToken,gProfile,cb) => {
         console.log("Error signing up",err);
         cb(err,null);
     });
+
+    console.log("user created",user);
 
     if(user) return cb(null, user && user[0]);
 

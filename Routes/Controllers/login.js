@@ -33,6 +33,11 @@ const signIn = async (req,res,next) => {
                 process.env.SECRET,
                 {expiresIn:60*60*24}
             );
+
+            res.cookie("api-auth",token,{
+                secure:false,
+                httpOnly:true,
+            });
     
             res.send({
                 username:user.username,
