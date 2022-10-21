@@ -7,13 +7,14 @@ const loginRoutes = require("../Routes/loginRoutes");
 const sizesRoutes = require("../Routes/sizesRoutes");
 const demographicRoutes = require("../Routes/demographicRoutes");
 const reviewRoutes = require("./reviewRoutes")
+const upload = require("./Utils/multer")
 //
 const router = Router();
 
 //
-router.use("/product", productRoutes);
+router.use("/product",upload.single("image"), productRoutes);
 //
-router.use("/user", userRoutes);
+router.use("/user", upload.fields([{name: "profilePicture"},{name: "banner"}]), userRoutes);
 //
 router.use("/stores",storeRoutes);
 // login
