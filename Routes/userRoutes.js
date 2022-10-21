@@ -10,6 +10,7 @@ const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const {getToken} = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart")
+//utils
 const url = require("./Utils/imageUploader")
 
 // crear usuario
@@ -28,33 +29,47 @@ router.post("/", async (req, res) => {
     shoppingCart,
   } = req.body;
   //Image uploaders
-  profilePicture = await url(req.files["profilePicture"][0].path)
-  banner = await url(req.files["banner"][0].path)
+  try {
+    profilePicture = await url(req.files["profilePicture"][0].path)
+  } catch (error) {
+    profilePicture = "https://res.cloudinary.com/pfclothhenry2022/image/upload/v1666385099/depositphotos_39258143-stock-illustration-businessman-avatar-profile-picture_rgmldn.webp"
+  }
+  try {
+    banner = await url(req.files["banner"][0].path)
+  } catch (error) {
+    banner = null
+  }
   //
   let passwordHash = await bcrypt.hash(password, 8);
 
   if (!favorites) favorites = [];
   if (!shoppingCart) shoppingCart = [];
 
-  try {
-    let [user, created] = await profile.findOrCreate({
-      where: {
-        name,
-        mail,
-        password: passwordHash,
-        phone,
-        username,
-        storeName,
-        banner,
-        profilePicture,
-        location,
-        favorites,
-        shoppingCart,
-      },
-    });
-    res.send(user);
+  try {  
+    try {
+      let [user, created] = await profile.findOrCreate({
+        where: {
+          name,
+          mail,
+          password: passwordHash,
+          phone,
+          username,
+          storeName,
+          banner,
+          profilePicture,
+          location,
+          favorites,
+          shoppingCart,
+        },
+      });
+      res.send(user);
+    } catch (error) {
+      throw Error(error.message)
+    }
+    
+    
   } catch (err) {
-    res.send(err);
+    res.status(404).send(err.message);
   }
 });
 //add elements to favorites

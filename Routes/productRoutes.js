@@ -74,7 +74,7 @@ router.get("/filter", async (req, res) => {
   }
 });
 //Agregar un producto ruta privada
-router.post("/", /*getToken*/ async (req, res) => {
+router.post("/", getToken, async (req, res) => {
   let {
     id,
     name,
