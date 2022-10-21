@@ -102,6 +102,11 @@ login:
     -POST /login
         -Accept username and password to generate token and send to the client
 
+Variant:
+
+    -GET variant/:id
+        -This route will return the variant with that id
+
 test users:
 
     - those are the test users to make use of the login route
