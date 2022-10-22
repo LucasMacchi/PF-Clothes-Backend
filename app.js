@@ -7,7 +7,7 @@ const {errorHandler} = require("./Routes/Utils/errorHandler");
 const passport = require('passport');
 const helmet = require('helmet');
 require('dotenv').config();
-const cookieSession = require('cookie-session');
+
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const session = require('express-session');
@@ -72,11 +72,6 @@ server.get('/',(req,res,next)=>{
 
 server.use(helmet());*/
 
-/*server.use(cookieSession({
-  name:'session',
-  maxAge:24 * 60 * 60 * 1000,
-  keys:[process.env.COOKIE_KEY],
-}));*/
 server.use(passport.initialize());
 server.use(passport.session());
 
