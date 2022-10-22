@@ -9,6 +9,7 @@ const getProductDetail = require("./Controllers/getProductDetail");
 const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
+const addProduct = require("./Controllers/addProduct")
 const { getToken } = require("./Utils/getToken");
 const url = require("./Utils/imageUploader")
 //
@@ -75,41 +76,9 @@ router.get("/filter", async (req, res) => {
 });
 //Agregar un producto ruta privada
 router.post("/", getToken, async (req, res) => {
-  let {
-    id,
-    name,
-    size,
-    color,
-    price,
-    temporal_price,
-    materials,
-    brand,
-    demographic,
-    stock,
-    image,
-  } = req.body;
-  //Image uploader
-  image = await url(req.file.path)
-  //
   try {
-    await product
-      .create({
-        name,
-        size,
-        color,
-        price,
-        temporal_price,
-        materials,
-        brand,
-        demographic,
-        stock,
-        image,
-      })
-      .then(async (product) => {
-        let user = await profile.findByPk(id);
-        await user.addProduct(product);
-        res.status(200).send(product);
-      });
+    const response = await addProduct(req);
+    res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
   }
