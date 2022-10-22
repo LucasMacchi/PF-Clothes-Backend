@@ -117,6 +117,20 @@ Variant:
     -DELETE variant/:id
         -This route will delete the variant with that id
 
+Activate:
+
+    -PUT activate/user/:id
+        -This route will activate the user
+
+    -DELETE activate/user/:id
+        -This route will desactivate the user
+    
+    -PUT activate/product/:id
+        -This route will activate the product
+
+    -DELETE activate/product/:id
+        -This route will desactivate the product
+
 test users:
 
     - those are the test users to make use of the login route

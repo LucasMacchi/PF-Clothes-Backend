@@ -8,6 +8,7 @@ const sizesRoutes = require("../Routes/sizesRoutes");
 const demographicRoutes = require("../Routes/demographicRoutes");
 const reviewRoutes = require("./reviewRoutes")
 const variantRoutes = require("./variantRoutes")
+const activateRoutes = require("./activateRoutes")
 const upload = require("./Utils/multer")
 //
 const router = Router();
@@ -28,6 +29,8 @@ router.use("/demographics",demographicRoutes);
 router.use("/review", reviewRoutes)
 //variant
 router.use("/variant", variantRoutes)
+//activate
+router.use("/activate", activateRoutes)
 //Test
 router.get("/test", (req, res,next) => {
   res.send("Hello World!!!!, im working");
