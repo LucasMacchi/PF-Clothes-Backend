@@ -5,7 +5,6 @@ const routes = require("./Routes/index");
 const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
 const passport = require('passport');
-const helmet = require('helmet');
 require('dotenv').config();
 
 const cookieParser = require('cookie-parser');
@@ -24,7 +23,6 @@ server.use(morgan("dev"));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
-//server.use(helmet({ crossOriginOpenerPolicy: { policy: "unsafe-none" } }));
 server.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 /*server.use((req, res, next) => {
@@ -39,12 +37,12 @@ server.use(cors({ origin: "http://localhost:3000", credentials: true }));
 });*/
 
 server.use(session({
-  secret:"secretcode",
+  secret:process.env.SECRET,
   resave: true,
   saveUninitialized:true,
   name:'session',
   cookie:{
-    //sameSite:"none",
+    sameSite:"none",
     //secure:true,
     maxAge:1000 * 60 * 60 * 24,
   }
