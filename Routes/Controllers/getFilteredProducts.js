@@ -648,10 +648,6 @@ const getFilteredProducts = async (
       order: [[sortBy, orderBy]],
       include: {
         model: variant,
-        where: {
-          color,
-          size,
-        },
       },
     });
     return (data = await filteredProducts);
