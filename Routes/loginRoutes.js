@@ -9,7 +9,9 @@ const errorLoginUrl = "http://localhost:3000/login/error";
 
 router.post("/",signIn);
 
-router.get("/google",passport.authenticate("google",{ scope: ['profile','email']}));
+router.get("/google",passport.authenticate("google",{ scope: ['profile','email']}),(res,req) => {
+    console.log("inside google login");
+});
 router.get("/oauth2/redirect/google",passport.authenticate("google",{
     failureMessage: "Cannot login to google, please try again later!",
     failureRedirect: errorLoginUrl,
@@ -18,7 +20,7 @@ router.get("/oauth2/redirect/google",passport.authenticate("google",{
 }),
 (req,res) => {
     console.log("despues de ir a google");
-    console.log(res);
+    console.log("res",res);
     res.redirect(successLoginUrl);
 });
 module.exports = router;
