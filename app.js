@@ -40,10 +40,8 @@ server.use(session({
   secret:process.env.SECRET,
   resave: true,
   saveUninitialized:true,
-  name:'session',
   cookie:{
     sameSite:"none",
-    //secure:true,
     maxAge:1000 * 60 * 60 * 24,
   }
 }));
