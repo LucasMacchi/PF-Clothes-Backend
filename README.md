@@ -50,6 +50,9 @@ Profile Routes:
     - PUT /user/shoppingcart?productID=&profileID=
         - This route will add a product to the shoppingcart array in the Profile table
 
+    -GET /user/shoppingcart?profileID=
+        -This route will return all the products in a profile's shoppingcart
+
     - DELETE /user/favorites?productID=&profileID=
         - This route will eliminate a product of the favorites array in the Profile table
 
@@ -98,6 +101,17 @@ login:
 
     -POST /login
         -Accept username and password to generate token and send to the client
+
+Variant:
+
+    -GET variant/:id
+        -This route will return the variant with that id
+
+    -PUT variant/:id
+        -This route will modify the variant with that id
+
+    -DELETE variant/:id
+        -This route will delete the variant with that id
 
 test users:
 

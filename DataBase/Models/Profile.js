@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
     },
     mail: {
       type: DataTypes.STRING,
+      uniq: true,
       allowNull: false,
     },
     password: {
