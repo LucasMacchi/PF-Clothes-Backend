@@ -10,6 +10,7 @@ const router = Router();
 //Aca abajo van las rutas separadas
 //Trae todos los productos vendidos
 router.get("/all/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const allMarketedProducts = await getAllMarketedProducts(id);
     res.status(200).send(allMarketedProducts);
@@ -20,6 +21,7 @@ router.get("/all/:id", async (req, res) => {
 
 //Trae el detalle de un producto vendido
 router.get("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
     const marketedProductDetail = await getMarketedProductDetail(id);
     res.status(200).send(marketedProductDetail);
