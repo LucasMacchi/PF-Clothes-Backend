@@ -10,32 +10,45 @@ const reviewRoutes = require("./reviewRoutes")
 const variantRoutes = require("./variantRoutes")
 const paymentRoutes = require("./paymentRoutes");
 const authRoutes = require("./authRoutes");
-const upload = require("./Utils/multer")
+const activateRoutes = require("./activateRoutes");
+const upload = require("./Utils/multer");
+const marketedRoutes = require("../Routes/marketedRoutes");
+
 //
 const router = Router();
 
 //
-router.use("/product",upload.single("image"), productRoutes);
+router.use("/product", upload.single("image"), productRoutes);
 //
-router.use("/user", upload.fields([{name: "profilePicture"},{name: "banner"}]), userRoutes);
+router.use(
+  "/user",
+  upload.fields([{ name: "profilePicture" }, { name: "banner" }]),
+  userRoutes
+);
 //
-router.use("/stores",storeRoutes);
+router.use("/stores", storeRoutes);
 // login
-router.use("/login",loginRoutes);
+router.use("/login", loginRoutes);
 // sizes
-router.use("/sizes",sizesRoutes);
+router.use("/sizes", sizesRoutes);
 // demographics
-router.use("/demographics",demographicRoutes);
+router.use("/demographics", demographicRoutes);
 //review
-router.use("/review", reviewRoutes)
+router.use("/review", reviewRoutes);
 //variant
+
 router.use("/variant", variantRoutes)
 // payment
 router.use("/payment",paymentRoutes);
 // auth
 router.use("/auth",authRoutes);
+//activate
+router.use("/activate", activateRoutes);
+//marketed
+router.use("/marketed", marketedRoutes);
+
 //Test
-router.get("/test", (req, res,next) => {
+router.get("/test", (req, res, next) => {
   res.send("Hello World!!!!, im working");
   next();
 });

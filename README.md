@@ -2,6 +2,10 @@ Guide of routes:
 
 Product Routes:
 
+    -POST /product
+        -This will create a new product, it will require a profile id and an array of objects with the variant
+        properties (size, stock, color)
+
     - GET /product/all/:cant
         -This will bring all the products, the cant variable will determine
         how many products will include each subarray
@@ -112,6 +116,20 @@ Variant:
 
     -DELETE variant/:id
         -This route will delete the variant with that id
+
+Activate:
+
+    -PUT activate/user/:id
+        -This route will activate the user
+
+    -DELETE activate/user/:id
+        -This route will desactivate the user
+    
+    -PUT activate/product/:id
+        -This route will activate the product
+
+    -DELETE activate/product/:id
+        -This route will desactivate the product
 
 test users:
 
