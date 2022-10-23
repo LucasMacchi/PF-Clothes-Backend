@@ -12,12 +12,41 @@ passport.use(new GoogleStrategy({
     callbackURL:GOOGLE_CALLBACK_URL,
     passReqToCallback:true,
 },
-async (req,accesToken,refreshToken,gProfile,cb) => {
+async (req,accesToken,refreshToken,gProfile,done) => {
     /*console.log("gprofile: ",gProfile);
     console.log("req ", req);
     console.log("acces token",accesToken);
     console.log("refresh token",refreshToken);
     console.log("cb",cb);*/
+    
+
+    /*try{
+        let existingUser = await profile.findOne({'google.id':gProfile.id});
+        if(existingUser){
+            return done(null,existingUser);
+        }
+
+        console.log('Creating new user ...');
+
+        const newUser = profile.create({
+            name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
+            username: gProfile.emails[0].value,
+            password: gProfile.id,
+            mail: gProfile.emails[0].value,
+            profilePicture: gProfile.photos[0].value,
+            googleId: gProfile.id, 
+            phone:'111111111',
+        });
+
+        console.log(newUser);
+
+        return done(null,newUser);
+    } catch (error){
+        return done(error,false);
+    }*/
+
+    
+
     const defaultUser = {
         name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
         username: gProfile.emails[0].value,
@@ -35,12 +64,14 @@ async (req,accesToken,refreshToken,gProfile,cb) => {
         defaults: defaultUser,
     }).catch((err) => {
         console.log("Error signing up",err);
-        cb(err,null);
+        done(err,null);
     });
 
     console.log("user created",user);
 
-    if(user) return cb(null, user && user[0]);
+    if(user) return done(null, user && user[0]);
+
+    
 
 }));
 
