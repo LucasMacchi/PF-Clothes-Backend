@@ -20,15 +20,19 @@ async (req,accesToken,refreshToken,gProfile,done) => {
     console.log("cb",cb);*/
     
 
-    /*try{
-        let existingUser = await profile.findOne({'google.id':gProfile.id});
+    try{
+        let existingUser = await profile.findOne({
+            where:{
+                'googleId':gProfile.id
+            }
+        });
         if(existingUser){
             return done(null,existingUser);
         }
 
         console.log('Creating new user ...');
 
-        const newUser = profile.create({
+        const newUser = await profile.create({
             name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
             username: gProfile.emails[0].value,
             password: gProfile.id,
@@ -41,13 +45,14 @@ async (req,accesToken,refreshToken,gProfile,done) => {
         console.log(newUser);
 
         return done(null,newUser);
+
     } catch (error){
         return done(error,false);
-    }*/
+    }
 
     
 
-    const defaultUser = {
+    /*const defaultUser = {
         name: `${gProfile.name.givenName} ${gProfile.name.familyName}`,
         username: gProfile.emails[0].value,
         password: gProfile.id,
@@ -69,7 +74,7 @@ async (req,accesToken,refreshToken,gProfile,done) => {
 
     console.log("user created",user);
 
-    if(user) return done(null, user && user[0]);
+    if(user) return done(null, user && user[0]);*/
 
     
 
