@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken");
 
 const router = Router();
 
-const successLoginUrl = "http://localhost:3000/home";
-const errorLoginUrl = "http://localhost:3000/login";
+const successLoginUrl = `${process.env.FRONTEND}/home`;
+const errorLoginUrl = `${process.env.FRONTEND}/login`;
 
 router.post("/",signIn);
 
