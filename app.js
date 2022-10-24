@@ -1,10 +1,17 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-//const cookieParser = require('cookie-parser');
 const routes = require("./Routes/index");
 const {logger} = require("./Routes/Utils/logger");
 const {errorHandler} = require("./Routes/Utils/errorHandler");
+const passport = require('passport');
+require('dotenv').config();
+
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+require("./Auth/passport");
+require("./Auth/GoogleSSO");
 
 const server = express();
 
@@ -14,9 +21,10 @@ server.use(morgan("dev"));
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
-//server.use(cookieParser());
+server.use(cookieParser());
+
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND}`); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -26,9 +34,29 @@ server.use((req, res, next) => {
   next();
 });
 
+server.use(session({
+  secret:process.env.SECRET,
+  resave: true,
+  saveUninitialized:true,
+  cookie:{
+    sameSite:"none",
+    maxAge:1000 * 60 * 60 * 24,
+  }
+}));
 
-server.use(logger);
+server.get('/',(req,res,next)=>{
+  console.log(req.session);
+  console.log(req.sessionID);
+  res.send('hello world');
+});
+
+
+server.use(passport.initialize());
+server.use(passport.session());
+
+
 server.use("/", routes);
+server.use(logger);
 
 // Error catching endware.
 server.use(errorHandler);

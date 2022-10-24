@@ -2,6 +2,7 @@ const {profile,Op} = require('../../DataBase/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+
 const signIn = async (req,res,next) => {
     const {username, password } = req.body;
 
@@ -32,6 +33,11 @@ const signIn = async (req,res,next) => {
                 process.env.SECRET,
                 {expiresIn:60*60*24}
             );
+
+            res.cookie("api-auth",token,{
+                secure:false,
+                httpOnly:true,
+            });
     
             res.send({
                 username:user.username,
@@ -45,6 +51,11 @@ const signIn = async (req,res,next) => {
 
 };
 
+const signInGoogle = async (req,res) => {
+
+}
+
 module.exports = {
     signIn,
+    signInGoogle,
 }

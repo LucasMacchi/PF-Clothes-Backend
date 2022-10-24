@@ -1,6 +1,6 @@
 const server = require("./app");
 const {conn, profilesCreator} = require("./DataBase/db")
-//const PORT = 3001;
+require('dotenv').config();
 
 const db = conn
 
