@@ -17,9 +17,6 @@ Product Routes:
         -The search variable will be the product you want to search and the cant variable,
         is an optional variable that let you specify the amout of product that each subarray will include
 
-    -POST /product
-        - This route will create a product in the Product table
-
     -GET /product/filter?name=&price=&size=&demographic=&color=&cant=
         - This route filters the products that match with any of the filters, and the cant variable,is an optional variable that let you specify the amout of product that each subarray will include
 
@@ -56,6 +53,9 @@ Profile Routes:
 
     -GET /user/shoppingcart?profileID=
         -This route will return all the products in a profile's shoppingcart
+
+    -GET /user/favorites?profileID=
+        -This route will return all the products in a profile's favorites
 
     - DELETE /user/favorites?productID=&profileID=
         - This route will eliminate a product of the favorites array in the Profile table
