@@ -7,6 +7,6 @@ const {
 
 // rutas vendedores
 router.get("/all",getAllStores);
-router.get("/:name",getStoreByName);
+router.get("/",getStoreByName);
 
 module.exports = router;

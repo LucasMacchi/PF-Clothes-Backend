@@ -18,6 +18,7 @@ module.exports = (sequelize) => {
     },
     mail: {
       type: DataTypes.STRING,
+      uniq: true,
       allowNull: false,
     },
     password: {
@@ -54,5 +55,10 @@ module.exports = (sequelize) => {
       defaultValue: [],
       allowNull: true,
     },
+    isActive:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    }
   });
 };

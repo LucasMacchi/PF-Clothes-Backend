@@ -2,6 +2,10 @@ Guide of routes:
 
 Product Routes:
 
+    -POST /product
+        -This will create a new product, it will require a profile id and an array of objects with the variant
+        properties (size, stock, color)
+
     - GET /product/all/:cant
         -This will bring all the products, the cant variable will determine
         how many products will include each subarray
@@ -12,9 +16,6 @@ Product Routes:
     -GET /?search=&cant=
         -The search variable will be the product you want to search and the cant variable,
         is an optional variable that let you specify the amout of product that each subarray will include
-
-    -POST /product
-        - This route will create a product in the Product table
 
     -GET /product/filter?name=&price=&size=&demographic=&color=&cant=
         - This route filters the products that match with any of the filters, and the cant variable,is an optional variable that let you specify the amout of product that each subarray will include
@@ -50,6 +51,12 @@ Profile Routes:
     - PUT /user/shoppingcart?productID=&profileID=
         - This route will add a product to the shoppingcart array in the Profile table
 
+    -GET /user/shoppingcart?profileID=
+        -This route will return all the products in a profile's shoppingcart
+
+    -GET /user/favorites?profileID=
+        -This route will return all the products in a profile's favorites
+
     - DELETE /user/favorites?productID=&profileID=
         - This route will eliminate a product of the favorites array in the Profile table
 
@@ -70,7 +77,7 @@ Stores Routes:
     - GET /stores/all
         - This route will fetch all the stores available in the app
 
-    - GET /stores/:name
+    - GET /stores?name=
         - This route will fetch a store by the name in the url
 
 Sizes Routes:
@@ -98,6 +105,31 @@ login:
 
     -POST /login
         -Accept username and password to generate token and send to the client
+
+Variant:
+
+    -GET variant/:id
+        -This route will return the variant with that id
+
+    -PUT variant/:id
+        -This route will modify the variant with that id
+
+    -DELETE variant/:id
+        -This route will delete the variant with that id
+
+Activate:
+
+    -PUT activate/user/:id
+        -This route will activate the user
+
+    -DELETE activate/user/:id
+        -This route will desactivate the user
+    
+    -PUT activate/product/:id
+        -This route will activate the product
+
+    -DELETE activate/product/:id
+        -This route will desactivate the product
 
 test users:
 

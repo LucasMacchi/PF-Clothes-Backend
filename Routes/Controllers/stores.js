@@ -24,11 +24,13 @@ const getAllStores = async (req,res,next) => {
 
 const getStoreByName = async (req,res) => {
     
-    let {name} = req.params;
+    let {name} = req.query;
 
     const store = await profile.findAll({
         where:{
-            storeName:name,
+            storeName:{
+                [Op.like]:`${name.charAt(0).toUpperCase()}${name.slice(1)}`+'%',
+            }
         }
     });
 
