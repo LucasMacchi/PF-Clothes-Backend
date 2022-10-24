@@ -4,7 +4,7 @@ Product Routes:
 
     -POST /product
         -This will create a new product, it will require a profile id and an array of objects with the variant
-        properties (size, stock, color)
+        properties (size, stock, color), you can send up to 5 images per product
 
     - GET /product/all/:cant
         -This will bring all the products, the cant variable will determine
