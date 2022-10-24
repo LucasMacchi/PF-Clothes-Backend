@@ -6,22 +6,28 @@ const addProduct = async (req) => {
     
     const profileLink = await profile.findByPk(id)
     if(!await profileLink) throw Error("Profile dont exist")
-
+    console.log("",req.body)
     if(id && name && image === undefined && demographic && variants && price){
+
         let variantArray= []
         for(let i = 0; i < variants.length; i++){
             const newV = await variant.create(variants[i])
             variantArray.push(newV)
         }
-        const url_image = await url(req.file.path)
-        
+        let arrayImages= []
+        for(const file of req.files){
+            //console.log(file)
+            const cUrl = await url(await file.path)
+            arrayImages.push(await cUrl)
+          }
+        //console.log(arrayImages)
         const newProduct = await product.create({
             name,
             price,
             materials,
             brand,
             demographic,
-            image: url_image
+            image: arrayImages
 
         })
         await newProduct.addVariants(variantArray)

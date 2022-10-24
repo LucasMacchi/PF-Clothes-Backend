@@ -13,12 +13,12 @@ const authRoutes = require("./authRoutes");
 const activateRoutes = require("./activateRoutes");
 const upload = require("./Utils/multer");
 const marketedRoutes = require("../Routes/marketedRoutes");
-
+const url = require("./Utils/imageUploader")
 //
 const router = Router();
 
 //
-router.use("/product", upload.single("image"), productRoutes);
+router.use("/product", upload.array("image", 5), productRoutes);
 //
 router.use(
   "/user",

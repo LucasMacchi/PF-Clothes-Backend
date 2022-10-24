@@ -38,8 +38,12 @@ module.exports = (sequelize) => {
       },
     },
     image: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false,
+      validate:{
+        min:1,
+        max:5
+      }
     },
     isActive:{
       type: DataTypes.BOOLEAN,
