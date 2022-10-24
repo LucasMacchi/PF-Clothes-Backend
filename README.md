@@ -77,7 +77,7 @@ Stores Routes:
     - GET /stores/all
         - This route will fetch all the stores available in the app
 
-    - GET /stores/:name
+    - GET /stores?name=
         - This route will fetch a store by the name in the url
 
 Sizes Routes:
