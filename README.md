@@ -31,6 +31,9 @@ Product Routes:
 
     -GET /product/review/avrg/:id
         -This route returns the average score of a profile
+    
+    -PATCH /product
+        -This route will modify an existing porduct
 
 
 
@@ -42,7 +45,7 @@ Profile Routes:
     - POST /user/get
         - This route will fetch a user by the id in the token
 
-    - PUT /user/:id
+    - PATCH /user
         - This route will modify a user data by the id in the url
 
     - PUT /user/favorites?productID=&profileID=
@@ -151,8 +154,9 @@ protected routes:
 
     - POST /product
     - POST /product/review/:id
+    - PATCH /product
     - POST /user/get
-    - PUT /user/:id
+    - PATCH /user
     - PUT /user/favorites
     - PUT /user/shoppingcart
     - DELETE /user/favorites

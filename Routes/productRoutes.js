@@ -10,6 +10,7 @@ const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
 const addProduct = require("./Controllers/addProduct")
+const patchProduct = require("./Controllers/patchProduct")
 const { getToken } = require("./Utils/getToken");
 const url = require("./Utils/imageUploader")
 //
@@ -124,6 +125,15 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
+//Modifica un producto
+router.patch("/",getToken, async (req, res) => {
+  try {
+    const detail = await patchProduct(req);
+    res.send(detail);
+  } catch (err) {
+    next(err);
+  }
+})
 
 //exportamos el router
 module.exports = router;
