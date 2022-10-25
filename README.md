@@ -31,6 +31,9 @@ Product Routes:
 
     -GET /product/review/avrg/:id
         -This route returns the average score of a profile
+    
+    -PATCH /product
+        -This route will modify an existing porduct
 
 
 
