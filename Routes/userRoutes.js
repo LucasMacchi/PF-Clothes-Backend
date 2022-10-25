@@ -13,6 +13,7 @@ const getAvrg = require("./Controllers/avrgScore");
 const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
 const getFavoritesList = require("./Controllers/getFavoritesList");
+const patchProfile = require("./Controllers/patchProfile")
 
 // crear usuario
 router.post("/", async (req, res) => {
@@ -71,6 +72,15 @@ router.post("/", async (req, res) => {
     
   } catch (err) {
     res.status(404).send(err.message);
+  }
+});
+//Modify profile
+router.patch("/",getToken, async (req, res) => {
+  try {
+    const response = await patchProfile(req);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
   }
 });
 //add elements to favorites
@@ -179,23 +189,5 @@ router.post("/review/:id", getToken, async (req, res) => {
   }
 });
 
-//Modificar datos de un usuario
-router.put("/:id", getToken, async (req, res) => {
-  const { id } = req.params;
-  const object = req.body;
-
-  if (object.password) object.password = await bcrypt.hash(object.password, 8);
-
-  try {
-    let modifyUser = await profile.update(object, {
-      where: {
-        id: id,
-      },
-    });
-    return res.send({ changed: true });
-  } catch (err) {
-    res.send(err.message);
-  }
-});
 
 module.exports = router;
