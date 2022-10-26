@@ -2,13 +2,16 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const routes = require("./Routes/index");
-const {logger} = require("./Routes/Utils/logger");
-const {errorHandler} = require("./Routes/Utils/errorHandler");
-const passport = require('passport');
-require('dotenv').config();
+const { logger } = require("./Routes/Utils/logger");
+const { errorHandler } = require("./Routes/Utils/errorHandler");
+const passport = require("passport");
+const mercadopago = require("mercadopago");
+const { payment, merchant_orders } = require("mercadopago");
 
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
+require("dotenv").config();
+
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 require("./Auth/passport");
 require("./Auth/GoogleSSO");
@@ -34,26 +37,89 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(session({
-  secret:process.env.SECRET,
-  resave: true,
-  saveUninitialized:true,
-  cookie:{
-    sameSite:"none",
-    maxAge:1000 * 60 * 60 * 24,
-  }
-}));
+server.use(
+  session({
+    secret: process.env.SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 
-server.get('/',(req,res,next)=>{
+server.get("/", (req, res, next) => {
   console.log(req.session);
   console.log(req.sessionID);
-  res.send('hello world');
+  res.send("hello world");
 });
 
+//Ruta que dirige a la pestaña de mercadopago para pagar
+server.get("/generar", (req, res, next) => {
+  let preference = {
+    back_urls: { success: "http://localhost:3001/success" }, //url a donde redirige al usuario cuando hace click en volver al sitio luego de comprar
+    items: [
+      {
+        id: 234234,
+        title: "Buzo",
+        unit_price: 100,
+        quantity: 3,
+        size: "XL",
+        color: "Rojo",
+      },
+      {
+        id: 56765,
+        title: "Camisa",
+        unit_price: 99,
+        quantity: 2,
+        size: "L",
+        color: "Blanco",
+      },
+    ],
+    //Cuando el usuario aprieta el boton de comprar se acciona este link
+    notification_url: "https://acd9-190-31-34-143.sa.ngrok.io/notificar",
+  };
+
+  //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
+  mercadopago.preferences
+    .create(preference)
+    .then(function (response) {
+      res.send(response.body.init_point);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+//Ruta para redirigir el usuario luego de que la compra fue exitosa
+server.get("/success", (req, res, next) => {
+  res.send("TODO SALIO BIEN");
+});
+
+//Ruta para traerme la data que quiero cuando el usuario aprieta comprar
+server.post("/notificar", async (req, res, next) => {
+  const query = req.query;
+  const topic = query.topic;
+  switch (topic) {
+    case "payment":
+      const paymentId = query.id;
+      const payment = await mercadopago.payment.findById(paymentId);
+      console.log(payment);
+      res.send(payment.body);
+    default:
+      break;
+  }
+});
+
+//Token del usuario de prueba vendedor de mercadopago
+mercadopago.configure({
+  access_token:
+    "APP_USR-3893474685008819-102513-18f45e4330eab9e0b1cbfc72f531cf92-1224963305",
+});
 
 server.use(passport.initialize());
 server.use(passport.session());
-
 
 server.use("/", routes);
 server.use(logger);
