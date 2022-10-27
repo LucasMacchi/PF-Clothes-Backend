@@ -56,29 +56,24 @@ server.get("/", (req, res, next) => {
 });
 
 //Ruta que dirige a la pestaña de mercadopago para pagar
-server.get("/generar", (req, res, next) => {
+server.post("/generar", (req, res, next) => {
+  const data = req.body;
+
+  const arreglo = [];
+  for (let i = 0; i < data.length; i++) {
+    arreglo.push({
+      id: data[i].id,
+      title: data[i].name,
+      unit_price: data[i].price,
+      quantity: 1,
+    });
+  }
+
   let preference = {
-    back_urls: { success: "http://localhost:3001/success" }, //url a donde redirige al usuario cuando hace click en volver al sitio luego de comprar
-    items: [
-      {
-        id: 234234,
-        title: "Buzo",
-        unit_price: 100,
-        quantity: 3,
-        size: "XL",
-        color: "Rojo",
-      },
-      {
-        id: 56765,
-        title: "Camisa",
-        unit_price: 99,
-        quantity: 2,
-        size: "L",
-        color: "Blanco",
-      },
-    ],
+    back_urls: { success: "http://localhost:3000/home" }, //url a donde redirige al usuario cuando hace click en volver al sitio luego de comprar
+    items: arreglo,
     //Cuando el usuario aprieta el boton de comprar se acciona este link
-    notification_url: "https://acd9-190-31-34-143.sa.ngrok.io/notificar",
+    //notification_url: "https://acd9-190-31-34-143.sa.ngrok.io/notificar",
   };
 
   //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
@@ -105,8 +100,9 @@ server.post("/notificar", async (req, res, next) => {
     case "payment":
       const paymentId = query.id;
       const payment = await mercadopago.payment.findById(paymentId);
-      console.log(payment);
-      res.send(payment.body);
+      console.log(payment.body.additional_info.items[0].title);
+      res.send(payment);
+      break;
     default:
       break;
   }
