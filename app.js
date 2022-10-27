@@ -27,7 +27,7 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND}`); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND || "http://localhost:3000"}`); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -37,7 +37,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(
+/*server.use(
   session({
     secret: process.env.SECRET,
     resave: true,
@@ -47,11 +47,11 @@ server.use(
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
-);
+);*/
 
 server.get("/", (req, res, next) => {
-  console.log(req.session);
-  console.log(req.sessionID);
+  //console.log(req.session);
+  //console.log(req.sessionID);
   res.send("hello world");
 });
 

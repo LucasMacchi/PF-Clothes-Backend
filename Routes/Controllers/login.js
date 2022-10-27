@@ -12,37 +12,31 @@ const signIn = async (req,res,next) => {
             where:{ username:username }
         });
 
-        console.log(user);
+        //console.log(user);
 
         const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
 
         if(!(user && passwordCorrect)){
-            res.status(401).json({
+            return res.status(401).json({
                 error:"invalid user or password",
             })
         }
 
         if(user && passwordCorrect){
-            const userDataforToken = {
-                id:user.id,
-                username:user.username
-            }
             
             const token = jwt.sign(
-                userDataforToken,
+                {id:user.id},
                 process.env.SECRET,
                 {expiresIn:60*60*24}
             );
 
-            res.cookie("api-auth",token,{
+            res.cookie('token',token,{
                 secure:false,
-                httpOnly:true,
+                expiresIn:1000*60*60*24
             });
+
+            res.send("log in");
     
-            res.send({
-                username:user.username,
-                token,
-            });
         }
         
     }catch(err){
