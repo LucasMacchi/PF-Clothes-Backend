@@ -4,7 +4,7 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 passport.use(new JWTstrategy({
     secretOrKey:process.env.SECRET,
-    jwtFromRequest:ExtractJWT.fromUrlQueryParameter('secret-token'),
+    jwtFromRequest:ExtractJWT.fromUrlQueryParameter('secret_token'),
 },(token,done) => {
     try{
         return done(null,token);
