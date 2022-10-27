@@ -12,7 +12,7 @@ const signIn = async (req,res,next) => {
             where:{ username:username }
         });
 
-        //console.log(user);
+        console.log(user);
 
         const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
 
@@ -30,12 +30,8 @@ const signIn = async (req,res,next) => {
                 {expiresIn:60*60*24}
             );
 
-            res.cookie('token',token,{
-                secure:false,
-                expiresIn:1000*60*60*24
-            });
+            res.json({token:token});
 
-            res.send("log in");
     
         }
         
