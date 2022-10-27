@@ -13,7 +13,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-require("./Auth/passport");
+require("./Auth/verify-token");
 require("./Auth/GoogleSSO");
 
 const server = express();

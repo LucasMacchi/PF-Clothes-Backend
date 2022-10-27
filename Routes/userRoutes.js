@@ -2,6 +2,7 @@ const { Router } = require("express");
 var bcrypt = require("bcryptjs");
 const { profile } = require("../DataBase/db");
 const router = Router();
+const jwt = require('jsonwebtoken');
 //utils
 const url = require("./Utils/imageUploader")
 //Controladores
@@ -14,7 +15,7 @@ const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
 const getFavoritesList = require("./Controllers/getFavoritesList");
 const patchProfile = require("./Controllers/patchProfile")
-
+const passport = require('passport');
 // crear usuario
 router.post("/", async (req, res) => {
   let {
@@ -147,10 +148,11 @@ router.get("/favorites", getToken, async (req, res) => {
 });
 
 //Request data from user
-router.post("/get", getToken, async (req, res) => {
-  const { id } = req;
+router.get("/get", passport.authenticate('jwt',{session:false}), async (req, res) => {
+  const {secret_token} = req.query;
+  const decodedToken = jwt.verify(secret_token,process.env.SECRET);
   try {
-    let user = await profile.findByPk(id);
+    let user = await profile.findByPk(decodedToken.id);
     return res.send(user);
   } catch (err) {
     res.send(err.message);
