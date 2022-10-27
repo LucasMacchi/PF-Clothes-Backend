@@ -119,7 +119,7 @@ mercadopago.configure({
 });
 
 server.use(passport.initialize());
-server.use(passport.session());
+//server.use(passport.session());
 
 server.use("/", routes);
 server.use(logger);
