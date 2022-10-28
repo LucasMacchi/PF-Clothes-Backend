@@ -27,13 +27,19 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `${process.env.FRONTEND || "http://localhost:3000"}`); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Origin",
+    `${process.env.FRONTEND || "http://localhost:3000"}`
+  ); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization,Set-Cookie"
   );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH,OPTIONS, PUT, DELETE"
+  );
   next();
 });
 
