@@ -52,7 +52,7 @@ Profile Routes:
         - This route will add a product to the favorites array in the Profile table
 
     - PUT /user/shoppingcart?productID=&profileID=
-        - This route will add a product to the shoppingcart array in the Profile table
+        - This route will add a variant of the product to the shoppingcart array in the Profile table
 
     -GET /user/shoppingcart?profileID=
         -This route will return all the products in a profile's shoppingcart
