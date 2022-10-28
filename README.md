@@ -42,7 +42,7 @@ Profile Routes:
     - POST /user
         - This route will create a user in the Profile table
 
-    - POST /user/get
+    - POST /user/get?secret_token=
         - This route will fetch a user by the id in the token
 
     - PATCH /user

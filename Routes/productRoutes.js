@@ -13,6 +13,7 @@ const addProduct = require("./Controllers/addProduct")
 const patchProduct = require("./Controllers/patchProduct")
 const { getToken } = require("./Utils/getToken");
 const url = require("./Utils/imageUploader")
+const passport = require("passport");
 //
 const router = Router();
 
@@ -76,7 +77,7 @@ router.get("/filter", async (req, res) => {
   }
 });
 //Agregar un producto ruta privada
-router.post("/", getToken, async (req, res) => {
+router.post("/", passport.authenticate('jwt',{session:false}), async (req, res) => {
   try {
     const response = await addProduct(req);
     res.status(200).send(response);
@@ -105,7 +106,7 @@ router.get("/review/avrg/:id", async (req, res) => {
   }
 });
 //Agrega una review
-router.post("/review/:id", getToken, async (req, res) => {
+router.post("/review/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const id = req.params.id;
   try {
     const response = await addReview(id, req.body, "product");
@@ -126,7 +127,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 //Modifica un producto
-router.patch("/",getToken, async (req, res) => {
+router.patch("/",passport.authenticate('jwt',{session:false}), async (req, res) => {
   try {
     const detail = await patchProduct(req);
     res.send(detail);

@@ -2,6 +2,7 @@ const { Router } = require("express");
 var bcrypt = require("bcryptjs");
 const { profile } = require("../DataBase/db");
 const router = Router();
+const jwt = require('jsonwebtoken');
 //utils
 const url = require("./Utils/imageUploader")
 //Controladores
@@ -14,7 +15,7 @@ const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
 const getFavoritesList = require("./Controllers/getFavoritesList");
 const patchProfile = require("./Controllers/patchProfile")
-
+const passport = require('passport');
 // crear usuario
 router.post("/", async (req, res) => {
   let {
@@ -75,7 +76,7 @@ router.post("/", async (req, res) => {
   }
 });
 //Modify profile
-router.patch("/",getToken, async (req, res) => {
+router.patch("/",passport.authenticate('jwt',{session:false}), async (req, res) => {
   try {
     const response = await patchProfile(req);
     res.status(200).send(response);
@@ -84,7 +85,7 @@ router.patch("/",getToken, async (req, res) => {
   }
 });
 //add elements to favorites
-router.put("/favorites", getToken, async (req, res) => {
+router.put("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await addProductsToLists(productID, profileID, "fav");
@@ -95,7 +96,7 @@ router.put("/favorites", getToken, async (req, res) => {
 });
 
 //add elements to shoppingcart
-router.put("/shoppingcart", getToken, async (req, res) => {
+router.put("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await addProductsToLists(productID, profileID, "shop");
@@ -105,7 +106,7 @@ router.put("/shoppingcart", getToken, async (req, res) => {
   }
 });
 //remove elements of favorites
-router.delete("/favorites", getToken, async (req, res) => {
+router.delete("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await deleteProductsOfList(productID, profileID, "fav");
@@ -115,7 +116,7 @@ router.delete("/favorites", getToken, async (req, res) => {
   }
 });
 //remove elements of the shopping card
-router.delete("/shoppingcart", getToken, async (req, res) => {
+router.delete("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await deleteProductsOfList(productID, profileID, "shop");
@@ -125,7 +126,7 @@ router.delete("/shoppingcart", getToken, async (req, res) => {
   }
 });
 //get all elements of the shopping card
-router.get("/shoppingcart", getToken, async (req, res) => {
+router.get("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { profileID } = req.query;
   try {
     const response = await getShoppingcart(profileID);
@@ -136,7 +137,7 @@ router.get("/shoppingcart", getToken, async (req, res) => {
 });
 
 //get all elements of the favorites list
-router.get("/favorites", getToken, async (req, res) => {
+router.get("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { profileID } = req.query;
   try {
     const response = await getFavoritesList(profileID);
@@ -147,10 +148,11 @@ router.get("/favorites", getToken, async (req, res) => {
 });
 
 //Request data from user
-router.post("/get", getToken, async (req, res) => {
-  const { id } = req;
+router.get("/get", passport.authenticate('jwt',{session:false}), async (req, res) => {
+  const {secret_token} = req.query;
+  const decodedToken = jwt.verify(secret_token,process.env.SECRET);
   try {
-    let user = await profile.findByPk(id);
+    let user = await profile.findByPk(decodedToken.id);
     return res.send(user);
   } catch (err) {
     res.send(err.message);

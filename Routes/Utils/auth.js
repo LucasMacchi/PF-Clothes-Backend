@@ -1,4 +1,5 @@
 const isUserAuthenticated = (req,res,next) => {
+    console.log(JSON.stringify(req.cookies),"request frontend");
     if(req.user){
         next();
     }else{
