@@ -76,7 +76,7 @@ router.post("/", async (req, res) => {
   }
 });
 //Modify profile
-router.patch("/",getToken, async (req, res) => {
+router.patch("/",passport.authenticate('jwt',{session:false}), async (req, res) => {
   try {
     const response = await patchProfile(req);
     res.status(200).send(response);
@@ -85,7 +85,7 @@ router.patch("/",getToken, async (req, res) => {
   }
 });
 //add elements to favorites
-router.put("/favorites", getToken, async (req, res) => {
+router.put("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await addProductsToLists(productID, profileID, "fav");
@@ -96,7 +96,7 @@ router.put("/favorites", getToken, async (req, res) => {
 });
 
 //add elements to shoppingcart
-router.put("/shoppingcart", getToken, async (req, res) => {
+router.put("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await addProductsToLists(productID, profileID, "shop");
@@ -106,7 +106,7 @@ router.put("/shoppingcart", getToken, async (req, res) => {
   }
 });
 //remove elements of favorites
-router.delete("/favorites", getToken, async (req, res) => {
+router.delete("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await deleteProductsOfList(productID, profileID, "fav");
@@ -116,7 +116,7 @@ router.delete("/favorites", getToken, async (req, res) => {
   }
 });
 //remove elements of the shopping card
-router.delete("/shoppingcart", getToken, async (req, res) => {
+router.delete("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { productID, profileID } = req.query;
   try {
     const response = await deleteProductsOfList(productID, profileID, "shop");
@@ -126,7 +126,7 @@ router.delete("/shoppingcart", getToken, async (req, res) => {
   }
 });
 //get all elements of the shopping card
-router.get("/shoppingcart", getToken, async (req, res) => {
+router.get("/shoppingcart", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { profileID } = req.query;
   try {
     const response = await getShoppingcart(profileID);
@@ -137,7 +137,7 @@ router.get("/shoppingcart", getToken, async (req, res) => {
 });
 
 //get all elements of the favorites list
-router.get("/favorites", getToken, async (req, res) => {
+router.get("/favorites", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const { profileID } = req.query;
   try {
     const response = await getFavoritesList(profileID);
