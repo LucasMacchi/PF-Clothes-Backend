@@ -116,6 +116,9 @@ Variant:
 
     -PUT variant/:id
         -This route will modify the variant with that id
+    
+    -PATCH variant/stock/:id?order=&cant=
+        -This route will add or reduce stock in a variant, order can be "reduce" or "add" for reducing the stock and adding to it, cant will be the number to modify
 
     -DELETE variant/:id
         -This route will delete the variant with that id
