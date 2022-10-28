@@ -124,6 +124,9 @@ Activate:
 
     -PUT activate/user/:id
         -This route will activate the user
+    
+    -PUT activate/user/moderator/:id
+        -This route will give a user the rol of moderator
 
     -DELETE activate/user/:id
         -This route will desactivate the user
@@ -133,6 +136,7 @@ Activate:
 
     -DELETE activate/product/:id
         -This route will desactivate the product
+    
 
 test users:
 
