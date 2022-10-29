@@ -25,7 +25,7 @@ router.post("/forgot-password",async (req,res)=>{
             }
         });
         if(!oldUser){
-            return res.send("User Not Exist!!");
+            return res.send("No existen usuarios con ese email");
         }
         const secret =  process.env.SECRET + oldUser.password;
         const token =  jwt.sign({email:oldUser.mail, id:oldUser.id},secret,{expiresIn:'2h'});
@@ -58,7 +58,7 @@ router.post("/forgot-password",async (req,res)=>{
             }
         });
 
-        res.send("Recovery email sent");
+        res.send("Email de recuperacion enviado");
     }catch(error){
         res.send(err.message);
     }
@@ -96,7 +96,7 @@ router.put('/reset-password',async (req,res)=>{
                 id:id,
             }
         });
-        res.send("password modified");
+        res.send("nuevo password configurado");
     }catch(err){
         res.send(err.message);
     }
