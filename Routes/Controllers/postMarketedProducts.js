@@ -11,10 +11,14 @@ const postMarketedProducts = async (id, productos) => {
 
   for (const file of productos) {
     const comprados = await marketedProduct.create({
-      id: file.id,
-      status: file.name,
+      status: "Compra aprobada",
       price: file.price,
-      amount: file.price,
+      amount: 1,
+      name: file.name,
+      size: file.size,
+      color: file.color,
+      demographic: file.demographic,
+      productoId: file.id,
     });
     await user.addMarketedProduct(comprados);
   }
