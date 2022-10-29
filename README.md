@@ -74,6 +74,9 @@ Profile Routes:
 
     -GET /user/review/avrg/:id
         -This route returns the average score of a profile
+    
+    POST /user/purchase
+        -This route will register a payment with the data from the shopping cart
 
 Stores Routes:
 
