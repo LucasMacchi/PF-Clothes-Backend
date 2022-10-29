@@ -1,29 +1,28 @@
 const {
   profile,
-  Op,
-  product,
-  qualification,
   marketedProduct,
 } = require("../../DataBase/db");
+const {reduceStock} = require("./variantsStock")
 
 const postMarketedProducts = async (id, productos) => {
   const user = await profile.findByPk(id);
 
-  for (const file of productos) {
+  for (const productSold of productos) {
     const comprados = await marketedProduct.create({
       status: "Compra aprobada",
-      price: file.price,
-      amount: 1,
-      name: file.name,
-      size: file.size,
-      color: file.color,
-      demographic: file.demographic,
-      productoId: file.id,
+      price: productSold.price,
+      name: productSold.name,
+      size: productSold.size,
+      color: productSold.color,
+      demographic: productSold.demographic,
+      productoId: productSold.id,
+      sellerId: productSold.profileId
     });
     await user.addMarketedProduct(comprados);
+    await reduceStock(productSold.variantID,1)
   }
 
-  return "Review agregada al " + order;
+  return "Compra realizada";
 };
 
 module.exports = postMarketedProducts;
