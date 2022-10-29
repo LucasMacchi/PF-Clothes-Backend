@@ -28,7 +28,7 @@ router.post("/forgot-password",async (req,res)=>{
         }
         const secret =  process.env.SECRET + oldUser.password;
         const token =  jwt.sign({email:oldUser.mail, id:oldUser.id},secret,{expiresIn:'2h'});
-        const link = `http://localhost:3001/auth/reset-password/${oldUser.id}/${token}`;
+        const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/reset-password/${oldUser.id}/${token}`;
         console.log(link);
         res.send("link");
     }catch(error){
@@ -58,9 +58,16 @@ router.get('/reset-password/:id/:token', async (req,res)=>{
 });
 
 router.put('/reset-password',async (req,res)=>{
-    const {id} = req.body;
+    const {id,password} = req.body;
     console.log(id);
     try{
+        const user = await profile.update({
+            password:password,
+        },{
+            where:{
+                id:id,
+            }
+        });
         res.send("password modified");
     }catch(err){
         res.send(err.message);
