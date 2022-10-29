@@ -142,6 +142,18 @@ Activate:
 
     -DELETE activate/product/:id
         -This route will desactivate the product
+
+Recover password:
+
+    - POST auth/forgot-password
+        - Route recieve email for password recovery
+    
+    - GET reset-password/:id/:token
+        - Route to send new password
+
+    - PUT /reset-password
+        - Route to set new password in database
+
     
 
 test users:
