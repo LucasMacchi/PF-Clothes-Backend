@@ -15,6 +15,7 @@ const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
 const getFavoritesList = require("./Controllers/getFavoritesList");
 const patchProfile = require("./Controllers/patchProfile");
+const postMarketedProducts = require("./Controllers/postMarketedProducts")
 const passport = require("passport");
 // crear usuario
 router.post("/", async (req, res) => {
@@ -212,7 +213,7 @@ router.get("/review/avrg/:id", async (req, res) => {
 });
 
 //Traer reviews de un usuario
-router.post("/review/:id", getToken, async (req, res) => {
+router.post("/review/:id", async (req, res) => {
   const id = req.params.id;
   try {
     const response = await addReview(id, req.body, "profile");
@@ -221,5 +222,16 @@ router.post("/review/:id", getToken, async (req, res) => {
     res.status(404).send(error.message);
   }
 });
+
+router.post("/purchase", async (req, res) => {
+  const id = req.query.id
+  try {
+    const response = await postMarketedProducts(id, req.body);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+
 
 module.exports = router;
