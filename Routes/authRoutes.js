@@ -49,7 +49,8 @@ router.get('/reset-password/:id/:token', async (req,res)=>{
     const secret = process.env.SECRET + oldUser.password;
     try{
         const verify = jwt.verify(token,secret);
-        res.send("verified");
+        //res.json({email:verify.email});
+        res.redirect(`${process.env.FRONTEND}/reset`);
     }catch(err){
         res.send("not verified");
     }
