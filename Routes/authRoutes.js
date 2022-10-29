@@ -4,7 +4,7 @@ const {isUserAuthenticated} = require('./Utils/auth');
 const {profile} = require('../DataBase/db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { route } = require("./userRoutes");
+const nodemailer = require('nodemailer');
 
 const router = Router();
 
@@ -31,7 +31,32 @@ router.post("/forgot-password",async (req,res)=>{
         const token =  jwt.sign({email:oldUser.mail, id:oldUser.id},secret,{expiresIn:'2h'});
         const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/reset-password/${oldUser.id}/${token}`;
         console.log(link);
-        res.send("link");
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: `${process.env.MAIL}`,
+              pass: `${process.env.MAIL_PASSWORD}`
+            }
+        });
+        const mailOptions = {
+            from: `${process.env.MAIL}`,
+            to: `${oldUser.mail}`,
+            subject: 'Enlace de recuperacion de password',
+            text: `Hola ${oldUser.name}, para crear tu nuevo password accede a este link ${link}
+             recuerda que solamente tienes una hora para usarlo, en caso de no haber solicitado
+             la recuperacion de password has caso omiso a este mensaje.
+             Atentamente equipo de express clothes`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+        });
+
+        res.send("Recovery email sent");
     }catch(error){
         res.send(err.message);
     }
