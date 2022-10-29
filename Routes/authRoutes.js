@@ -3,6 +3,7 @@ const {getUser} = require("./Controllers/getUser");
 const {isUserAuthenticated} = require('./Utils/auth');
 const {profile} = require('../DataBase/db');
 const jwt = require('jsonwebtoken');
+const { route } = require("./userRoutes");
 
 const router = Router();
 
@@ -53,6 +54,16 @@ router.get('/reset-password/:id/:token', async (req,res)=>{
         res.redirect(`${process.env.FRONTEND}/reset?user=${oldUser.id}`);
     }catch(err){
         res.send("not verified");
+    }
+});
+
+router.put('/reset-password',async (req,res)=>{
+    const {id} = req.body;
+    console.log(id);
+    try{
+        res.send("password modified");
+    }catch(err){
+        res.send(err.message);
     }
 });
 
