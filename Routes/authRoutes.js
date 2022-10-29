@@ -3,6 +3,7 @@ const {getUser} = require("./Controllers/getUser");
 const {isUserAuthenticated} = require('./Utils/auth');
 const {profile} = require('../DataBase/db');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const { route } = require("./userRoutes");
 
 const router = Router();
@@ -50,7 +51,6 @@ router.get('/reset-password/:id/:token', async (req,res)=>{
     const secret = process.env.SECRET + oldUser.password;
     try{
         const verify = jwt.verify(token,secret);
-        //res.json({email:verify.email});
         res.redirect(`${process.env.FRONTEND}/reset?user=${oldUser.id}`);
     }catch(err){
         res.send("not verified");
@@ -61,8 +61,9 @@ router.put('/reset-password',async (req,res)=>{
     const {id,password} = req.body;
     console.log(id);
     try{
+        let passwordHash = await bcrypt.hash(password, 8);
         const user = await profile.update({
-            password:password,
+            password:passwordHash,
         },{
             where:{
                 id:id,
