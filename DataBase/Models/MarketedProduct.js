@@ -18,6 +18,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    name: { type: DataTypes.STRING, allowNull: false },
+    size: { type: DataTypes.STRING, allowNull: false },
+    color: { type: DataTypes.STRING, allowNull: false },
+    demographic: { type: DataTypes.STRING, allowNull: false },
+    productoId: { type: DataTypes.STRING, allowNull: false },
     date: {
       type: DataTypes.DATEONLY,
       defaultValue: DataTypes.NOW,
