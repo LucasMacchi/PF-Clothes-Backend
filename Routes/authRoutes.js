@@ -115,7 +115,14 @@ router.get('/verify/:id/:token',async(req,res) =>{
     const secret = process.env.SECRET + user.password;
     try{
         const verify = jwt.verify(token,secret);
-        res.redirect(`${process.env.FRONTEND}/verified?user=${user.id}`);
+        await profile.update({
+            verified:true,
+        },{
+            where:{
+                id:user.id,
+            }
+        });
+        res.redirect(`${process.env.FRONTEND}/verified`);
     }catch(err){
         res.send("not verified");
     }
