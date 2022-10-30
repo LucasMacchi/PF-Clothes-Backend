@@ -102,4 +102,23 @@ router.put('/reset-password',async (req,res)=>{
     }
 });
 
+router.get('/verify/:id/:token',async(req,res) =>{
+    const {id,token} = req.params;
+    const user = await profile.findOne({
+        where:{
+            id:id,
+        }
+    });
+    if(!user){
+        return res.send("El usuario no existe");
+    }
+    const secret = process.env.SECRET + user.password;
+    try{
+        const verify = jwt.verify(token,secret);
+        res.redirect(`${process.env.FRONTEND}/verified?user=${user.id}`);
+    }catch(err){
+        res.send("not verified");
+    }
+});
+
 module.exports = router;
