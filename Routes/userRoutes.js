@@ -17,6 +17,7 @@ const getFavoritesList = require("./Controllers/getFavoritesList");
 const patchProfile = require("./Controllers/patchProfile");
 const postMarketedProducts = require("./Controllers/postMarketedProducts")
 const passport = require("passport");
+const nodemailer = require('nodemailer');
 // crear usuario
 router.post("/", async (req, res) => {
   let {
@@ -67,7 +68,41 @@ router.post("/", async (req, res) => {
           shoppingCart,
         },
       });
-      res.send(user);
+      if(user){
+        // token and link
+        const secret = process.env.SECRET + user.password;
+        const token =  jwt.sign({email:user.mail, id:user.id},secret,{expiresIn:60*60*24});
+        const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/verify/${user.id}/${token}`;
+        // mail
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.EMAIL,
+              pass: process.env.EMAIL_PASSWORD,
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.mail,
+            subject: 'Verificacion de usuario',
+            text: `Bienvenido ${user.name}, gracias por registrarte para terminar el proceso
+            de registro ingresa en el siguiente link para verificar tu cuenta ${link} el link
+            tendra un tiempo de expiracion de un dia.
+            Atentamente equipo de express clothes`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+        });
+
+        res.send("Usuario creado");
+      }
+      
     } catch (error) {
       throw Error(error.message);
     }

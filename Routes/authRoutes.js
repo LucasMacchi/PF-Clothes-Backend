@@ -30,7 +30,7 @@ router.post("/forgot-password",async (req,res)=>{
         const secret =  process.env.SECRET + oldUser.password;
         const token =  jwt.sign({email:oldUser.mail, id:oldUser.id},secret,{expiresIn:'2h'});
         const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/reset-password/${oldUser.id}/${token}`;
-        console.log(link);
+        //console.log(link);
         
         const transporter = nodemailer.createTransport({
             service: 'gmail',
