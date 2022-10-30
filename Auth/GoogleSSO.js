@@ -4,7 +4,7 @@ const {profile} = require('../DataBase/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const GOOGLE_CALLBACK_URL = "http://localhost:3001/login/oauth2/redirect/google";
+const GOOGLE_CALLBACK_URL = `${process.env.FRONTEND || "http://localhost:3001"}/login/oauth2/redirect/google`;
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
