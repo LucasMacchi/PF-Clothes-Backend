@@ -68,6 +68,11 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    verified:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false,
     }
   });
 };

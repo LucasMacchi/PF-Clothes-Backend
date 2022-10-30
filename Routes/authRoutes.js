@@ -30,7 +30,7 @@ router.post("/forgot-password",async (req,res)=>{
         const secret =  process.env.SECRET + oldUser.password;
         const token =  jwt.sign({email:oldUser.mail, id:oldUser.id},secret,{expiresIn:'2h'});
         const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/reset-password/${oldUser.id}/${token}`;
-        console.log(link);
+        //console.log(link);
         
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -100,6 +100,83 @@ router.put('/reset-password',async (req,res)=>{
     }catch(err){
         res.send(err.message);
     }
+});
+
+router.get('/verify/:id/:token',async(req,res) =>{
+    const {id,token} = req.params;
+    const user = await profile.findOne({
+        where:{
+            id:id,
+        }
+    });
+    if(!user){
+        return res.send("El usuario no existe");
+    }
+    const secret = process.env.SECRET + user.password;
+    try{
+        const verify = jwt.verify(token,secret);
+        await profile.update({
+            verified:true,
+        },{
+            where:{
+                id:user.id,
+            }
+        });
+        res.redirect(`${process.env.FRONTEND}/verified`);
+    }catch(err){
+        res.redirect(`${process.env.FRONTEND}/not-verified`);
+    }
+});
+
+router.post('/not-verified',async(req,res)=>{
+    const {email} = req.body;
+  try{
+    const user = await profile.findOne({
+        where:{
+            mail:email,
+        }
+    });
+
+    if(!user) return res.send("No hay un usuario registrado con este email");
+
+    if(user){
+        // token and link
+        const secret = process.env.SECRET + user.password;
+        const token =  jwt.sign({email:user.mail, id:user.id},secret,{expiresIn:60*60*24});
+        const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/verify/${user.id}/${token}`;
+        // mail
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: process.env.EMAIL,
+              pass: process.env.EMAIL_PASSWORD,
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.mail,
+            subject: 'Verificacion de usuario',
+            text: `Bienvenido ${user.name}, gracias por registrarte para terminar el proceso
+            de registro ingresa en el siguiente link para verificar tu cuenta ${link} el link
+            tendra un tiempo de expiracion de un dia.
+            Atentamente equipo de express clothes`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+        });
+
+        res.send("Email de confirmacion enviado");
+    }
+  }catch(err){
+    res.send(err.message);
+  }
+
 });
 
 module.exports = router;
