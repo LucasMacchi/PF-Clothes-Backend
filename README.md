@@ -148,12 +148,19 @@ Recover password:
     - POST auth/forgot-password
         - Route recieve email for password recovery
     
-    - GET reset-password/:id/:token
+    - GET auth/reset-password/:id/:token
         - Route to send new password
 
-    - PUT /reset-password
+    - PUT auth/reset-password
         - Route to set new password in database
 
+User account verification:
+
+    - GET auth/verify/:id/:token
+        -Route to verify account
+    
+    - POST auth/not-verified
+        -Route to resend verification in case of failure
     
 
 test users:
