@@ -171,7 +171,7 @@ router.post('/not-verified',async(req,res)=>{
             }
         });
 
-        res.send("Usuario creado");
+        res.send("Email de confirmacion enviado");
     }
   }catch(err){
     res.send(err.message);
