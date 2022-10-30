@@ -3,8 +3,9 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const {profile} = require('../DataBase/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
-const GOOGLE_CALLBACK_URL = "http://localhost:3001/login/oauth2/redirect/google";
+const GOOGLE_CALLBACK_URL = `${process.env.FRONTEND || "http://localhost:3001"}/login/oauth2/redirect/google`;
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -41,6 +42,39 @@ async (req,accesToken,refreshToken,gProfile,done) => {
             googleId: gProfile.id, 
             phone:'111111111',
         });
+
+        if(newUser){
+             // token and link
+            const secret = process.env.SECRET + user.password;
+            const token =  jwt.sign({email:user.mail, id:user.id},secret,{expiresIn:60*60*24});
+            const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/verify/${newUser.id}/${token}`;
+            // mail
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: process.env.EMAIL,
+                  pass: process.env.EMAIL_PASSWORD,
+                }
+            });
+    
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: newUser.mail,
+                subject: 'Verificacion de usuario',
+                text: `Bienvenido ${newUser.name}, gracias por registrarte para terminar el proceso
+                de registro ingresa en el siguiente link para verificar tu cuenta ${link} el link
+                tendra un tiempo de expiracion de un dia.
+                Atentamente equipo de express clothes`
+            };
+    
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+            });
+        }
 
         console.log(newUser);
 
