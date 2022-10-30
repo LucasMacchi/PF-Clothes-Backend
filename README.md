@@ -77,6 +77,9 @@ Profile Routes:
     
     POST /user/purchase
         -This route will register a payment with the data from the shopping cart
+    
+    -GET user/sells/:id
+        -This route will return all the products a profile sold
 
 Stores Routes:
 
