@@ -271,7 +271,7 @@ router.post("/purchase", async (req, res) => {
 
 //trae todos los productos vendidos 
 router.get("/sells/:id", async (req, res) => {
-  const id = req.query.id
+  const id = req.params.id
   try {
     const response = await getSelledProducts(id);
     res.status(200).send(response);
