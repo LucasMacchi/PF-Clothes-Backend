@@ -36,7 +36,7 @@ const signIn = async (req,res,next) => {
                 {expiresIn:60*60*24}
             );
 
-            res.json({
+            return res.json({
                 token:token,
                 message:"credenciales correctas",
             });
