@@ -45,8 +45,8 @@ async (req,accesToken,refreshToken,gProfile,done) => {
 
         if(newUser){
              // token and link
-            const secret = process.env.SECRET + user.password;
-            const token =  jwt.sign({email:user.mail, id:user.id},secret,{expiresIn:60*60*24});
+            const secret = process.env.SECRET + newUser.password;
+            const token =  jwt.sign({email:newUser.mail, id:newUser.id},secret,{expiresIn:60*60*24});
             const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/verify/${newUser.id}/${token}`;
             // mail
             const transporter = nodemailer.createTransport({
