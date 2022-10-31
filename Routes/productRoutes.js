@@ -109,7 +109,7 @@ router.get("/review/avrg/:id", async (req, res) => {
 //Agrega una review
 router.post("/review/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const id = req.params.id;
-  const {token} = req.query;
+  const {secret_token} = req.query;
   const decodedToken = jwt.verify(token,process.env.SECRET);
   const data = {...req.body};
   data.profileId = decodedToken.id;
