@@ -6,7 +6,8 @@ const addReview = async (id, review, order) => {
         if(!article) throw Error("Este "+order+" no existe")
         const qual = await qualification.create({
             score: review.score,
-            reviews: review.reviews
+            reviews: review.reviews,
+            profileId:review.profileId,
         })
         article.addQualification(qual)
         return "Review agregada al "+order
@@ -17,7 +18,6 @@ const addReview = async (id, review, order) => {
         const qual = await qualification.create({
             score: review.score,
             reviews: review.reviews,
-            profileId:review.profileId,
         })
         article.addQualification(qual)
         return "Review agregada al "+order
