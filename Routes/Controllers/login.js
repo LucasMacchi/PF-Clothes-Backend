@@ -18,8 +18,14 @@ const signIn = async (req,res,next) => {
 
         if(!(user && passwordCorrect)){
             return res.status(401).json({
-                error:"invalid user or password",
-            })
+                message:"usuario o password invalido",
+            });
+        }
+
+        if(!user.verified){
+            return res.status(401).json({
+                message:"por favor ingresa al enlace de verificacion enviado a tu email"
+            });
         }
 
         if(user && passwordCorrect){
@@ -30,7 +36,10 @@ const signIn = async (req,res,next) => {
                 {expiresIn:60*60*24}
             );
 
-            res.json({token:token});
+            res.json({
+                token:token,
+                message:"credenciales correctas",
+            });
 
     
         }
