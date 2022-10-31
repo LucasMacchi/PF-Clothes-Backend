@@ -75,7 +75,7 @@ Profile Routes:
     -GET /user/review/avrg/:id
         -This route returns the average score of a profile
     
-    POST /user/purchase
+    POST /user/purchase?id=
         -This route will register a payment with the data from the shopping cart
     
     -GET user/sells/:id
@@ -88,6 +88,9 @@ Stores Routes:
 
     - GET /stores?name=
         - This route will fetch a store by the name in the url
+    
+    -GET /stores/sells/:id
+        -This route will return the size, price, demographic, time created, location and product id of each sells a profile had
 
 Sizes Routes:
 
