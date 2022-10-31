@@ -14,6 +14,7 @@ const patchProduct = require("./Controllers/patchProduct")
 const { getToken } = require("./Utils/getToken");
 const url = require("./Utils/imageUploader")
 const passport = require("passport");
+const jwt = require('jsonwebtoken');
 //
 const router = Router();
 
@@ -108,8 +109,12 @@ router.get("/review/avrg/:id", async (req, res) => {
 //Agrega una review
 router.post("/review/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
   const id = req.params.id;
+  const {secret_token} = req.query;
+  const decodedToken = jwt.verify(secret_token,process.env.SECRET);
+  const data = {...req.body};
+  data.profileId = decodedToken.id;
   try {
-    const response = await addReview(id, req.body, "product");
+    const response = await addReview(id, data, "product");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
