@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
-const GOOGLE_CALLBACK_URL = `${process.env.FRONTEND || "http://localhost:3001"}/login/oauth2/redirect/google`;
+const GOOGLE_CALLBACK_URL = `${process.env.BACKEND || "http://localhost:3001"}/login/oauth2/redirect/google`;
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
