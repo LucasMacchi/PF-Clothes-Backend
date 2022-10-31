@@ -17,6 +17,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -40,6 +42,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -57,6 +61,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -76,6 +81,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -95,6 +101,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -115,6 +123,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -135,6 +145,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -153,6 +164,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -167,6 +179,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (size && price && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -185,6 +200,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -202,6 +219,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -221,6 +239,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -240,6 +259,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -258,6 +278,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -276,6 +297,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -297,6 +320,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -311,6 +336,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -329,6 +355,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -350,6 +378,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -366,6 +396,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -384,6 +415,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -403,6 +436,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -424,6 +458,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -439,6 +474,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -457,6 +493,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -473,6 +511,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -489,6 +528,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -503,6 +543,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (size && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -517,7 +560,7 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (size && price) {
     let filteredProducts = await product.findAll({
-      where: {},
+      where: { isActive: true },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -533,6 +576,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -544,6 +588,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts.filter((el) => el.price <= price));
   } else if (price && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -559,6 +606,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -576,6 +624,9 @@ const getFilteredProducts = async (
     /////////////////////////////////////////////////////////////////////////////////////
   } else if (size) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -591,6 +642,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -602,6 +654,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (price) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -616,6 +671,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -627,6 +684,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -643,6 +703,9 @@ const getFilteredProducts = async (
     /////////////////////////////////////////////////////////////////////////////////////
   } else {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
