@@ -81,6 +81,9 @@ Profile Routes:
     -GET user/sells/:id
         -This route will return all the products a profile sold
 
+    -GET user/onSell/:id
+        -This route will return all the products on sale of an specific profile
+
 Stores Routes:
 
     - GET /stores/all
