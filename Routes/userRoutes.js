@@ -251,8 +251,12 @@ router.get("/review/avrg/:id", async (req, res) => {
 //Traer reviews de un usuario
 router.post("/review/:id", async (req, res) => {
   const id = req.params.id;
+  const {token} = req.query;
+  const decodedToken = jwt.verify(token,process.env.SECRET);
+  const data = {...req.body};
+  data.profileID = decodedToken.id;
   try {
-    const response = await addReview(id, req.body, "profile");
+    const response = await addReview(id, data, "profile");
     res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
