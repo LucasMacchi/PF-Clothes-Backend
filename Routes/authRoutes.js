@@ -202,6 +202,42 @@ router.post("/sendemail", async (req, res) => {
     },
   });
 
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: user.mail,
+    subject: "Express Clothes",
+    text: `Hola ${user.name}, has comprado ${productos.length} productos en Express Clothes. La compra de los mismos ha sido aprobada y ya estan siendo despachados y enviados. 
+    
+    Muchas gracias por su compra.`,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      res.send("Email NO enviado");
+    } else {
+      res.send("Email enviado");
+    }
+  });
+});
+
+router.post("/sendemailsellers", async (req, res) => {
+  const { mail } = req.query;
+  const productos = req.body;
+
+  const user = await profile.findOne({
+    where: {
+      mail: mail,
+    },
+  });
+
   let vendedores = [];
   for (const productSold of productos) {
     const vendedor = await profile.findOne({
@@ -222,11 +258,11 @@ router.post("/sendemail", async (req, res) => {
 
   const mailOptions = {
     from: process.env.EMAIL,
-    to: [user.mail, ...vendedores],
+    to: vendedores,
     subject: "Express Clothes",
-    text: `Hola ${user.name}, has comprado ${productos.length} productos en Express Clothes. La compra de los mismos ha sido aprobada y ya estan siendo despachados y enviados. 
+    text: `Estimado vendedor de "Express Clothes", usted ha realizado una venta de sus productos al usuario ${user.mail}. Por favor pongase en contacto con el mismo para coordinar el envio. 
     
-    Muchas gracias por su compra.`,
+    Muchas gracias.`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
