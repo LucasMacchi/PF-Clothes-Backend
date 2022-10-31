@@ -14,6 +14,7 @@ const patchProduct = require("./Controllers/patchProduct")
 const { getToken } = require("./Utils/getToken");
 const url = require("./Utils/imageUploader")
 const passport = require("passport");
+const jwt = require('jsonwebtoken');
 //
 const router = Router();
 
