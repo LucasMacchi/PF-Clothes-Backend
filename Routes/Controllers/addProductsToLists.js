@@ -1,4 +1,4 @@
-const {profile,Op} = require('../../DataBase/db');
+const {profile,Op,variant} = require('../../DataBase/db');
 
 
 const addProductsToLists = async(productID, userID, order) => {
@@ -15,6 +15,8 @@ const addProductsToLists = async(productID, userID, order) => {
         const user = await profile.findByPk(userID)
         const data = await user
         if(!data) throw Error("Ese perfil no existe")
+        const vari = await variant.findByPk(productID)
+        if(!await vari) throw Error("Esta variante no existe")
         data.dataValues.shoppingCart.push(productID)
         await profile.update({shoppingCart: data.dataValues.shoppingCart}, {where:{id:userID}})
         return "El producto se agrego al carrito"

@@ -101,6 +101,7 @@ server.get("/success", (req, res, next) => {
 server.post("/notificar", async (req, res, next) => {
   const query = req.query;
   const topic = query.topic;
+  
   switch (topic) {
     case "payment":
       const paymentId = query.id;
