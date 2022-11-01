@@ -114,15 +114,51 @@ router.post("/", async (req, res) => {
   }
 });
 //Modify profile
-router.patch(
-  "/",
+router.post(
+  "/update",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    /*try {
-      const response = await patchProfile(req);
-      res.status(200).send(response);
+    try {
+      const response = await patchProfile(req,res);
+      res.send(response);
     } catch (error) {
-      res.status(404).send(error.message);
+      res.send(error);
+    }
+   /* let {
+      id,
+      storeName,
+      banner,
+      profilePicture,
+      location,
+    } = req.body;
+    //console.log(profilePicture);
+    const uploadedImage = await cloudinary.uploader.upload(profilePicture,
+      { 
+        upload_preset:'yvjjtrzu',
+        public_id:`algo`,
+        allowed_formats:['png','jpg','jpeg'],
+       }, 
+      function(error, result) {
+        if(error){
+          console.log(error);
+        }
+        console.log(result);
+       });
+    try{
+      console.log(req.body);
+      const user = await profile.update({
+        storeName,
+        banner,
+        location,
+        profilePicture:uploadedImage.url,
+      },{
+        where:{
+          id:id,
+        }
+      });
+      res.send(user);
+    }catch(err){
+      res.send(err);
     }*/
   }
 );

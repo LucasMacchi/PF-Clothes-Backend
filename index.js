@@ -5,7 +5,7 @@ require('dotenv').config();
 const db = conn
 
 
-db.sync({force: true}).then(()=> {
+db.sync({force: false}).then(()=> {
   server.listen(process.env.PORT, async() => {
     try {
       await profilesCreator()
