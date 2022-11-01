@@ -8,7 +8,7 @@ const passport = require("passport");
 const mercadopago = require("mercadopago");
 const { payment, merchant_orders } = require("mercadopago");
 
-require("dotenv").config();
+require("dotenv").config(); 
 
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
