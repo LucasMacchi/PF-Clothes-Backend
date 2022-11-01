@@ -61,6 +61,7 @@ router.get("/", async (req, res) => {
 router.get("/filter", async (req, res) => {
   const { name, size, price, demographic, color, page, sortBy, orderBy } =
     req.query;
+    console.log(req.query);
   try {
     const products = await getFilteredProducts(
       name,

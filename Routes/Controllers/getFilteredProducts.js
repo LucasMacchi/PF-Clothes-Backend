@@ -656,6 +656,9 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -664,7 +667,7 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (filteredProducts);
   } else if (name) {
     let filteredProducts = await product.findAll({
       where: {
