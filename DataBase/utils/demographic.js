@@ -1,10 +1,10 @@
 const demographic = [
-  "adult male",
-  "adult female",
-  "teen female",
-  "teen male",
-  "little boy",
-  "little girl",
+  "Hombre",
+  "Mujer",
+  "Mujer adolescente",
+  "Hombre adolescente",
+  "Niño",
+  "Niña",
 ];
 
 module.exports = {
