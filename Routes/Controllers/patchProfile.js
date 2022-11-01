@@ -1,7 +1,8 @@
 const { profile } = require("../../DataBase/db");
 const url = require("../Utils/imageUploader");
+const cloudinary = require("../Utils/cloudinary");
 
-const patchProfile = async (req) => {
+const patchProfile = async (req,res) => {
   let {
     id,
     name,
@@ -16,25 +17,51 @@ const patchProfile = async (req) => {
   console.log("BODY ==> ", req.body);
 
   try {
-    profilePicture = await url(req.files["profilePicture"][0].path);
-  } catch (error) {}
-  try {
-    banner = await url(req.files["banner"][0].path);
-  } catch (error) {}
-  const user = await profile.findByPk(id);
-  user.name = name ? name : user.name;
-  user.mail = mail ? mail : user.mail;
-  user.username = username ? username : user.username;
-  user.phone = phone ? phone : user.phone;
-  user.storeName = storeName ? storeName : user.storeName;
-  user.phone = phone ? phone : user.phone;
-  user.location = location ? location : user.location;
+    
+    const profileAvatar = await cloudinary.uploader.upload(profilePicture,
+      { 
+        upload_preset:'yvjjtrzu',
+        public_id:`algo`,
+        allowed_formats:['png','jpg','jpeg'],
+       }, 
+      function(error, result) {
+        if(error){
+          console.log(error);
+        }
+        console.log(result);
+    });  
+    console.log(profileAvatar);  
+    const profileBanner = await cloudinary.uploader.upload(banner,
+      {
+        upload_preset:'yvjjtrzu',
+        public_id:`algo`,
+        allowed_formats:['png','jpg','jpeg'],
+      }, 
+      function(error, result) {
+        if(error){
+          console.log(error);
+        }
+        console.log(result);
+    })
 
-  user.profilePicture =
-    typeof profilePicture === "string" ? profilePicture : user.profilePicture;
-  user.banner = typeof banner === "string" ? banner : user.banner;
-  await user.save();
-  return user;
+    const user = await profile.findByPk(id);
+    console.log(user);
+    user.name = name ? name : user.name;
+    user.mail = mail ? mail : user.mail;
+    user.username = username ? username : user.username;
+    user.phone = phone ? phone : user.phone;
+    user.storeName = storeName ? storeName : user.storeName;
+    user.phone = phone ? phone : user.phone;
+    user.location = location ? location : user.location;
+
+    user.profilePicture =
+    typeof profileAvatar.url === "string" ? profileAvatar.url : user.profilePicture;
+    user.banner = typeof profileBanner.url === "string" ? profileBanner.url : user.banner;
+    await user.save();
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = patchProfile;
