@@ -1,60 +1,51 @@
-const {profile,Op} = require('../../DataBase/db');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { profile, Op } = require("../../DataBase/db");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
+const signIn = async (req, res, next) => {
+  const { username, password } = req.body;
 
-const signIn = async (req,res,next) => {
-    const {username, password } = req.body;
+  try {
+    const user = await profile.findOne({
+      where: { username: username },
+    });
 
-    try{
+    console.log(user);
 
-        const user = await profile.findOne({
-            where:{ username:username }
-        });
+    const passwordCorrect =
+      user === null ? false : await bcrypt.compare(password, user.password);
 
-        console.log(user);
-
-        const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
-
-        if(!(user && passwordCorrect)){
-            return res.status(401).json({
-                message:"usuario o password invalido",
-            });
-        }
-
-        if(!user.verified){
-            return res.status(401).json({
-                message:"por favor ingresa al enlace de verificacion enviado a tu email"
-            });
-        }
-
-        if(user && passwordCorrect){
-            
-            const token = jwt.sign(
-                {id:user.id},
-                process.env.SECRET,
-                {expiresIn:60*60*24}
-            );
-
-            return res.json({
-                token:token,
-                message:"credenciales correctas",
-            });
-
-    
-        }
-        
-    }catch(err){
-        next(err);
+    if (!(user && passwordCorrect)) {
+      return res.status(401).json({
+        message: "Usuario o contraseña invalida",
+      });
     }
 
+    if (!user.verified) {
+      return res.status(401).json({
+        message:
+          "Por favor verifica tu cuenta en el enlace que se te envio a tu correo electronico",
+      });
+    }
+
+    if (user && passwordCorrect) {
+      const token = jwt.sign({ id: user.id }, process.env.SECRET, {
+        expiresIn: 60 * 60 * 24,
+      });
+
+      return res.json({
+        token: token,
+        message: "Credenciales correctas",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
 };
 
-const signInGoogle = async (req,res) => {
-
-}
+const signInGoogle = async (req, res) => {};
 
 module.exports = {
-    signIn,
-    signInGoogle,
-}
+  signIn,
+  signInGoogle,
+};
