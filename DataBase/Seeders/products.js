@@ -1,7 +1,7 @@
 const products = [
   {
     price: 10,
-    demographic: "Hombre adolescente ",
+    demographic: "Hombre adolescente",
     image: [
       "https://images.pexels.com/photos/954254/pexels-photo-954254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     ],
