@@ -20,6 +20,7 @@ const getSelledProducts = require("./Controllers/getSelledProducts")
 const onSell = require("./Controllers/getOnSell")
 const passport = require("passport");
 const nodemailer = require('nodemailer');
+const cloudinary = require("../Routes/Utils/cloudinary");
 // crear usuario
 router.post("/", async (req, res) => {
   let {
@@ -117,14 +118,49 @@ router.patch(
   "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    try {
+    const form = formidable({multiples: true});
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        res.writeHead(err.httpCode || 400, { 'Content-Type': 'text/plain' });
+        res.end(String(err));
+        return;
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      console.log(files);
+    });
+    /*try {
       const response = await patchProfile(req);
       res.status(200).send(response);
     } catch (error) {
       res.status(404).send(error.message);
-    }
+    }*/
   }
 );
+
+router.post("/image",async (req,res) => {
+  //console.log(req.body);
+  const {image} = req.body;
+  const uploadedImage = await cloudinary.uploader.upload(image,
+  { 
+    upload_preset:'yvjjtrzu',
+    public_id:`algo`,
+    allowed_formats:['png','jpg','jpeg'],
+   }, 
+  function(error, result) {
+    if(error){
+      console.log(error);
+    }
+    console.log(result);
+   });
+
+   try{
+    res.status(200).json(uploadedImage);
+   }catch(err){
+    res.send(err.message);
+   }
+  
+
+})
 //add elements to favorites
 router.put(
   "/favorites",
