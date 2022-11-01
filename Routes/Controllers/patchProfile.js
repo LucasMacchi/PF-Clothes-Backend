@@ -17,7 +17,7 @@ const patchProfile = async (req,res) => {
   console.log("BODY ==> ", req.body);
 
   try {
-    //profilePicture = await url(req.files["profilePicture"][0].path);
+    
     const profileAvatar = await cloudinary.uploader.upload(profilePicture,
       { 
         upload_preset:'yvjjtrzu',
@@ -31,7 +31,19 @@ const patchProfile = async (req,res) => {
         console.log(result);
     });  
     console.log(profileAvatar);  
-    //banner = await url(req.files["banner"][0].path); 
+    const profileBanner = await cloudinary.uploader.upload(banner,
+      {
+        upload_preset:'yvjjtrzu',
+        public_id:`algo`,
+        allowed_formats:['png','jpg','jpeg'],
+      }, 
+      function(error, result) {
+        if(error){
+          console.log(error);
+        }
+        console.log(result);
+    })
+
     const user = await profile.findByPk(id);
     console.log(user);
     user.name = name ? name : user.name;
@@ -44,7 +56,7 @@ const patchProfile = async (req,res) => {
 
     user.profilePicture =
     typeof profileAvatar.url === "string" ? profileAvatar.url : user.profilePicture;
-    user.banner = typeof banner === "string" ? banner : user.banner;
+    user.banner = typeof profileBanner.url === "string" ? profileBanner.url : user.banner;
     await user.save();
     return user;
   } catch (error) {
