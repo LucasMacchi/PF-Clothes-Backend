@@ -118,16 +118,6 @@ router.patch(
   "/",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    const form = formidable({multiples: true});
-    form.parse(req, (err, fields, files) => {
-      if (err) {
-        res.writeHead(err.httpCode || 400, { 'Content-Type': 'text/plain' });
-        res.end(String(err));
-        return;
-      }
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      console.log(files);
-    });
     /*try {
       const response = await patchProfile(req);
       res.status(200).send(response);
