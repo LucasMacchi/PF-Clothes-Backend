@@ -45,7 +45,7 @@ Profile Routes:
     - POST /user/get?secret_token=
         - This route will fetch a user by the id in the token
 
-    - PATCH /user
+    - POST /user/update
         - This route will modify a user data by the id in the url
 
     - PUT /user/favorites?productID=&profileID=
