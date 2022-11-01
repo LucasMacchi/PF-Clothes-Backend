@@ -9,12 +9,12 @@ const getProductDetail = require("./Controllers/getProductDetail");
 const addReview = require("./Controllers/addReview");
 const getReview = require("./Controllers/getReviews");
 const getAvrg = require("./Controllers/avrgScore");
-const addProduct = require("./Controllers/addProduct")
-const patchProduct = require("./Controllers/patchProduct")
+const addProduct = require("./Controllers/addProduct");
+const patchProduct = require("./Controllers/patchProduct");
 const { getToken } = require("./Utils/getToken");
-const url = require("./Utils/imageUploader")
+const url = require("./Utils/imageUploader");
 const passport = require("passport");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 //
 const router = Router();
 
@@ -78,14 +78,18 @@ router.get("/filter", async (req, res) => {
   }
 });
 //Agregar un producto ruta privada
-router.post("/", passport.authenticate('jwt',{session:false}), async (req, res) => {
-  try {
-    const response = await addProduct(req);
-    res.status(200).send(response);
-  } catch (error) {
-    res.status(404).send(error.message);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const response = await addProduct(req);
+      res.send(response);
+    } catch (error) {
+      res.send(error);
+    }
   }
-});
+);
 //Trae las reviews al producto
 router.get("/review/:id", async (req, res) => {
   const id = req.params.id;
@@ -107,19 +111,23 @@ router.get("/review/avrg/:id", async (req, res) => {
   }
 });
 //Agrega una review
-router.post("/review/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
-  const id = req.params.id;
-  const {secret_token} = req.query;
-  const decodedToken = jwt.verify(secret_token,process.env.SECRET);
-  const data = {...req.body};
-  data.profileId = decodedToken.id;
-  try {
-    const response = await addReview(id, data, "product");
-    res.status(200).send(response);
-  } catch (error) {
-    res.status(404).send(error.message);
+router.post(
+  "/review/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const id = req.params.id;
+    const { secret_token } = req.query;
+    const decodedToken = jwt.verify(secret_token, process.env.SECRET);
+    const data = { ...req.body };
+    data.profileId = decodedToken.id;
+    try {
+      const response = await addReview(id, data, "product");
+      res.status(200).send(response);
+    } catch (error) {
+      res.status(404).send(error.message);
+    }
   }
-});
+);
 
 // Detalles del producto
 router.get("/:id", async (req, res, next) => {
@@ -132,14 +140,18 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 //Modifica un producto
-router.patch("/",passport.authenticate('jwt',{session:false}), async (req, res) => {
-  try {
-    const detail = await patchProduct(req);
-    res.send(detail);
-  } catch (err) {
-    next(err);
+router.patch(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const detail = await patchProduct(req);
+      res.send(detail);
+    } catch (err) {
+      next(err);
+    }
   }
-})
+);
 
 //exportamos el router
 module.exports = router;
