@@ -79,10 +79,11 @@ server.post("/generar/:id", (req, res, next) => {
   let preference = {
     items: arreglo,
     back_urls: {
-      success: "https://express-clothes.vercel.app/home",
+      success: `${process.env.FRONTEND}/home`,
+      failure: `${process.env.FRONTEND}/home`,
     },
     //Cuando el usuario aprieta el boton de comprar se acciona este link
-    //notification_url: `https://pf-cloth-2022.herokuapp.com/payment/notificar/${id}`,
+    notification_url: `https://pf-cloth-2022.herokuapp.com/payment/notificar/${id}`,
   };
 
   //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
