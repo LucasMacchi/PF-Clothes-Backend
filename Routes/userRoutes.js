@@ -15,12 +15,13 @@ const { getToken } = require("./Utils/getToken");
 const getShoppingcart = require("./Controllers/getShoppingcart");
 const getFavoritesList = require("./Controllers/getFavoritesList");
 const patchProfile = require("./Controllers/patchProfile");
-const postMarketedProducts = require("./Controllers/postMarketedProducts")
-const getSelledProducts = require("./Controllers/getSelledProducts")
-const onSell = require("./Controllers/getOnSell")
+const postMarketedProducts = require("./Controllers/postMarketedProducts");
+const getSelledProducts = require("./Controllers/getSelledProducts");
+const onSell = require("./Controllers/getOnSell");
 const passport = require("passport");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const cloudinary = require("../Routes/Utils/cloudinary");
+const modifyProfile = require("./Controllers/ModifyProfile");
 // crear usuario
 router.post("/", async (req, res) => {
   let {
@@ -71,41 +72,44 @@ router.post("/", async (req, res) => {
           shoppingCart,
         },
       });
-      if(user){
+      if (user) {
         // token and link
         const secret = process.env.SECRET + user.password;
-        const token =  jwt.sign({email:user.mail, id:user.id},secret,{expiresIn:60*60*24});
-        const link = `${process.env.BACKEND || "http://localhost:3001"}/auth/verify/${user.id}/${token}`;
+        const token = jwt.sign({ email: user.mail, id: user.id }, secret, {
+          expiresIn: 60 * 60 * 24,
+        });
+        const link = `${
+          process.env.BACKEND || "http://localhost:3001"
+        }/auth/verify/${user.id}/${token}`;
         // mail
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: process.env.EMAIL,
-              pass: process.env.EMAIL_PASSWORD,
-            }
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASSWORD,
+          },
         });
 
         const mailOptions = {
-            from: process.env.EMAIL,
-            to: user.mail,
-            subject: 'Verificacion de usuario',
-            text: `Bienvenido ${user.name}, gracias por registrarte para terminar el proceso
+          from: process.env.EMAIL,
+          to: user.mail,
+          subject: "Verificacion de usuario",
+          text: `Bienvenido ${user.name}, gracias por registrarte para terminar el proceso
             de registro ingresa en el siguiente link para verificar tu cuenta ${link} el link
             tendra un tiempo de expiracion de un dia.
-            Atentamente equipo de express clothes`
+            Atentamente equipo de express clothes`,
         };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Email sent: " + info.response);
+          }
         });
 
         res.send("Usuario creado");
       }
-      
     } catch (error) {
       throw Error(error.message);
     }
@@ -119,7 +123,19 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const response = await patchProfile(req,res);
+      const response = await patchProfile(req, res);
+      res.send(response);
+    } catch (error) {
+      res.send(error);
+    }
+  }
+);
+router.patch(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const response = await modifyProfile(req, res);
       res.send(response);
     } catch (error) {
       res.send(error);
@@ -127,30 +143,30 @@ router.post(
   }
 );
 
-router.post("/image",async (req,res) => {
+router.post("/image", async (req, res) => {
   //console.log(req.body);
-  const {image} = req.body;
-  const uploadedImage = await cloudinary.uploader.upload(image,
-  { 
-    upload_preset:'yvjjtrzu',
-    public_id:`algo`,
-    allowed_formats:['png','jpg','jpeg'],
-   }, 
-  function(error, result) {
-    if(error){
-      console.log(error);
+  const { image } = req.body;
+  const uploadedImage = await cloudinary.uploader.upload(
+    image,
+    {
+      upload_preset: "yvjjtrzu",
+      public_id: `algo`,
+      allowed_formats: ["png", "jpg", "jpeg"],
+    },
+    function (error, result) {
+      if (error) {
+        console.log(error);
+      }
+      console.log(result);
     }
-    console.log(result);
-   });
+  );
 
-   try{
+  try {
     res.status(200).json(uploadedImage);
-   }catch(err){
+  } catch (err) {
     res.send(err.message);
-   }
-  
-
-})
+  }
+});
 //add elements to favorites
 router.put(
   "/favorites",
@@ -287,7 +303,7 @@ router.post("/review/:id", async (req, res) => {
 });
 
 router.post("/purchase", async (req, res) => {
-  const id = req.query.id
+  const id = req.query.id;
   try {
     const response = await postMarketedProducts(id, req.body);
     res.status(200).send(response);
@@ -296,9 +312,9 @@ router.post("/purchase", async (req, res) => {
   }
 });
 
-//trae todos los productos vendidos 
+//trae todos los productos vendidos
 router.get("/sells/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const response = await getSelledProducts(id);
     res.status(200).send(response);
@@ -306,9 +322,9 @@ router.get("/sells/:id", async (req, res) => {
     res.status(404).send(error.message);
   }
 });
-//trae todos los productos vendidos 
+//trae todos los productos vendidos
 router.get("/onSell/:id", async (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   try {
     const response = await onSell(id);
     res.status(200).send(response);
