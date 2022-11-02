@@ -78,7 +78,7 @@ server.post("/generar", (req, res, next) => {
   let preference = {
     items: arreglo,
     //Cuando el usuario aprieta el boton de comprar se acciona este link
-    //notification_url: "https://991d-181-93-52-102.sa.ngrok.io/notificar",
+    notification_url: "https://991d-181-93-52-102.sa.ngrok.io/notificar",
   };
 
   //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
