@@ -69,7 +69,7 @@ server.post("/generar/:id", (req, res, next) => {
   const arreglo = [];
   for (let i = 0; i < data.length; i++) {
     arreglo.push({
-      id: data[i].id,
+      id: data[i].variantID,
       title: data[i].name,
       unit_price: data[i].price,
       quantity: 1,
