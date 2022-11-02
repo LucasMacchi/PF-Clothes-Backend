@@ -17,7 +17,11 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
         demographic,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -30,7 +34,7 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +44,12 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -52,11 +61,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && price && demographic && color) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -69,13 +82,17 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && price && color && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        price:{
+          [Op.between]:[0,price],
+        },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -88,13 +105,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && color && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -115,7 +134,12 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -127,7 +151,7 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
@@ -135,6 +159,10 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -146,13 +174,17 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && price && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -164,9 +196,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && price && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -178,13 +216,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (size && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -202,6 +242,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -221,6 +262,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -240,6 +282,10 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -251,13 +297,17 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (color && price && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -269,13 +319,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (color && demographic && name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -297,7 +349,11 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
         demographic,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -306,11 +362,15 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (demographic && price && color) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -322,13 +382,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (demographic && name && color) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -350,7 +412,11 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
         demographic,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -359,13 +425,17 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (name && price && color) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -377,13 +447,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (name && demographic && color) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -403,6 +475,10 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -414,7 +490,7 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////
@@ -424,6 +500,10 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -432,13 +512,14 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (name && size) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -457,6 +538,8 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
+
         demographic,
       },
       limit: 10,
@@ -473,6 +556,7 @@ const getFilteredProducts = async (
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -489,6 +573,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -503,6 +588,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (size && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -517,7 +605,12 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (size && price) {
     let filteredProducts = await product.findAll({
-      where: {},
+      where: { 
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
+       },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -528,11 +621,15 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (price && demographic) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
       },
       limit: 10,
       offset: page,
@@ -541,9 +638,15 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (price && color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -554,11 +657,12 @@ const getFilteredProducts = async (
         },
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (data = await filteredProducts);
   } else if (color && demographic) {
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -576,6 +680,9 @@ const getFilteredProducts = async (
     /////////////////////////////////////////////////////////////////////////////////////
   } else if (size) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -591,6 +698,7 @@ const getFilteredProducts = async (
     let filteredProducts = await product.findAll({
       where: {
         demographic,
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -602,6 +710,12 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (price) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+        price:{
+          [Op.between]:[0,price],
+        }
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -609,13 +723,15 @@ const getFilteredProducts = async (
         model: variant,
       },
     });
-    return (data = await filteredProducts.filter((el) => el.price <= price));
+    return (filteredProducts);
   } else if (name) {
     let filteredProducts = await product.findAll({
       where: {
         name: {
           [Op.like]: name.toLowerCase() + "%",
         },
+
+        isActive: true,
       },
       limit: 10,
       offset: page,
@@ -627,6 +743,9 @@ const getFilteredProducts = async (
     return (data = await filteredProducts);
   } else if (color) {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],
@@ -643,6 +762,9 @@ const getFilteredProducts = async (
     /////////////////////////////////////////////////////////////////////////////////////
   } else {
     let filteredProducts = await product.findAll({
+      where: {
+        isActive: true,
+      },
       limit: 10,
       offset: page,
       order: [[sortBy, orderBy]],

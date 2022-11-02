@@ -1,50 +1,51 @@
-const {profile,Op} = require('../../DataBase/db');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { profile, Op } = require("../../DataBase/db");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const signIn = async (req,res,next) => {
-    const {username, password } = req.body;
+const signIn = async (req, res, next) => {
+  const { username, password } = req.body;
 
-    try{
+  try {
+    const user = await profile.findOne({
+      where: { username: username },
+    });
 
-        const user = await profile.findOne({
-            where:{ username:username }
-        });
+    console.log(user);
 
-        console.log(user);
+    const passwordCorrect =
+      user === null ? false : await bcrypt.compare(password, user.password);
 
-        const passwordCorrect = user === null ? false : await bcrypt.compare(password,user.password);
-
-        if(!(user && passwordCorrect)){
-            res.status(401).json({
-                error:"invalid user or password",
-            })
-        }
-
-        if(user && passwordCorrect){
-            const userDataforToken = {
-                id:user.id,
-                username:user.username
-            }
-            
-            const token = jwt.sign(
-                userDataforToken,
-                process.env.SECRET,
-                {expiresIn:60*60*24}
-            );
-    
-            res.send({
-                username:user.username,
-                token,
-            });
-        }
-        
-    }catch(err){
-        next(err);
+    if (!(user && passwordCorrect)) {
+      return res.status(401).json({
+        message: "Usuario o contraseña invalida",
+      });
     }
 
+    if (!user.verified) {
+      return res.status(401).json({
+        message:
+          "Por favor verifica tu cuenta en el enlace que se te envio a tu correo electronico",
+      });
+    }
+
+    if (user && passwordCorrect) {
+      const token = jwt.sign({ id: user.id }, process.env.SECRET, {
+        expiresIn: 60 * 60 * 24,
+      });
+
+      return res.json({
+        token: token,
+        message: "Credenciales correctas",
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
 };
 
+const signInGoogle = async (req, res) => {};
+
 module.exports = {
-    signIn,
-}
+  signIn,
+  signInGoogle,
+};

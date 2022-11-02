@@ -4,7 +4,7 @@ Product Routes:
 
     -POST /product
         -This will create a new product, it will require a profile id and an array of objects with the variant
-        properties (size, stock, color)
+        properties (size, stock, color), you can send up to 5 images per product
 
     - GET /product/all/:cant
         -This will bring all the products, the cant variable will determine
@@ -31,6 +31,9 @@ Product Routes:
 
     -GET /product/review/avrg/:id
         -This route returns the average score of a profile
+    
+    -PATCH /product
+        -This route will modify an existing porduct
 
 
 
@@ -39,17 +42,17 @@ Profile Routes:
     - POST /user
         - This route will create a user in the Profile table
 
-    - POST /user/get
+    - POST /user/get?secret_token=
         - This route will fetch a user by the id in the token
 
-    - PUT /user/:id
+    - POST /user/update
         - This route will modify a user data by the id in the url
 
     - PUT /user/favorites?productID=&profileID=
         - This route will add a product to the favorites array in the Profile table
 
     - PUT /user/shoppingcart?productID=&profileID=
-        - This route will add a product to the shoppingcart array in the Profile table
+        - This route will add a variant of the product to the shoppingcart array in the Profile table
 
     -GET /user/shoppingcart?profileID=
         -This route will return all the products in a profile's shoppingcart
@@ -71,6 +74,15 @@ Profile Routes:
 
     -GET /user/review/avrg/:id
         -This route returns the average score of a profile
+    
+    POST /user/purchase?id=
+        -This route will register a payment with the data from the shopping cart
+    
+    -GET user/sells/:id
+        -This route will return all the products a profile sold
+
+    -GET user/onSell/:id
+        -This route will return all the products on sale of an specific profile
 
 Stores Routes:
 
@@ -79,6 +91,9 @@ Stores Routes:
 
     - GET /stores?name=
         - This route will fetch a store by the name in the url
+    
+    -GET /stores/sells/:id
+        -This route will return the size, price, demographic, time created, location and product id of each sells a profile had
 
 Sizes Routes:
 
@@ -113,6 +128,9 @@ Variant:
 
     -PUT variant/:id
         -This route will modify the variant with that id
+    
+    -PATCH variant/stock/:id?order=&cant=
+        -This route will add or reduce stock in a variant, order can be "reduce" or "add" for reducing the stock and adding to it, cant will be the number to modify
 
     -DELETE variant/:id
         -This route will delete the variant with that id
@@ -121,6 +139,9 @@ Activate:
 
     -PUT activate/user/:id
         -This route will activate the user
+    
+    -PUT activate/user/moderator/:id
+        -This route will give a user the rol of moderator
 
     -DELETE activate/user/:id
         -This route will desactivate the user
@@ -130,6 +151,26 @@ Activate:
 
     -DELETE activate/product/:id
         -This route will desactivate the product
+
+Recover password:
+
+    - POST auth/forgot-password
+        - Route recieve email for password recovery
+    
+    - GET auth/reset-password/:id/:token
+        - Route to send new password
+
+    - PUT auth/reset-password
+        - Route to set new password in database
+
+User account verification:
+
+    - GET auth/verify/:id/:token
+        -Route to verify account
+    
+    - POST auth/not-verified
+        -Route to resend verification in case of failure
+    
 
 test users:
 
@@ -151,8 +192,9 @@ protected routes:
 
     - POST /product
     - POST /product/review/:id
+    - PATCH /product
     - POST /user/get
-    - PUT /user/:id
+    - PATCH /user
     - PUT /user/favorites
     - PUT /user/shoppingcart
     - DELETE /user/favorites

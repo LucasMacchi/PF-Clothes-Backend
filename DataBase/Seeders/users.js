@@ -11,6 +11,7 @@ const users = [
         banner: "https://images.pexels.com/photos/3768005/pexels-photo-3768005.jpeg?cs=srgb&dl=pexels-william-matt-3768005.jpg&fm=jpg",
         location: "Corrientes",
         profilePicture: "https://t1.pb.ltmcdn.com/es/posts/2/4/2/que_piensa_una_persona_cuando_dejas_de_buscarla_5242_orig.jpg",
+        verified:true,
     },
     {
         name: "Marcelo Rodriguez",
@@ -22,6 +23,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "Corrientes",
         profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
+        verified:true,
     },
     {
         name: "Roberto Hernando",
@@ -32,6 +34,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "torrejas",
         profilePicture: "https://concepto.de/wp-content/uploads/2018/08/persona-e1533759204552.jpg",
+        verified:true,
     },
     {
         name: "Franco Milazzo",
@@ -42,7 +45,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "Cordoba",
         profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/3/3f/Franco_Milazzo.png/revision/latest/scale-to-width-down/250?cb=20150623183355&path-prefix=es",
-      
+        verified:true,
     },
     {
         name: "Martina Gonzales",
@@ -53,7 +56,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "Cordoba",
         profilePicture: "https://lamenteesmaravillosa.com/wp-content/uploads/2022/03/mujer-ojos-cerrados-mano-corazon-768x512.jpg",
-
+        verified:true,
     },
     {
         name: "Lucia Buchetti",
@@ -64,7 +67,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "Mendoza",
         profilePicture: "https://www.caritas.org.mx/wp-content/uploads/2019/02/cualidades-persona-humanitaria.jpg",
-
+        verified:true,
     },
     {
         name: "Mario Davis",
@@ -75,7 +78,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "Entre Rios",
         profilePicture: "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/styles/480/public/media/image/2022/06/billy-kametz-2728819.jpg?itok=dLNsBLtJ",
-
+        verified:true,
     },
     {
         name: "Maximo Cosseti",
@@ -86,7 +89,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "CABA",
         profilePicture: "https://cloudfront-us-east-1.images.arcpublishing.com/radiomitre/Y2B2DJZVBFAFRB4NDORUCUXDUM.jpg",
-
+        verified:true,
     },
     {
         name: "Mario Santos",
@@ -97,7 +100,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "CABA",
         profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/3/3d/Mario_Santos.png/revision/latest/scale-to-width-down/250?cb=20150614023808&path-prefix=es",
-
+        verified:true,
     },
     {
         name: "Pablo Lamponne",
@@ -108,7 +111,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "CABA",
         profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/b/b8/54216_fiobe-pobtada.jpg/revision/latest/scale-to-width-down/250?cb=20170709032448&path-prefix=es",
-
+        verified:true,
     },
     {
         name: "Gabriel David Medina",
@@ -119,7 +122,7 @@ const users = [
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "CABA",
         profilePicture: "https://static.wikia.nocookie.net/lossimuladores/images/c/ce/Tarjeta_de_Navidad_26.png/revision/latest/scale-to-width-down/180?cb=20160318014107&path-prefix=es",
-
+        verified:true,
     },
     {
         name: "Facundo Ancarani",
@@ -129,7 +132,7 @@ const users = [
         phone: "111111111111",
         banner: "https://st2.depositphotos.com/1006832/6017/i/950/depositphotos_60178113-stock-photo-clothes-shop-interior.jpg",
         location: "CABA",
- 
+        verified:true,
     }
 ]
 

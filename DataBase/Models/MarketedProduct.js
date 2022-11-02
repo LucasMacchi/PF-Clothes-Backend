@@ -14,13 +14,16 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    amount: {
-      type: DataTypes.INTEGER,
+    name: { type: DataTypes.STRING, allowNull: false },
+    size: { type: DataTypes.STRING, allowNull: false },
+    color: { type: DataTypes.STRING, allowNull: false },
+    demographic: { type: DataTypes.STRING, allowNull: false },
+    productoId: { type: DataTypes.STRING, allowNull: false },
+    sellerId: { type: DataTypes.STRING, allowNull: false },
+    pagado: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATEONLY,
-      defaultValue: DataTypes.NOW,
+      defaultValue: false,
     },
   });
 };

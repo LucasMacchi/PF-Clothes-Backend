@@ -3,20 +3,22 @@ const { Router } = require("express");
 const productRoutes = require("../Routes/productRoutes");
 const userRoutes = require("../Routes/userRoutes");
 const storeRoutes = require("../Routes/storeRoutes");
-const loginRoutes = require("../Routes/loginRoutes");
+const loginRoutes = require("./loginRoutes");
 const sizesRoutes = require("../Routes/sizesRoutes");
 const demographicRoutes = require("../Routes/demographicRoutes");
-const reviewRoutes = require("./reviewRoutes");
-const variantRoutes = require("./variantRoutes");
+const reviewRoutes = require("./reviewRoutes")
+const variantRoutes = require("./variantRoutes")
+const paymentRoutes = require("./paymentRoutes");
+const authRoutes = require("./authRoutes");
 const activateRoutes = require("./activateRoutes");
 const upload = require("./Utils/multer");
 const marketedRoutes = require("../Routes/marketedRoutes");
-
+const url = require("./Utils/imageUploader")
 //
 const router = Router();
 
 //
-router.use("/product", upload.single("image"), productRoutes);
+router.use("/product", upload.array("image", 5), productRoutes);
 //
 router.use(
   "/user",
@@ -34,11 +36,17 @@ router.use("/demographics", demographicRoutes);
 //review
 router.use("/review", reviewRoutes);
 //variant
-router.use("/variant", variantRoutes);
+
+router.use("/variant", variantRoutes)
+// payment
+router.use("/payment",paymentRoutes);
+// auth
+router.use("/auth",authRoutes);
 //activate
 router.use("/activate", activateRoutes);
 //marketed
 router.use("/marketed", marketedRoutes);
+
 //Test
 router.get("/test", (req, res, next) => {
   res.send("Hello World!!!!, im working");

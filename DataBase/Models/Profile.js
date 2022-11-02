@@ -25,6 +25,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    googleId:{
+      type:DataTypes.STRING,
+      allowNull:true,
+    },
     phone: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -59,6 +63,16 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
+    },
+    isModerator:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    verified:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false,
     }
   });
 };

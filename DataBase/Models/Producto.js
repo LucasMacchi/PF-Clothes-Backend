@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      set(value){
-        this.setDataValue("name", value.toLowerCase())
-      }
+      set(value) {
+        this.setDataValue("name", value.toLowerCase());
+      },
     },
     price: {
       type: DataTypes.FLOAT,
@@ -38,13 +38,17 @@ module.exports = (sequelize) => {
       },
     },
     image: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false,
+      validate: {
+        min: 1,
+        max: 5,
+      },
     },
-    isActive:{
+    isActive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
-    }
+      defaultValue: true,
+    },
   });
 };
