@@ -32,7 +32,7 @@ router.get("/oauth2/redirect/google",passport.authenticate("google",{
             });
             res.cookie('token',token);
             console.log("TOKEN ==> ",token)
-            res.redirect(`${process.env.FRONTEND}/home`);
+            res.redirect(`${process.env.FRONTEND}/home?token=${token}`);
         }
 
        
