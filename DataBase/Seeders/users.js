@@ -12,6 +12,7 @@ const users = [
         location: "Corrientes",
         profilePicture: "https://t1.pb.ltmcdn.com/es/posts/2/4/2/que_piensa_una_persona_cuando_dejas_de_buscarla_5242_orig.jpg",
         verified:true,
+        isModerator: true
     },
     {
         name: "Marcelo Rodriguez",
