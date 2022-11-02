@@ -105,7 +105,7 @@ router.post("/notificar/:id", async (req, res) => {
 
           const mailOptions = {
             from: process.env.EMAIL,
-            to: "micaelpicco@gmail.com",
+            to: user.mail,
             subject: "Express Clothes",
             text: `Hola ${user.name}, has comprado ${data.length} productos en Express Clothes. La compra de los mismos ha sido aprobada y ya estan siendo despachados y enviados. 
     
