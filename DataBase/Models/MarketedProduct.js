@@ -20,5 +20,10 @@ module.exports = (sequelize) => {
     demographic: { type: DataTypes.STRING, allowNull: false },
     productoId: { type: DataTypes.STRING, allowNull: false },
     sellerId: { type: DataTypes.STRING, allowNull: false },
+    pagado: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   });
 };
