@@ -69,7 +69,7 @@ server.post("/generar/:id", (req, res, next) => {
   const arreglo = [];
   for (let i = 0; i < data.length; i++) {
     arreglo.push({
-      id: data[i].id,
+      id: data[i].variantID,
       title: data[i].name,
       unit_price: data[i].price,
       quantity: 1,
@@ -79,10 +79,11 @@ server.post("/generar/:id", (req, res, next) => {
   let preference = {
     items: arreglo,
     back_urls: {
-      success: "http://localhost:3000/home",
+      success: `${process.env.FRONTEND}/home`,
+      failure: `${process.env.FRONTEND}/home`,
     },
     //Cuando el usuario aprieta el boton de comprar se acciona este link
-    //notification_url: `https://77be-190-31-34-143.sa.ngrok.io/payment/notificar/${id}`,
+    notification_url: `https://pf-cloth-2022.herokuapp.com/payment/notificar/${id}`,
   };
 
   //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
