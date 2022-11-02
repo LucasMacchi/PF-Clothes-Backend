@@ -5,6 +5,7 @@ const { product, profile } = require("../DataBase/db");
 const getAllMarketedProducts = require("./Controllers/getAllMarketedProducts");
 const getMarketedProductDetail = require("./Controllers/getMarketedProductDetail");
 const postMarketedProducts = require("./Controllers/postMarketedProducts");
+const deleteMarketedProducts = require("./Controllers/deleteMarketedProducts")
 
 //
 const router = Router();
@@ -38,6 +39,15 @@ router.get("/:id", async (req, res) => {
   try {
     const marketedProductDetail = await getMarketedProductDetail(id);
     res.status(200).send(marketedProductDetail);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+});
+router.delete("/clean/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await deleteMarketedProducts(id);
+    res.status(200).send(response);
   } catch (error) {
     res.status(404).send(error.message);
   }
