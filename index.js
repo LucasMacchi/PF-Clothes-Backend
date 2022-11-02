@@ -3,9 +3,8 @@ const { conn, profilesCreator } = require("./DataBase/db");
 require("dotenv").config();
 
 const db = conn;
-
 db.sync({ force: false }).then(() => {
-  server.listen(process.env.PORT, async () => {
+server.listen(process.env.PORT, async () => {
     try {
       //await profilesCreator();
       db.authenticate().then(() => console.log("database connected"));
