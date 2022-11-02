@@ -8,7 +8,7 @@ const passport = require("passport");
 const mercadopago = require("mercadopago");
 const { payment, merchant_orders } = require("mercadopago");
 
-require("dotenv").config(); 
+require("dotenv").config();
 
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -62,8 +62,9 @@ server.get("/", (req, res, next) => {
 });
 
 //Ruta que dirige a la pestaña de mercadopago para pagar
-server.post("/generar", (req, res, next) => {
+server.post("/generar/:id", (req, res, next) => {
   const data = req.body;
+  const { id } = req.params;
 
   const arreglo = [];
   for (let i = 0; i < data.length; i++) {
@@ -77,8 +78,11 @@ server.post("/generar", (req, res, next) => {
 
   let preference = {
     items: arreglo,
+    back_urls: {
+      success: "http://localhost:3000/home",
+    },
     //Cuando el usuario aprieta el boton de comprar se acciona este link
-    notification_url: "https://991d-181-93-52-102.sa.ngrok.io/notificar",
+    //notification_url: `https://77be-190-31-34-143.sa.ngrok.io/payment/notificar/${id}`,
   };
 
   //Enviamos al front la url donde tiene que redirigir al usuario cuando clickea comprar en el carrito
@@ -98,21 +102,21 @@ server.get("/success", (req, res, next) => {
 });
 
 //Ruta para traerme la data que quiero cuando el usuario aprieta comprar
-server.post("/notificar", async (req, res, next) => {
-  const query = req.query;
-  const topic = query.topic;
-  
-  switch (topic) {
-    case "payment":
-      const paymentId = query.id;
-      const payment = await mercadopago.payment.findById(paymentId);
-      console.log(payment.body.additional_info.items);
-      res.send(payment);
-      break;
-    default:
-      break;
-  }
-});
+// server.post("/notificar", async (req, res, next) => {
+//   const query = req.query;
+//   const topic = query.topic;
+
+//   switch (topic) {
+//     case "payment":
+//       const paymentId = query.id;
+//       const payment = await mercadopago.payment.findById(paymentId);
+//       console.log(payment.body.additional_info.items);
+//       res.send(payment);
+//       break;
+//     default:
+//       break;
+//   }
+// });
 
 //Token del usuario de prueba vendedor de mercadopago
 mercadopago.configure({
