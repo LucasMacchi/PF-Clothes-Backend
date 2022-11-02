@@ -4,10 +4,10 @@ require("dotenv").config();
 
 const db = conn;
 
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   server.listen(process.env.PORT, async () => {
     try {
-      await profilesCreator();
+      //await profilesCreator();
       db.authenticate().then(() => console.log("database connected"));
       console.log("Server is up, at port ", process.env.PORT);
     } catch (error) {
