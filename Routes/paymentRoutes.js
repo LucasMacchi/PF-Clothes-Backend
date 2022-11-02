@@ -29,7 +29,9 @@ router.post("/notificar/:id", async (req, res) => {
       const payment = await mercadopago.payment.findById(paymentId);
       console.log(payment.body.additional_info.items);
       for (let i = 0; i < payment.body.additional_info.items.length; i++) {
-        a.push(payment.body.additional_info.items[i].id);
+        if (payment.body.status === "approved") {
+          a.push(payment.body.additional_info.items[i].id);
+        }
       }
       break;
     default:
