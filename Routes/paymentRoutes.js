@@ -32,7 +32,6 @@ router.post("/notificar/:id", async (req, res) => {
         a.push(payment.body.additional_info.items[i].id);
       }
       break;
-
     default:
       break;
   }
@@ -54,6 +53,7 @@ router.post("/notificar/:id", async (req, res) => {
         },
         { where: { id: productSold.id } }
       );
+
       const vendedor = await profile.findOne({
         where: {
           id: productSold.sellerId,
