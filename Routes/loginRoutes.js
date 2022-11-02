@@ -31,7 +31,7 @@ router.get("/oauth2/redirect/google",passport.authenticate("google",{
                 expiresIn:60*60*24 // one day
             });
             res.cookie('token',token);
-            res.redirect(`${process.env.FRONTEND}/home`);
+            res.redirect(`${process.env.FRONTEND}/home?gtoken=${token}`);
         }
 
        
