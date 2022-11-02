@@ -1,5 +1,5 @@
 const { profile, marketedProduct } = require("../../DataBase/db");
-const { reduceStock } = require("./variantsStock");
+//const { reduceStock } = require("./variantsStock");
 
 const postMarketedProducts = async (id, productos) => {
   const user = await profile.findByPk(id);
@@ -18,7 +18,6 @@ const postMarketedProducts = async (id, productos) => {
       variantId: productSold.variantID,
     });
     await user.addMarketedProduct(comprados);
-    await reduceStock(productSold.variantID, 1);
   }
 
   return "Compra realizada";

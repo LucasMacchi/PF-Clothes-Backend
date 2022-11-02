@@ -5,6 +5,7 @@ const passport = require("passport");
 const { marketedProduct, profile } = require("../DataBase/db");
 const mercadopago = require("mercadopago");
 const nodemailer = require("nodemailer");
+const { reduceStock } = require("./Controllers/variantsStock");
 
 router.get("/", passport.authenticate("jwt", { session: false }), payment);
 
@@ -56,6 +57,7 @@ router.post("/notificar/:id", async (req, res) => {
           },
           { where: { id: productSold.id } }
         );
+        await reduceStock(productSold.variantId, 1);
 
         const vendedor = await profile.findOne({
           where: {
