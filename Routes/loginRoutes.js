@@ -22,7 +22,7 @@ router.get("/oauth2/redirect/google",passport.authenticate("google",{
             }
         });
 
-        console.log(user);
+        console.log("LOGIN INFO ==> ",user);
 
         if(!user.verified){
             return res.redirect(`${process.env.FRONTEND}/login?google=not%20verified`);
@@ -31,6 +31,7 @@ router.get("/oauth2/redirect/google",passport.authenticate("google",{
                 expiresIn:60*60*24 // one day
             });
             res.cookie('token',token);
+            console.log("TOKEN ==> ",token)
             res.redirect(`${process.env.FRONTEND}/home`);
         }
 
