@@ -269,6 +269,15 @@ router.get(
     }
   }
 );
+router.get("/getProfile/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    let user = await profile.findByPk(id);
+    return res.send(user);
+  } catch (err) {
+    res.send(err.message);
+  }
+});
 
 //Trae las reviews al usuario
 router.get("/review/:id", async (req, res) => {
