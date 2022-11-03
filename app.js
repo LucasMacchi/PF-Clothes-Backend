@@ -80,6 +80,7 @@ server.post("/generar/:id", (req, res, next) => {
     items: arreglo,
     back_urls: {
       success: `${process.env.FRONTEND}/home`,
+      pending: `${process.env.FRONTEND}/home`,
       failure: `${process.env.FRONTEND}/home`,
     },
     //Cuando el usuario aprieta el boton de comprar se acciona este link
