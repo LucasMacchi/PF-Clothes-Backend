@@ -1,3 +1,23 @@
+![WhatsApp Image 2022-10-26 at 20 39 24](https://user-images.githubusercontent.com/62063233/200431570-365687fa-c14c-4796-a298-4d1e774fb83c.jpeg)
+
+What is this?
+This is the backend of our final proyect for Henry, a cloth e-commerce.
+
+What technologies uses?
+
+- Sequelize
+- Express
+- Mercadopago API
+- Passport
+- JWT
+
+How to start it?
+
+1. Clone the repository
+2. Do an *npm install* on the folder
+3. Start it with *npm start*
+4. Congratulations! you now have the backend of the project up and running
+
 Guide of routes:
 
 Product Routes:
