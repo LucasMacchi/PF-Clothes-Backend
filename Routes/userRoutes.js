@@ -83,7 +83,9 @@ router.post("/", async (req, res) => {
         }/auth/verify/${user.id}/${token}`;
         // mail
         const transporter = nodemailer.createTransport({
-          service: "gmail",
+          service: "Zoho",
+          host: 'smtp.zoho.com',
+          port: 587,
           auth: {
             user: process.env.EMAIL,
             pass: process.env.EMAIL_PASSWORD,
